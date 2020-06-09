@@ -27,11 +27,11 @@ _Syntax_:
 :Sub <foo> <bar> <start-line> <end-line>
 ```
 _Examples_:
-1. Replace `cat` with `dog` in an entire file:  
+Replace `cat` with `dog` in an entire file:  
 ```
 :Sub cat dog
 ```
-2. Replace `Lorem ipsum` with `foobar` between lines 2 and 4 (inclusive):
+Replace `Lorem ipsum` with `foobar` between lines 2 and 4 (inclusive):
 ```
 :Sub Lorem\ ipsum foobar 2 4
 ```
@@ -44,7 +44,7 @@ _Syntax_:
 :Del <start-line> <end-line>
 ```
 _Examples_:
-1. Delete lines 1 though 5:
+Delete lines 1 though 5:
 ```
 :Del 1 5
 ```
@@ -57,7 +57,7 @@ _Syntax_:
 :Ind <start-line> <end-line>
 ```
 _Examples_:
-1. Suppose we have the following code:
+Suppose we have the following code:
 ```
 1 namespace foo {
 2 void bar() {
@@ -78,4 +78,35 @@ We get:
 4         std::cout << "What does that even mean?" << std::endl;
 5     }
 6 }
+```
+
+### Insert | Ins
+_Description_: The _Insert_ or _Ins_ commands are used to insert a character at the beginning of every line within a specified range. This command is useful for commenting out large blocks of code.  
+_Syntax_:
+```
+:Insert <char> <start-line> <end-line>
+:Ins <char> <start-line> <end-line>
+```
+_Examples_:  
+Suppose we want to comment out the following:  
+```
+1 namespace foo {
+2     void bar() {
+3         std::cout << "A foo that bars!" << std::endl;
+4         std::cout << "What does that even mean?" << std::endl;
+5     }
+6 }
+```
+The following command will do the trick:  
+```
+:Ins \/\/ 1 6
+```
+Note that I had to escape the forward slashes. The command returns:  
+```
+1 //namespace foo {
+2 //    void bar() {
+3 //        std::cout << "A foo that bars!" << std::endl;
+4 //        std::cout << "What does that even mean?" << std::endl;
+5 //    }
+6 //}
 ```
