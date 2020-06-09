@@ -49,5 +49,34 @@ _Examples_:
 :Del 1 5
 ```
 
+### Indent | Ind
+_Description_: The _Indent_ or _Ind_ commands are used to indent lines by **4 spaces** within a specified range.  
+_Syntax_:
+```
+:Indent <start-line> <end-line>
+:Ind <start-line> <end-line>
+```
+_Examples_:
+1. Suppose we have the following code:
+```
+  1 namespace foo {
+  2 void bar() {
+  3     std::cout << "A foo that bars!" << std::endl;
+  4     std::cout << "What does that even mean?" << std::endl;
+  5 }
+  6 }
+```
+We want to indent the function within namespace `foo` by 4 spaces:
+```
+:Ind 2 5
+```
+We get:
+```
 
-
+  1 namespace foo {
+  2     void bar() {
+  3         std::cout << "A foo that bars!" << std::endl;
+  4         std::cout << "What does that even mean?" << std::endl;
+  5     }
+  6 }
+```
