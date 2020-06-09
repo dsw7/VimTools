@@ -26,7 +26,7 @@ _Syntax_:
 :Sub <foo> <bar>
 :Sub <foo> <bar> <start-line> <end-line>
 ```
-_Examples_:
+_Examples_:  
 Replace `cat` with `dog` in an entire file:  
 ```
 :Sub cat dog
