@@ -59,12 +59,12 @@ _Syntax_:
 _Examples_:
 1. Suppose we have the following code:
 ```
-  1 namespace foo {
-  2 void bar() {
-  3     std::cout << "A foo that bars!" << std::endl;
-  4     std::cout << "What does that even mean?" << std::endl;
-  5 }
-  6 }
+1 namespace foo {
+2 void bar() {
+3     std::cout << "A foo that bars!" << std::endl;
+4     std::cout << "What does that even mean?" << std::endl;
+5 }
+6 }
 ```
 We want to indent the function within namespace `foo` by 4 spaces:
 ```
@@ -72,11 +72,10 @@ We want to indent the function within namespace `foo` by 4 spaces:
 ```
 We get:
 ```
-
-  1 namespace foo {
-  2     void bar() {
-  3         std::cout << "A foo that bars!" << std::endl;
-  4         std::cout << "What does that even mean?" << std::endl;
-  5     }
-  6 }
+1 namespace foo {
+2     void bar() {
+3         std::cout << "A foo that bars!" << std::endl;
+4         std::cout << "What does that even mean?" << std::endl;
+5     }
+6 }
 ```
