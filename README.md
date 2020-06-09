@@ -37,7 +37,7 @@ _Examples_:
 ```
 
 ### Delete | Del
-_Description_: The _Delete_ or _Del_ commands are used to delete lines within a range.
+_Description_: The _Delete_ or _Del_ commands are used to delete lines within a specified range.  
 _Syntax_:
 ```
 :Delete <start-line> <end-line>
