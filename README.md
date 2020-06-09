@@ -1,7 +1,7 @@
 # VimTools
-An awesome, user friendly set of vim commands (and other configurations) for improving developer workflow! This repository basically just contains a `.vimrc` file that enables some basic settings and also defines some user friendly shortcuts for common operations such as substitutions, inserts, etc.  
+An awesome, user friendly set of `vim` commands (and other configurations) for improving developer workflow! This repository basically just contains a `.vimrc` file that enables some basic settings and also defines some user friendly shortcuts for common operations such as substitutions, inserts, etc.  
 
-### Setup
+## Setup
 Easy! Start by grabbing the `dsw7.vimrc` file:
 ```
 $ curl https://raw.githubusercontent.com/dsw7/VimTools/master/dsw7.vimrc --output dsw7.vimrc
@@ -15,3 +15,25 @@ Alternatively, if you don't have an existing `.vimrc` file in your home director
 $ cd
 $ curl https://raw.githubusercontent.com/dsw7/VimTools/master/dsw7.vimrc --output .vimrc
 ```
+
+## List of custom commands
+### Replace | Sub
+_Description_: The _Replace_ or _Sub_ commands are used to replace text within either a range of lines or in the entire file.  
+_Syntax_:
+```
+:Replace <foo> <bar>
+:Replace <foo> <bar> <start-line> <end-line>
+:Sub <foo> <bar>
+:Sub <foo> <bar> <start-line> <end-line>
+```
+_Examples_:
+1. Replace `cat` with `dog` in an entire file:  
+```
+:Sub cat dog
+```
+2. Replace `Lorem ipsum` with `foobar` between lines 2 and 4 (inclusive):
+```
+:Sub Lorem\ ipsum foobar 2 4
+```
+
+
