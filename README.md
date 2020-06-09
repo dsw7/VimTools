@@ -16,7 +16,7 @@ $ cd
 $ curl https://raw.githubusercontent.com/dsw7/VimTools/master/dsw7.vimrc --output .vimrc
 ```
 
-## List of custom commands
+## List of custom commands (implemented to date)
 ### Replace | Sub
 _Description_: The _Replace_ or _Sub_ commands are used to replace text within either a range of lines or in the entire file.  
 _Syntax_:
@@ -35,5 +35,19 @@ _Examples_:
 ```
 :Sub Lorem\ ipsum foobar 2 4
 ```
+
+### Delete | Del
+_Description_: The _Delete_ or _Del_ commands are used to delete lines within a range.
+_Syntax_:
+```
+:Delete <start-line> <end-line>
+:Del <start-line> <end-line>
+```
+_Examples_:
+1. Delete lines 1 though 5:
+```
+:Del 1 5
+```
+
 
 
