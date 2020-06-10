@@ -114,7 +114,7 @@ The following command will do the trick:
 ```
 :Ins \/\/ 1 6
 ```
-Note that we have to escape the forward slashes. The command returns:  
+Note that we had to escape the forward slashes in the above example. The command returns:  
 ```
 1 //namespace foo {
 2 //    void bar() {
