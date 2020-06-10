@@ -78,10 +78,10 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :echom "-- Invalid syntax!"
 :echohl None
 :echom "Valid syntax follows:"
-:echom ":Replace <foo> <bar>"
-:echom ":Replace <foo> <bar> <start-line> <end-line>"
+:echom ":Sub <foo> <bar>"
+:echom ":Sub <foo> <bar> <start-line> <end-line>"
 :echom "To replace strings with spaces like: 'foo bar' -> 'cat dog':"
-:echom ":Replace foo\\ bar cat\\ dog"
+:echom ":Sub foo\\ bar cat\\ dog"
 :endfunction
 
 :function Replace(input, output, ...)
@@ -108,8 +108,8 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :echom "-- Invalid syntax!"
 :echohl None
 :echom "Valid syntax follows:"
-:echom ":Insert <foo>"
-:echom ":Insert <foo> <start-line> <end-line>"
+:echom ":Ins <foo>"
+:echom ":Ins <foo> <start-line> <end-line>"
 :endfunction
 
 :function Insert(char, ...)
@@ -135,7 +135,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :echom "-- Invalid syntax!"
 :echohl None
 :echom "Valid syntax follows:"
-:echom ":Delete <start-line> <end-line>"
+:echom ":Del <start-line> <end-line>"
 :endfunction
 
 :function Delete(...)
@@ -157,7 +157,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :echom "-- Invalid syntax!"
 :echohl None
 :echom "Valid syntax follows:"
-:echom ":Indent <start-line> <end-line>"
+:echom ":Ind <start-line> <end-line>"
 :endfunction
 
 :function Indent(...)
