@@ -17,12 +17,10 @@ $ curl https://raw.githubusercontent.com/dsw7/VimTools/master/dsw7.vimrc --outpu
 ```
 
 ## List of custom commands (implemented to date)
-### Replace | Sub
-_Description_: The _Replace_ or _Sub_ commands are used to replace text within either a range of lines or in the entire file.  
+### Sub
+_Description_: The _Sub_ command is used to replace text within either a range of lines or in the entire file.  
 _Syntax_:  
 ```
-:Replace <foo> <bar>
-:Replace <foo> <bar> <start-line> <end-line>
 :Sub <foo> <bar>
 :Sub <foo> <bar> <start-line> <end-line>
 ```
@@ -36,11 +34,10 @@ Replace `Lorem ipsum` with `foobar` between lines 2 and 4 (inclusive):
 :Sub Lorem\ ipsum foobar 2 4
 ```
 
-### Delete | Del
-_Description_: The _Delete_ or _Del_ commands are used to delete lines within a specified range.  
+### Del
+_Description_: The _Del_ command is used to delete lines within a specified range.  
 _Syntax_:  
 ```
-:Delete <start-line> <end-line>
 :Del <start-line> <end-line>
 ```
 _Examples_:  
@@ -49,11 +46,10 @@ Delete lines 1 though 5:
 :Del 1 5
 ```
 
-### Indent | Ind
-_Description_: The _Indent_ or _Ind_ commands are used to indent lines by **4 spaces** within a specified range.  
+### Ind
+_Description_: The _Ind_ command is used to indent lines by **4 spaces** within a specified range.  
 _Syntax_:  
 ```
-:Indent <start-line> <end-line>
 :Ind <start-line> <end-line>
 ```
 _Examples_:  
@@ -80,11 +76,10 @@ We get:
 6 }
 ```
 
-### Insert | Ins
-_Description_: The _Insert_ or _Ins_ commands are used to insert a character at the beginning of every line within a specified range. This command is useful for commenting out large blocks of code.  
+### Ins
+_Description_: The _Ins_ command is used to insert a character at the beginning of every line within a specified range. This command is useful for commenting out large blocks of code.  
 _Syntax_:  
 ```
-:Insert <char> <start-line> <end-line>
 :Ins <char> <start-line> <end-line>
 ```
 _Examples_:  
