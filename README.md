@@ -33,6 +33,10 @@ Replace `Lorem ipsum` with `foobar` between lines 2 and 4 (inclusive):
 ```
 :Sub Lorem\ ipsum foobar 2 4
 ```
+The _Sub_ command works with regular expressions. To replace all instances of `for` and `far` in a body of text with `foo`:
+```
+:Sub f[o|a]r foo
+```
 
 ### Del
 _Description_: The _Del_ command is used to delete lines within a specified range.  
