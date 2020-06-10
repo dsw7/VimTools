@@ -98,7 +98,6 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :endif
 :endfunction
 
-:command -nargs=+ Replace :call Replace(<f-args>)
 :command -nargs=+ Sub :call Replace(<f-args>)
 
 
@@ -127,7 +126,6 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :endif
 :endfunction
 
-:command -nargs=+ Insert :call Insert(<f-args>)
 :command -nargs=+ Ins :call Insert(<f-args>)
 
 
@@ -150,7 +148,6 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :endif
 :endfunction
 
-:command -nargs=+ Delete :call Delete(<f-args>)
 :command -nargs=+ Del :call Delete(<f-args>)
 
 
@@ -173,7 +170,6 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :endif
 :endfunction
 
-:command -nargs=+ Indent :call Indent(<f-args>)
 :command -nargs=+ Ind :call Indent(<f-args>)
 
 
