@@ -173,5 +173,28 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :command -nargs=+ Ind :call Indent(<f-args>)
 
 
+" Function for copying blocks of text
+:function CopyHelp()
+:echohl WarningMsg
+:echom "-- Invalid syntax!"
+:echohl None
+:echom "Valid syntax follows:"
+:echom ":Cp <start-line> <end-line> <destination-line>"
+:endfunction
+
+:function Copy(...)
+:if a:0 == 3 
+:   let start = a:1
+:   let end = a:2
+:   let pos = a:3
+:   execute start . ',' . end . 't' . pos
+:else
+:   call CopyHelp()
+:endif
+:endfunction
+
+:command -nargs=+ Cp :call Copy(<f-args>)
+
+
 " clear a search
 :command Cls :noh

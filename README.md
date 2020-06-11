@@ -123,3 +123,43 @@ Note that we had to escape the forward slashes in the above example. The command
 5 //    }
 6 //}
 ```
+
+### Cp
+_Description_:  
+- The _Cp_ command is used to copy and paste a block of lines. 
+
+_Syntax_:  
+```
+:Cp <start-line> <end-line> <destination>
+```
+_Examples_:  
+- Suppose we want to copy the following code to lines 8 onward:
+
+```
+1 namespace foo {
+2     void bar() {
+3         std::cout << "A foo that bars!" << std::endl;
+4         std::cout << "What does that even mean?" << std::endl;
+5     }
+6 }
+```
+The following command;
+```
+:Cp 1 6 8
+```
+Will yield the following:
+```
+1  namespace foo {
+2      void bar() {
+3          std::cout << "A foo that bars!" << std::endl;
+4          std::cout << "What does that even mean?" << std::endl;
+5      }
+6  }
+7
+8  namespace foo {
+9      void bar() {
+10         std::cout << "A foo that bars!" << std::endl;
+11         std::cout << "What does that even mean?" << std::endl;
+12     }
+13 }
+```
