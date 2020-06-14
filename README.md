@@ -163,3 +163,13 @@ Will yield the following:
 12     }
 13 }
 ```
+
+### Ws
+_Description_:  
+- The _Ws_ command is used to remove trailing whitespace. 
+
+_Syntax_:  
+```
+:Ws
+```
+Command takes no arguments.
