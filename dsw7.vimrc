@@ -4,7 +4,7 @@
 syntax on
 
 " set colorscheme
-colorscheme desert 
+colorscheme desert
 
 " tabbing
 set tabstop=4
@@ -13,7 +13,7 @@ set expandtab
 
 " set line numbers and set the number color
 set number
-hi LineNr ctermfg=lightgreen 
+hi LineNr ctermfg=lightgreen
 
 " always show command
 set showcmd
@@ -183,7 +183,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :endfunction
 
 :function Copy(...)
-:if a:0 == 3 
+:if a:0 == 3
 :   let start = a:1
 :   let end = a:2
 :   let pos = a:3
@@ -194,6 +194,25 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :endfunction
 
 :command -nargs=+ Cp :call Copy(<f-args>)
+
+
+" Function for removing whitespace
+:function RemoveWhiteSpaceHelp()
+:echohl WarningMsg
+:echom "-- Invalid syntax!"
+:echohl None
+:echom "Function takes no arguments."
+:endfunction
+
+:function RemoveWhiteSpace(...)
+:if a:0 > 0
+:   call RemoveWhiteSpaceHelp()
+:else
+:   execute '%s/\s\+$//g'
+:endif
+:endfunction
+
+:command -nargs=? Ws :call RemoveWhiteSpace(<f-args>)
 
 
 " clear a search
