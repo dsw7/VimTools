@@ -69,7 +69,7 @@ _Syntax_:
 _Examples_:  
 - Suppose we have the following code:
 
-```
+```c++
 1 namespace foo {
 2 void bar() {
 3     std::cout << "A foo that bars!" << std::endl;
@@ -82,7 +82,7 @@ We want to indent the function within namespace `foo` by 4 spaces:
 :Ind 2 5
 ```
 We get:  
-```
+```c++
 1 namespace foo {
 2     void bar() {
 3         std::cout << "A foo that bars!" << std::endl;
@@ -102,7 +102,7 @@ _Syntax_:
 _Examples_:  
 - Suppose we want to comment out the following:
 
-```
+```c++
 1 namespace foo {
 2     void bar() {
 3         std::cout << "A foo that bars!" << std::endl;
@@ -115,7 +115,7 @@ The following command will do the trick:
 :Ins \/\/ 1 6
 ```
 Note that we had to escape the forward slashes in the above example. The command returns:  
-```
+```c++
 1 //namespace foo {
 2 //    void bar() {
 3 //        std::cout << "A foo that bars!" << std::endl;
@@ -135,7 +135,7 @@ _Syntax_:
 _Examples_:  
 - Suppose we want to copy the following code to lines 8 onward:
 
-```
+```c++
 1 namespace foo {
 2     void bar() {
 3         std::cout << "A foo that bars!" << std::endl;
@@ -148,7 +148,7 @@ The following command;
 :Cp 1 6 8
 ```
 Will yield the following:
-```
+```c++
 1  namespace foo {
 2      void bar() {
 3          std::cout << "A foo that bars!" << std::endl;
