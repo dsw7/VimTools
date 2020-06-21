@@ -173,3 +173,39 @@ _Syntax_:
 :Ws
 ```
 Command takes no arguments.
+
+### Mv
+_Description_:  
+- The _Mv_ command is used to move a block of text.
+
+_Syntax_:  
+```
+:Mv <start-line> <end-line> <destination>
+```
+_Examples_:  
+- Suppose we drag the following code to line 9:
+
+```c++
+1 namespace foo {
+2     void bar() {
+3         std::cout << "A foo that bars!" << std::endl;
+4         std::cout << "What does that even mean?" << std::endl;
+5     }
+6 }
+```
+The following command will do the trick:  
+```
+:Mv 1 6 9
+```
+The result:
+```c++
+1
+2
+3
+4 namespace foo {
+5     void bar() {
+6         std::cout << "A foo that bars!" << std::endl;
+7         std::cout << "What does that even mean?" << std::endl;
+8     }
+9 }
+```
