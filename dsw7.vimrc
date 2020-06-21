@@ -57,7 +57,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 " HELP FUNCTIONS
 " --------------------------------------------------------------
 :function ReplaceHelp()
-:echohl WarningMsg
+:echohl ErrorMsg
 :echom "-- Invalid syntax!"
 :echohl None
 :echom "Valid syntax follows:"
@@ -68,7 +68,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :endfunction
 
 :function InsertHelp()
-:echohl WarningMsg
+:echohl ErrorMsg
 :echom "-- Invalid syntax!"
 :echohl None
 :echom "Valid syntax follows:"
@@ -77,7 +77,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :endfunction
 
 :function DeleteHelp()
-:echohl WarningMsg
+:echohl ErrorMsg
 :echom "-- Invalid syntax!"
 :echohl None
 :echom "Valid syntax follows:"
@@ -85,7 +85,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :endfunction
 
 :function IndentHelp()
-:echohl WarningMsg
+:echohl ErrorMsg
 :echom "-- Invalid syntax!"
 :echohl None
 :echom "Valid syntax follows:"
@@ -93,7 +93,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :endfunction
 
 :function CopyHelp()
-:echohl WarningMsg
+:echohl ErrorMsg
 :echom "-- Invalid syntax!"
 :echohl None
 :echom "Valid syntax follows:"
@@ -101,14 +101,14 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :endfunction
 
 :function RemoveWhiteSpaceHelp()
-:echohl WarningMsg
+:echohl ErrorMsg
 :echom "-- Invalid syntax!"
 :echohl None
 :echom "Function takes no arguments."
 :endfunction
 
 :function MoveHelp()
-:echohl WarningMsg
+:echohl ErrorMsg
 :echom "-- Invalid syntax!"
 :echohl None
 :echom "Valid syntax follows:"
@@ -116,14 +116,14 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :endfunction
 
 :function HelpHelp()
-:echohl WarningMsg
+:echohl ErrorMsg
 :echom "-- Invalid syntax!"
 :echohl None
 :echom "Function takes no arguments"
 :endfunction
 
 :function LineError()
-:echohl WarningMsg
+:echohl ErrorMsg
 :echom "-- Invalid syntax!"
 :echohl None
 :echom "The <start-line> value must not exceed the <end-line> value."
@@ -250,6 +250,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :    echom ":Mv  -> Move a block of text"
 :endif
 :endfunction
+
 
 " --------------------------------------------------------------
 " COMMANDS
