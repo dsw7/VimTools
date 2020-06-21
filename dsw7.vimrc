@@ -120,8 +120,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 " CUSTOM FUNCTIONS
 " --------------------------------------------------------------
 
-" Function for replacing text either throughout the file or
-" between a range of lines
+" Function for replacing text either throughout the file or between a range of lines
 :function Replace(input, output, ...)
 :if a:0 == 0                  " a:0 = number of unspecified arguments (...)
 :   execute '%s/' . a:input . '/' . a:output . '/g'
@@ -136,8 +135,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :endif
 :endfunction
 
-" Function for adding some character at the beginning of every
-" line between some range or in entire file
+" Function for adding some character at the beginning of every line between some range or in entire file
 :function Insert(char, ...)
 :if a:0 == 0
 :   execute '%s/^/' . a:char. '/g'
