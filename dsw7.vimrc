@@ -197,7 +197,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :endif
 :endfunction
 
-:function Copy(...) 
+:function Copy(...)
 :if a:0 == 3
 :    let start = str2nr(a:1)
 :    let end = str2nr(a:2)
@@ -220,7 +220,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :endif
 :endfunction
 
-:function Move(...) 
+:function Move(...)
 :if a:0 == 3
 :    let start = str2nr(a:1)
 :    let end = str2nr(a:2)
@@ -237,7 +237,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 
 :function Help(...)
 :if a:0 > 0
-:    call HelpHelp()    
+:    call HelpHelp()
 :else
 :    echom "List of commands:"
 :    echom ":Cls -> Clear a search"
