@@ -119,7 +119,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :echohl ErrorMsg
 :echom "-- Invalid syntax!"
 :echohl None
-:echom "Function takes no arguments"
+:echom "Function takes no arguments."
 :endfunction
 
 :function LineError()
