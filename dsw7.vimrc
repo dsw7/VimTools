@@ -54,25 +54,8 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 
 
 " --------------------------------------------------------------
-" CUSTOM COMMANDS
+" HELP FUNCTIONS
 " --------------------------------------------------------------
-" Some notes:
-" :command -nargs=* Foo :echo "<args>"
-" 1        2        3   4
-"
-" 1: always need to specify :command
-" 2: specify number of arguments
-"   -nargs=0    No arguments
-"   -nargs=1    One argument
-"   -nargs=*    Any number of arguments
-"   -nargs=?    Zero or one argument
-"   -nargs=+    One or more arguments
-" 3: command name (needs to be capitalized)
-" 4: the actual command to run
-
-
-" Function for replacing text either throughout the file or
-" between a range of lines
 :function ReplaceHelp()
 :echohl WarningMsg
 :echom "-- Invalid syntax!"
@@ -84,6 +67,61 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :echom ":Sub foo\\ bar cat\\ dog"
 :endfunction
 
+:function InsertHelp()
+:echohl WarningMsg
+:echom "-- Invalid syntax!"
+:echohl None
+:echom "Valid syntax follows:"
+:echom ":Ins <foo>"
+:echom ":Ins <foo> <start-line> <end-line>"
+:endfunction
+
+:function DeleteHelp()
+:echohl WarningMsg
+:echom "-- Invalid syntax!"
+:echohl None
+:echom "Valid syntax follows:"
+:echom ":Del <start-line> <end-line>"
+:endfunction
+
+:function IndentHelp()
+:echohl WarningMsg
+:echom "-- Invalid syntax!"
+:echohl None
+:echom "Valid syntax follows:"
+:echom ":Ind <start-line> <end-line>"
+:endfunction
+
+:function CopyHelp()
+:echohl WarningMsg
+:echom "-- Invalid syntax!"
+:echohl None
+:echom "Valid syntax follows:"
+:echom ":Cp <start-line> <end-line> <destination-line>"
+:endfunction
+
+:function RemoveWhiteSpaceHelp()
+:echohl WarningMsg
+:echom "-- Invalid syntax!"
+:echohl None
+:echom "Function takes no arguments."
+:endfunction
+
+:function MoveHelp()
+:echohl WarningMsg
+:echom "-- Invalid syntax!"
+:echohl None
+:echom "Valid syntax follows:"
+:echom ":Mv <start-line> <end-line> <destination-line>"
+:endfunction
+
+
+" --------------------------------------------------------------
+" CUSTOM FUNCTIONS
+" --------------------------------------------------------------
+
+" Function for replacing text either throughout the file or
+" between a range of lines
 :function Replace(input, output, ...)
 :if a:0 == 0                  " a:0 = number of unspecified arguments (...)
 :   execute '%s/' . a:input . '/' . a:output . '/g'
@@ -98,20 +136,8 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :endif
 :endfunction
 
-:command -nargs=+ Sub :call Replace(<f-args>)
-
-
 " Function for adding some character at the beginning of every
 " line between some range or in entire file
-:function InsertHelp()
-:echohl WarningMsg
-:echom "-- Invalid syntax!"
-:echohl None
-:echom "Valid syntax follows:"
-:echom ":Ins <foo>"
-:echom ":Ins <foo> <start-line> <end-line>"
-:endfunction
-
 :function Insert(char, ...)
 :if a:0 == 0
 :   execute '%s/^/' . a:char. '/g'
@@ -126,18 +152,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :endif
 :endfunction
 
-:command -nargs=+ Ins :call Insert(<f-args>)
-
-
 " Function for deleting numerous lines
-:function DeleteHelp()
-:echohl WarningMsg
-:echom "-- Invalid syntax!"
-:echohl None
-:echom "Valid syntax follows:"
-:echom ":Del <start-line> <end-line>"
-:endfunction
-
 :function Delete(...)
 :if a:0 == 2
 :   let start = a:1
@@ -148,18 +163,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :endif
 :endfunction
 
-:command -nargs=+ Del :call Delete(<f-args>)
-
-
 " Function for indenting code 4 spaces
-:function IndentHelp()
-:echohl WarningMsg
-:echom "-- Invalid syntax!"
-:echohl None
-:echom "Valid syntax follows:"
-:echom ":Ind <start-line> <end-line>"
-:endfunction
-
 :function Indent(...)
 :if a:0 == 2
 :   let start = a:1
@@ -170,18 +174,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :endif
 :endfunction
 
-:command -nargs=+ Ind :call Indent(<f-args>)
-
-
 " Function for copying blocks of text
-:function CopyHelp()
-:echohl WarningMsg
-:echom "-- Invalid syntax!"
-:echohl None
-:echom "Valid syntax follows:"
-:echom ":Cp <start-line> <end-line> <destination-line>"
-:endfunction
-
 :function Copy(...)
 :if a:0 == 3
 :   let start = a:1
@@ -193,17 +186,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :endif
 :endfunction
 
-:command -nargs=+ Cp :call Copy(<f-args>)
-
-
 " Function for removing whitespace
-:function RemoveWhiteSpaceHelp()
-:echohl WarningMsg
-:echom "-- Invalid syntax!"
-:echohl None
-:echom "Function takes no arguments."
-:endfunction
-
 :function RemoveWhiteSpace(...)
 :if a:0 > 0
 :   call RemoveWhiteSpaceHelp()
@@ -212,8 +195,44 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :endif
 :endfunction
 
-:command -nargs=? Ws :call RemoveWhiteSpace(<f-args>)
+" Function for moving blocks of text
+:function Move(...)
+:if a:0 == 3
+:   let start = a:1
+:   let end = a:2
+:   let pos = a:3
+:   execute start . ',' . end . 'm' . pos
+:else
+:   call MoveHelp()
+:endif
+:endfunction
 
 
-" clear a search
-:command Cls :noh
+" --------------------------------------------------------------
+" COMMANDS
+" --------------------------------------------------------------
+:command Cls :noh                                      " Clear a search
+:command -nargs=? Ws  :call RemoveWhiteSpace(<f-args>) " Remove all whitespace
+:command -nargs=+ Cp  :call Copy(<f-args>)             " Copy a block of lines
+:command -nargs=+ Ind :call Indent(<f-args>)           " Indent by 4 spaces
+:command -nargs=+ Del :call Delete(<f-args>)           " Delete between a range of lines
+:command -nargs=+ Ins :call Insert(<f-args>)           " Insert a delimiter at beginning of lines
+:command -nargs=+ Sub :call Replace(<f-args>)          " Replace a word
+:command -nargs=+ Mv  :call Move(<f-args>)             " Move a block of text
+
+
+" --------------------------------------------------------------
+" NOTES
+" --------------------------------------------------------------
+" :command -nargs=* Foo :echo "<args>"
+" 1        2        3   4
+"
+" 1: always need to specify :command
+" 2: specify number of arguments
+"   -nargs=0    No arguments
+"   -nargs=1    One argument
+"   -nargs=*    Any number of arguments
+"   -nargs=?    Zero or one argument
+"   -nargs=+    One or more arguments
+" 3: command name (needs to be capitalized)
+" 4: the actual command to run
