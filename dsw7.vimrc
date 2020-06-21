@@ -115,6 +115,13 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :echom ":Mv <start-line> <end-line> <destination-line>"
 :endfunction
 
+:function LineError()
+:echohl WarningMsg
+:echom "-- Invalid syntax!"
+:echohl None
+:echom "The <start-line> value must not exceed the <end-line> value."
+:endfunction
+
 
 " --------------------------------------------------------------
 " CUSTOM FUNCTIONS
@@ -129,7 +136,11 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :elseif a:0 == 2              " a:0 = 2 if start and end line numbers are passed
 :   let start = a:1           " a:1 = the first optional value
 :   let end = a:2             " a:2 = the second optional value
-:   execute start . ',' . end . 's/' . a:input . '/' . a:output . '/g'
+:   if start <= end
+:       execute start . ',' . end . 's/' . a:input . '/' . a:output . '/g'
+:   else
+:       call LineError()
+:   endif
 :elseif a:0 > 2               " a:0 > 2 if only the start, end and some other arg passed
 :   call ReplaceHelp()
 :endif
