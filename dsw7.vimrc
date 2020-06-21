@@ -126,93 +126,105 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 " --------------------------------------------------------------
 " CUSTOM FUNCTIONS
 " --------------------------------------------------------------
-
-" Function for replacing text either throughout the file or between a range of lines
 :function Replace(input, output, ...)
 :if a:0 == 0                  " a:0 = number of unspecified arguments (...)
-:   execute '%s/' . a:input . '/' . a:output . '/g'
+:    execute '%s/' . a:input . '/' . a:output . '/g'
 :elseif a:0 == 1              " a:0 = 1 if only the start argument passed
-:   call ReplaceHelp()
+:    call ReplaceHelp()
 :elseif a:0 == 2              " a:0 = 2 if start and end line numbers are passed
-:   let start = a:1           " a:1 = the first optional value
-:   let end = a:2             " a:2 = the second optional value
-:   if start <= end
-:       execute start . ',' . end . 's/' . a:input . '/' . a:output . '/g'
-:   else
-:       call LineError()
-:   endif
+:    let start = str2nr(a:1)  " a:1 = the first optional value
+:    let end = str2nr(a:2)    " a:2 = the second optional value
+:    if start <= end
+:        execute start . ',' . end . 's/' . a:input . '/' . a:output . '/g'
+:    else
+:        call LineError()
+:    endif
 :elseif a:0 > 2               " a:0 > 2 if only the start, end and some other arg passed
-:   call ReplaceHelp()
+:    call ReplaceHelp()
 :endif
 :endfunction
 
-" Function for adding some character at the beginning of every line between some range or in entire file
 :function Insert(char, ...)
 :if a:0 == 0
-:   execute '%s/^/' . a:char. '/g'
+:    execute '%s/^/' . a:char. '/g'
 :elseif a:0 == 1
-:   call InsertHelp()
+:    call InsertHelp()
 :elseif a:0 == 2
-:   let start = a:1
-:   let end = a:2
-:   execute start . ',' . end . 's/^/' . a:char . '/g'
+:    let start = str2nr(a:1)
+:    let end = str2nr(a:2)
+:    if start <= end
+:        execute start . ',' . end . 's/^/' . a:char . '/g'
+:    else
+:        call LineError()
+:    endif
 :elseif a:0 > 2
-:   call InsertHelp()
+:    call InsertHelp()
 :endif
 :endfunction
 
-" Function for deleting numerous lines
 :function Delete(...)
 :if a:0 == 2
-:   let start = a:1
-:   let end = a:2
-:   execute start . ',' . end . 'd'
+:    let start = str2nr(a:1)
+:    let end = str2nr(a:2)
+:    if start <= end
+:        execute start . ',' . end . 'd'
+:    else
+:        call LineError()
+:    endif
 :else
-:   call DeleteHelp()
+:    call DeleteHelp()
 :endif
 :endfunction
 
-" Function for indenting code 4 spaces
 :function Indent(...)
 :if a:0 == 2
-:   let start = a:1
-:   let end = a:2
-:   execute start . ',' . end . 's/^/    /g'
+:    let start = str2nr(a:1)
+:    let end = str2nr(a:2)
+:    if start <= end
+:        execute start . ',' . end . 's/^/    /g'
+:    else
+:        call LineError()
+:    endif
 :else
-:   call IndentHelp()
+:    call IndentHelp()
 :endif
 :endfunction
 
-" Function for copying blocks of text
-:function Copy(...)
+:function Copy(...) 
 :if a:0 == 3
-:   let start = a:1
-:   let end = a:2
-:   let pos = a:3
-:   execute start . ',' . end . 't' . pos
+:    let start = str2nr(a:1)
+:    let end = str2nr(a:2)
+:    let pos = str2nr(a:3)
+:    if start <= end
+:        execute start . ',' . end . 't' . pos
+:    else
+:        call LineError()
+:    endif
 :else
-:   call CopyHelp()
+:    call CopyHelp()
 :endif
 :endfunction
 
-" Function for removing whitespace
 :function RemoveWhiteSpace(...)
 :if a:0 > 0
-:   call RemoveWhiteSpaceHelp()
+:    call RemoveWhiteSpaceHelp()
 :else
-:   execute '%s/\s\+$//g'
+:    execute '%s/\s\+$//g'
 :endif
 :endfunction
 
-" Function for moving blocks of text
-:function Move(...)
+:function Move(...) 
 :if a:0 == 3
-:   let start = a:1
-:   let end = a:2
-:   let pos = a:3
-:   execute start . ',' . end . 'm' . pos
+:    let start = str2nr(a:1)
+:    let end = str2nr(a:2)
+:    let pos = str2nr(a:3)
+:    if start <= end
+:        execute start . ',' . end . 'm' . pos
+:    else
+:        call LineError()
+:    endif
 :else
-:   call MoveHelp()
+:    call MoveHelp()
 :endif
 :endfunction
 
