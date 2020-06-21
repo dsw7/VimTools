@@ -115,6 +115,13 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :echom ":Mv <start-line> <end-line> <destination-line>"
 :endfunction
 
+:function HelpHelp()
+:echohl WarningMsg
+:echom "-- Invalid syntax!"
+:echohl None
+:echom "Function takes no arguments"
+:endfunction
+
 :function LineError()
 :echohl WarningMsg
 :echom "-- Invalid syntax!"
@@ -228,18 +235,34 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :endif
 :endfunction
 
+:function Help(...)
+:if a:0 > 0
+:    call HelpHelp()    
+:else
+:    echom "List of commands:"
+:    echom ":Cls -> Clear a search"
+:    echom ":Ws  -> Remove all whitespace"
+:    echom ":Cp  -> Copy a block of lines"
+:    echom ":Ind -> Indent by 4 spaces"
+:    echom ":Del -> Delete between a range of lines"
+:    echom ":Ins -> Insert a delimiter at beginning of lines"
+:    echom ":Sub -> Replace a word"
+:    echom ":Mv  -> Move a block of text"
+:endif
+:endfunction
 
 " --------------------------------------------------------------
 " COMMANDS
 " --------------------------------------------------------------
-:command Cls :noh                                      " Clear a search
-:command -nargs=? Ws  :call RemoveWhiteSpace(<f-args>) " Remove all whitespace
-:command -nargs=+ Cp  :call Copy(<f-args>)             " Copy a block of lines
-:command -nargs=+ Ind :call Indent(<f-args>)           " Indent by 4 spaces
-:command -nargs=+ Del :call Delete(<f-args>)           " Delete between a range of lines
-:command -nargs=+ Ins :call Insert(<f-args>)           " Insert a delimiter at beginning of lines
-:command -nargs=+ Sub :call Replace(<f-args>)          " Replace a word
-:command -nargs=+ Mv  :call Move(<f-args>)             " Move a block of text
+:command Cls :noh                                       " Clear a search
+:command -nargs=? Ws   :call RemoveWhiteSpace(<f-args>) " Remove all whitespace
+:command -nargs=+ Cp   :call Copy(<f-args>)             " Copy a block of lines
+:command -nargs=+ Ind  :call Indent(<f-args>)           " Indent by 4 spaces
+:command -nargs=+ Del  :call Delete(<f-args>)           " Delete between a range of lines
+:command -nargs=+ Ins  :call Insert(<f-args>)           " Insert a delimiter at beginning of lines
+:command -nargs=+ Sub  :call Replace(<f-args>)          " Replace a word
+:command -nargs=+ Mv   :call Move(<f-args>)             " Move a block of text
+:command -nargs=? Help :call Help(<f-args>)             " Print a list of the preceding commands
 
 
 " --------------------------------------------------------------
