@@ -282,6 +282,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :command -nargs=? Paste :call Paste(<f-args>)            " Paste text from system clipboard
 :command -nargs=? Help  :call Help(<f-args>)             " Print a list of the preceding commands
 
+
 " --------------------------------------------------------------
 " NOTES
 " --------------------------------------------------------------
