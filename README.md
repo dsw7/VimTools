@@ -209,3 +209,26 @@ The result:
 8     }
 9 }
 ```
+
+### Paste
+_Description_:  
+- The _Paste_ command is used to paste system clipboard contents to a file.
+
+_Syntax_:  
+```
+:Paste
+```
+_Examples_:  
+- Suppose we want to copy the following text into line 2 of a file:  
+```
+Lorem ipsum dolor sit amet...
+```
+We would start by hightlighting the above text and using the standard command `Ctrl-C`. We would then move the cursor to line 2 in the Vim session and type:
+```
+:Paste
+```
+Which would yield:
+```
+1
+2 Lorem ipsum dolor sit amet...
+```
