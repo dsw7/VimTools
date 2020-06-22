@@ -115,6 +115,13 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :echom ":Mv <start-line> <end-line> <destination-line>"
 :endfunction
 
+:function PasteHelp()
+:echohl ErrorMsg
+:echom "-- Invalid syntax!"
+:echohl None
+:echom "Function takes no arguments."
+:endfunction
+
 :function HelpHelp()
 :echohl ErrorMsg
 :echom "-- Invalid syntax!"
@@ -235,6 +242,14 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :endif
 :endfunction
 
+:function Paste(...)
+:if a:0 > 0
+:    call PasteHelp()
+:else
+:    normal! "+p
+:endif
+:endfunction
+
 :function Help(...)
 :if a:0 > 0
 :    call HelpHelp()
@@ -255,16 +270,16 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 " --------------------------------------------------------------
 " COMMANDS
 " --------------------------------------------------------------
-:command Cls :noh                                       " Clear a search
-:command -nargs=? Ws   :call RemoveWhiteSpace(<f-args>) " Remove all whitespace
-:command -nargs=+ Cp   :call Copy(<f-args>)             " Copy a block of lines
-:command -nargs=+ Ind  :call Indent(<f-args>)           " Indent by 4 spaces
-:command -nargs=+ Del  :call Delete(<f-args>)           " Delete between a range of lines
-:command -nargs=+ Ins  :call Insert(<f-args>)           " Insert a delimiter at beginning of lines
-:command -nargs=+ Sub  :call Replace(<f-args>)          " Replace a word
-:command -nargs=+ Mv   :call Move(<f-args>)             " Move a block of text
-:command -nargs=? Help :call Help(<f-args>)             " Print a list of the preceding commands
-
+:command Cls :noh                                        " Clear a search
+:command -nargs=? Ws    :call RemoveWhiteSpace(<f-args>) " Remove all whitespace
+:command -nargs=+ Cp    :call Copy(<f-args>)             " Copy a block of lines
+:command -nargs=+ Ind   :call Indent(<f-args>)           " Indent by 4 spaces
+:command -nargs=+ Del   :call Delete(<f-args>)           " Delete between a range of lines
+:command -nargs=+ Ins   :call Insert(<f-args>)           " Insert a delimiter at beginning of lines
+:command -nargs=+ Sub   :call Replace(<f-args>)          " Replace a word
+:command -nargs=+ Mv    :call Move(<f-args>)             " Move a block of text
+:command -nargs=? Paste :call Paste(<f-args>)            " Paste text from system clipboard
+:command -nargs=? Help  :call Help(<f-args>)             " Print a list of the preceding commands
 
 " --------------------------------------------------------------
 " NOTES
