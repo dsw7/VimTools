@@ -58,7 +58,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 " --------------------------------------------------------------
 :function ReplaceHelp()
 :echohl ErrorMsg
-:echom "-- Invalid syntax!"
+:echom "Invalid syntax!"
 :echohl None
 :echom "Valid syntax follows:"
 :echom ":Sub <foo> <bar>"
@@ -69,7 +69,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 
 :function InsertHelp()
 :echohl ErrorMsg
-:echom "-- Invalid syntax!"
+:echom "Invalid syntax!"
 :echohl None
 :echom "Valid syntax follows:"
 :echom ":Ins <foo>"
@@ -78,7 +78,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 
 :function DeleteHelp()
 :echohl ErrorMsg
-:echom "-- Invalid syntax!"
+:echom "Invalid syntax!"
 :echohl None
 :echom "Valid syntax follows:"
 :echom ":Del <start-line> <end-line>"
@@ -86,7 +86,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 
 :function IndentHelp()
 :echohl ErrorMsg
-:echom "-- Invalid syntax!"
+:echom "Invalid syntax!"
 :echohl None
 :echom "Valid syntax follows:"
 :echom ":Ind <start-line> <end-line>"
@@ -94,7 +94,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 
 :function CopyHelp()
 :echohl ErrorMsg
-:echom "-- Invalid syntax!"
+:echom "Invalid syntax!"
 :echohl None
 :echom "Valid syntax follows:"
 :echom ":Cp <start-line> <end-line> <destination-line>"
@@ -102,14 +102,14 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 
 :function RemoveWhiteSpaceHelp()
 :echohl ErrorMsg
-:echom "-- Invalid syntax!"
+:echom "Invalid syntax!"
 :echohl None
 :echom "Function takes no arguments."
 :endfunction
 
 :function MoveHelp()
 :echohl ErrorMsg
-:echom "-- Invalid syntax!"
+:echom "Invalid syntax!"
 :echohl None
 :echom "Valid syntax follows:"
 :echom ":Mv <start-line> <end-line> <destination-line>"
@@ -117,21 +117,21 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 
 :function PasteHelp()
 :echohl ErrorMsg
-:echom "-- Invalid syntax!"
+:echom "Invalid syntax!"
 :echohl None
 :echom "Function takes no arguments."
 :endfunction
 
 :function HelpHelp()
 :echohl ErrorMsg
-:echom "-- Invalid syntax!"
+:echom "Invalid syntax!"
 :echohl None
 :echom "Function takes no arguments."
 :endfunction
 
 :function LineError()
 :echohl ErrorMsg
-:echom "-- Invalid syntax!"
+:echom "Invalid syntax!"
 :echohl None
 :echom "The <start-line> value must not exceed the <end-line> value."
 :endfunction
@@ -255,14 +255,15 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :    call HelpHelp()
 :else
 :    echom "List of commands:"
-:    echom ":Cls -> Clear a search"
-:    echom ":Ws  -> Remove all whitespace"
-:    echom ":Cp  -> Copy a block of lines"
-:    echom ":Ind -> Indent by 4 spaces"
-:    echom ":Del -> Delete between a range of lines"
-:    echom ":Ins -> Insert a delimiter at beginning of lines"
-:    echom ":Sub -> Replace a word"
-:    echom ":Mv  -> Move a block of text"
+:    echom ":Cls   -> Clear a search"
+:    echom ":Ws    -> Remove all whitespace"
+:    echom ":Cp    -> Copy a block of lines"
+:    echom ":Ind   -> Indent by 4 spaces"
+:    echom ":Del   -> Delete between a range of lines"
+:    echom ":Ins   -> Insert a delimiter at beginning of lines"
+:    echom ":Sub   -> Replace a word"
+:    echom ":Mv    -> Move a block of text"
+:    echom ":Paste -> Paste a block of text from system clipboard"
 :endif
 :endfunction
 
