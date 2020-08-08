@@ -107,6 +107,14 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :echom "Function takes no arguments."
 :endfunction
 
+:function RemoveWhiteSpaceBeforeLineHelp()
+:echohl ErrorMsg
+:echom "Invalid syntax!"
+:echohl None
+:echom "Valid syntax follows:"
+:echom ":Wl <start-line> <end-line>"
+:endfunction
+
 :function MoveHelp()
 :echohl ErrorMsg
 :echom "Invalid syntax!"
@@ -232,12 +240,12 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :    let start = str2nr(a:1)
 :    let end = str2nr(a:2)
 :    if start <= end
-:        execute start . ',' . end . 's/^\s\+$//g'
+:        execute start . ',' . end . 's/^\s\+//g'
 :    else
 :        call LineError()
 :    endif
 :else
-:    call MoveHelp()
+:    call RemoveWhiteSpaceBeforeLineHelp()
 :endif
 :endfunction
 
@@ -287,7 +295,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 " --------------------------------------------------------------
 :command Cls :noh                                                  " Clear a search
 :command -nargs=? Ws    :call RemoveWhiteSpace(<f-args>)           " Remove all whitespace
-:command -nargs=? Wl    :call RemoveWhiteSpaceBeforeLine(<f-args>) " Remove all whitespace
+:command -nargs=+ Wl    :call RemoveWhiteSpaceBeforeLine(<f-args>) " Remove all whitespace before lines
 :command -nargs=+ Cp    :call Copy(<f-args>)                       " Copy a block of lines
 :command -nargs=+ Ind   :call Indent(<f-args>)                     " Indent by 4 spaces
 :command -nargs=+ Del   :call Delete(<f-args>)                     " Delete between a range of lines
