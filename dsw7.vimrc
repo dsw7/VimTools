@@ -279,6 +279,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :    echom "List of commands:"
 :    echom ":Cls   -> Clear a search"
 :    echom ":Ws    -> Remove all whitespace"
+:    echom ":Wl    -> Remove all whitespace before a set of lines"
 :    echom ":Cp    -> Copy a block of lines"
 :    echom ":Ind   -> Indent by 4 spaces"
 :    echom ":Del   -> Delete between a range of lines"
