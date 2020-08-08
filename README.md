@@ -232,3 +232,33 @@ Which would yield:
 1
 2 Lorem ipsum dolor sit amet...
 ```
+
+### Wl
+_Description_:  
+- The _Wl_ command removes whitespace before a set of lines.
+
+_Syntax_:  
+```
+:Wl <start-line> <end-line>
+```
+_Examples_:  
+- Suppose we copied the following into the editor:    
+```
+1 Lorem
+2     ipsum
+3         dolor
+4             sit 
+5                 amet...
+```
+We could re-align the text as follows:
+```
+:Wl 1 5
+```
+Which would yield:
+```
+1 Lorem
+2 ipsum
+3 dolor
+4 sit 
+5 amet...
+```
