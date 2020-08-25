@@ -72,7 +72,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :echom "Invalid syntax!"
 :echohl None
 :echom "Valid syntax follows:"
-:echom ":SubAll <foo> <bar>"
+:echom ":SubAll <foo> <bar> <*|**>"
 :endfunction
 
 :function InsertHelp()
@@ -174,11 +174,18 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :endif
 :endfunction
 
-:function ReplaceInAllFiles(input, output, ...)
+:function ReplaceInAllFiles(input, output, scope, ...)
 :if a:0 == 0
-:    arg *                    " add all files in current directory
-:    argdo '%s/' . a:input . '/' . a:output . '/ge' | update
-:else:
+:    if a:scope == '*'
+:        arg *                " add all files in current directory
+:        argdo execute '%s/' . a:input . '/' . a:output. '/ge' | update
+:    elseif a:scope == '**'   " add all files in current and sub directories
+:        arg **
+:        argdo execute '%s/' . a:input . '/' . a:output. '/ge' | update
+:    else
+:        call ReplaceInAllFilesHelp()
+:    endif
+:else
 :    call ReplaceInAllFilesHelp()
 :endif
 :endfunction
@@ -302,7 +309,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :    echom ":Del    -> Delete between a range of lines"
 :    echom ":Ins    -> Insert a delimiter at beginning of lines"
 :    echom ":Sub    -> Replace a string in current file"
-:    echom ":SubAll -> Replace a string in all files in working directory"
+:    echom ":SubAll -> Replace a string in many files"
 :    echom ":Mv     -> Move a block of text"
 :    echom ":Paste  -> Paste a block of text from system clipboard"
 :endif
@@ -312,7 +319,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 " --------------------------------------------------------------
 " COMMANDS
 " --------------------------------------------------------------
-:command Cls :noh                                                  " Clear a search
+:command Cls :noh                                                   " Clear a search
 :command -nargs=? Ws     :call RemoveWhiteSpace(<f-args>)           " Remove all whitespace
 :command -nargs=+ Wl     :call RemoveWhiteSpaceBeforeLine(<f-args>) " Remove all whitespace before lines
 :command -nargs=+ Cp     :call Copy(<f-args>)                       " Copy a block of lines
@@ -320,7 +327,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :command -nargs=+ Del    :call Delete(<f-args>)                     " Delete between a range of lines
 :command -nargs=+ Ins    :call Insert(<f-args>)                     " Insert a delimiter at beginning of lines
 :command -nargs=+ Sub    :call Replace(<f-args>)                    " Replace a string in current file
-:command -nargs=+ SubAll :call Replace(<f-args>)                    " Replace a string in all files in working dir
+:command -nargs=+ SubAll :call ReplaceInAllFiles(<f-args>)          " Replace a string in all files in working dir
 :command -nargs=+ Mv     :call Move(<f-args>)                       " Move a block of text
 :command -nargs=? Paste  :call Paste(<f-args>)                      " Paste text from system clipboard
 :command -nargs=? Help   :call Help(<f-args>)                       " Print a list of the preceding commands
