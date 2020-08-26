@@ -13,6 +13,7 @@ set expandtab
 
 " set line numbers and set the number color
 set number
+set numberwidth=2
 hi LineNr ctermfg=lightgreen
 
 " always show command
@@ -51,6 +52,21 @@ hi Comment ctermfg=darkgrey
 inoremap {<CR> {<CR>}<Esc>ko<tab>
 inoremap [<CR> [<CR>]<Esc>ko<tab>
 inoremap (<CR> (<CR>)<Esc>ko<tab>
+
+" remap esc key to none
+inoremap jk <esc>
+inoremap <esc> <nop>
+
+" remap arrow keys to none
+noremap <Up> <nop>
+noremap <Down> <nop>
+noremap <Left> <nop>
+noremap <Right> <nop>
+
+inoremap <Up> <nop>
+inoremap <Down> <nop>
+inoremap <Left> <nop>
+inoremap <Right> <nop>
 
 
 " --------------------------------------------------------------
