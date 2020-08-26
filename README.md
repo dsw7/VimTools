@@ -43,6 +43,21 @@ _Examples_:
 :Sub f[o|a]r foo
 ```
 
+### SubAll
+_Description_:  
+- The _SubAll_ command is used to replace text in all files within the current working directory or the current working directory and all subdirectories
+
+_Syntax_:  
+```
+:SubAll <foo> <bar> <*|**>
+```
+_Examples_:  
+- Replace `cat` with `dog` in the current file and all files within the current working directory and subdirectories:
+
+```
+:SubAll cat dog **
+```
+
 ### Del
 _Description_:  
 - The _Del_ command is used to delete lines within a specified range.
