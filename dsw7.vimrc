@@ -13,6 +13,7 @@ set expandtab
 
 " set line numbers and set the number color
 set number
+set numberwidth=2
 hi LineNr ctermfg=lightgreen
 
 " always show command
