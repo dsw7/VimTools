@@ -317,6 +317,7 @@ inoremap <Right> <nop>
 :    call HelpHelp()
 :else
 :    echom "List of commands:"
+:    echom "==========================================================" 
 :    echom ":Cls    -> Clear a search"
 :    echom ":Ws     -> Remove all whitespace"
 :    echom ":Wl     -> Remove all whitespace before a set of lines"
@@ -328,6 +329,7 @@ inoremap <Right> <nop>
 :    echom ":SubAll -> Replace a string in many files"
 :    echom ":Mv     -> Move a block of text"
 :    echom ":Paste  -> Paste a block of text from system clipboard"
+:    echom "==========================================================" 
 :endif
 :endfunction
 
