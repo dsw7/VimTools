@@ -7,7 +7,7 @@ syntax on
 set cmdheight=1
 
 " show status line
-set ls=2
+" set ls=2
 
 " set colorscheme
 colorscheme desert
