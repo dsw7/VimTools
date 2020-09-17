@@ -19,28 +19,29 @@ $ curl https://raw.githubusercontent.com/dsw7/VimTools/master/dsw7.vimrc --outpu
 ## List of custom commands (implemented to date)
 ### Sub
 _Description_:  
-- The _Sub_ command is used to replace text within either a range of lines or in the entire file.
+- The _Sub_ command is used to replace text within either a range of lines or in the entire file. The _Sub_ command replaces the contents of the `"/` register with a new entry `<bar>`
 
 _Syntax_:  
 ```
-:Sub <foo> <bar>
-:Sub <foo> <bar> <start-line> <end-line>
+:/<foo>
+:Sub <bar>
+```
+Or:
+```
+:/<foo>
+:Sub <bar> <start-line> <end-line>
 ```
 _Examples_:  
 - Replace `cat` with `dog` in an entire file:
+```
+:/cat
+:Sub dog
+```
+- Replace `Lorem` with `foobar` between lines 2 and 4 (inclusive):
 
 ```
-:Sub cat dog
-```
-- Replace `Lorem ipsum` with `foobar` between lines 2 and 4 (inclusive):
-
-```
-:Sub Lorem\ ipsum foobar 2 4
-```
-- The _Sub_ command works with regular expressions. To replace all instances of `for` and `far` in a body of text with `foo`:
-
-```
-:Sub f[o|a]r foo
+:/Lorem
+:Sub ipsum 2 4
 ```
 
 ### SubAll
