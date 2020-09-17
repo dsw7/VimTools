@@ -67,11 +67,14 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :echohl ErrorMsg
 :echom "Invalid syntax!"
 :echohl None
-:echom "Valid syntax follows:"
-:echom ":Sub <foo> <bar>"
-:echom ":Sub <foo> <bar> <start-line> <end-line>"
-:echom "To replace strings with spaces like: 'foo bar' -> 'cat dog':"
-:echom ":Sub foo\\ bar cat\\ dog"
+:echom "Usage:"
+:echom "  1. Search for <foo> using Shift + 3 or /"
+:echom "  2. Type :Sub <bar>"
+:echom "This will replace all occurrences of <foo> with <bar>"
+:echom "A range of lines can also be specified:"
+:echom "  1. Search for <foo> using Shift + 3 or /"
+:echom "  2. Type :Sub <bar> <start-line> <end-line>"
+:echom "This will replace all occurrences of <foo> with <bar> between <start-line> and <end-line>"
 :endfunction
 
 :function ReplaceInAllFilesHelp()
