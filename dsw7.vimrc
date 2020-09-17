@@ -163,16 +163,16 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 " --------------------------------------------------------------
 " CUSTOM FUNCTIONS
 " --------------------------------------------------------------
-:function Replace(input, output, ...)
+:function Replace(output, ...)
 :if a:0 == 0                  " a:0 = number of unspecified arguments (...)
-:    execute '%s/' . a:input . '/' . a:output . '/g'
+:    execute '%s/' . escape(getreg('/'), '/') . '/' . a:output . '/g'
 :elseif a:0 == 1              " a:0 = 1 if only the start argument passed
 :    call ReplaceHelp()
 :elseif a:0 == 2              " a:0 = 2 if start and end line numbers are passed
 :    let start = str2nr(a:1)  " a:1 = the first optional value
 :    let end = str2nr(a:2)    " a:2 = the second optional value
 :    if start <= end
-:        execute start . ',' . end . 's/' . a:input . '/' . a:output . '/g'
+:        execute start . ',' . end . 's/' . escape(getreg('/'), '/') . '/' . a:output . '/g'
 :    else
 :        call LineError()
 :    endif
