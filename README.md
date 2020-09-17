@@ -37,7 +37,7 @@ _Examples_:
 :/cat
 :Sub dog
 ```
-- Replace `Lorem` with `foobar` between lines 2 and 4 (inclusive):
+- Replace `Lorem` with `ipsum` between lines 2 and 4 (inclusive):
 
 ```
 :/Lorem
