@@ -155,6 +155,15 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :echom "Function takes no arguments."
 :endfunction
 
+:function HeaderHelp()
+:echohl ErrorMsg
+:echom "Invalid syntax!"
+:echohl None
+:echom "Valid syntax follows:"
+:echom ":Header <my-header-text>"
+:echom ":Header <my-header-text> <padding>"
+:endfunction
+
 :function LineError()
 :echohl ErrorMsg
 :echom "Invalid syntax!"
@@ -310,15 +319,17 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :if a:0 == 1
 :    let padding = 5
 :elseif a:0 == 2
-:    let padding = a:2
-:else
+:    let padding = str2nr(a:2)
+:else  " unreachable because blocked by -nargs=+ in COMMANDS section
+:    call HeaderHelp()
 :    return
 :endif
 :let strsize = strlen(a:1)
-:let bar = repeat('=', strsize + 2 * padding + 2)
+:let hline = repeat('=', strsize + 2 * padding + 2)
 :let mid = repeat('=', padding)
 :let row = mid . ' ' . a:1 . ' ' . mid
-:call setline('.', [bar, row, bar])
+:call setline('.', [hline, row, hline])
+:+3
 :endfunction
 
 :function Help(...)
