@@ -1,6 +1,6 @@
-" --------------------------------------------------------------
-" SETTINGS
-" --------------------------------------------------------------
+================
+===== Dogs =====
+================
 syntax on
 
 " set command bar height
@@ -306,6 +306,21 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :endif
 :endfunction
 
+:function Header(...)
+:if a:0 == 1
+:    let padding = 5
+:elseif a:0 == 2
+:    let padding = a:2
+:else
+:    return
+:endif
+:let strsize = strlen(a:1)
+:let bar = repeat('=', strsize + 2 * padding + 2)
+:let mid = repeat('=', padding)
+:let row = mid . ' ' . a:1 . ' ' . mid
+:call setline('.', [bar, row, bar])
+:endfunction
+
 :function Help(...)
 :if a:0 > 0
 :    call HelpHelp()
@@ -323,6 +338,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :    echom ":SubAll -> Replace a string in many files"
 :    echom ":Mv     -> Move a block of text"
 :    echom ":Paste  -> Paste a block of text from system clipboard"
+:    echom ":Header -> Create a header"
 :    echom "=========================================================="
 :endif
 :endfunction
@@ -342,6 +358,7 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 :command -nargs=+ SubAll :call ReplaceInAllFiles(<f-args>)          " Replace a string in all files in working dir
 :command -nargs=+ Mv     :call Move(<f-args>)                       " Move a block of text
 :command -nargs=? Paste  :call Paste(<f-args>)                      " Paste text from system clipboard
+:command -nargs=+ Header :call Header(<f-args>)                     " Create some header text
 :command -nargs=? Help   :call Help(<f-args>)                       " Print a list of the preceding commands
 
 
