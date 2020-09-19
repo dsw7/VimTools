@@ -69,11 +69,11 @@ echom "Invalid syntax!"
 echohl None
 echom "Usage:"
 echom "  1. Search for <foo> using Shift + 3 or /"
-echom "  2. Type :Sub <bar>"
+echom "  2. Type :S <bar>"
 echom "This will replace all occurrences of <foo> with <bar>"
 echom "A range of lines can also be specified:"
 echom "  1. Search for <foo> using Shift + 3 or /"
-echom "  2. Type :Sub <bar> <start-line> <end-line>"
+echom "  2. Type :S <bar> <start-line> <end-line>"
 echom "This will replace all occurrences of <foo> with <bar> between <start-line> and <end-line>"
 endfunction
 
@@ -328,7 +328,7 @@ let strsize = strlen(a:1)
 let hline = repeat('=', strsize + 2 * padding + 2)
 let mid = repeat('=', padding)
 let row = mid . ' ' . a:1 . ' ' . mid
-call setline('.', [hline, row, hline])
+call setline('.', [hline, row, hline, ''])
 +3
 endfunction
 
@@ -345,7 +345,7 @@ else
     echom ":Ind    -> Indent by 4 spaces"
     echom ":Del    -> Delete between a range of lines"
     echom ":Ins    -> Insert a delimiter at beginning of lines"
-    echom ":Sub    -> Replace a string in current file"
+    echom ":S      -> Replace a string in current file"
     echom ":SubAll -> Replace a string in many files"
     echom ":Mv     -> Move a block of text"
     echom ":Paste  -> Paste a block of text from system clipboard"
@@ -365,7 +365,7 @@ command -nargs=+ Cp     :call Copy(<f-args>)                       " Copy a bloc
 command -nargs=+ Ind    :call Indent(<f-args>)                     " Indent by 4 spaces
 command -nargs=+ Del    :call Delete(<f-args>)                     " Delete between a range of lines
 command -nargs=+ Ins    :call Insert(<f-args>)                     " Insert a delimiter at beginning of lines
-command -nargs=+ Sub    :call Replace(<f-args>)                    " Replace a string in current file
+command -nargs=+ S      :call Replace(<f-args>)                    " Replace a string in current file
 command -nargs=+ SubAll :call ReplaceInAllFiles(<f-args>)          " Replace a string in all files in working dir
 command -nargs=+ Mv     :call Move(<f-args>)                       " Move a block of text
 command -nargs=? Paste  :call Paste(<f-args>)                      " Paste text from system clipboard
