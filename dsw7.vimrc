@@ -59,6 +59,9 @@ inoremap {<CR> {<CR>}<Esc>ko<tab>
 inoremap [<CR> [<CR>]<Esc>ko<tab>
 inoremap (<CR> (<CR>)<Esc>ko<tab>
 
+" map esc to jj
+inoremap jj <Esc>
+
 
 " --------------------------------------------------------------
 " HELP FUNCTIONS
