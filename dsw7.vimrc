@@ -55,13 +55,17 @@ set hlsearch " highlight the search results
 " set comment color
 hi Comment ctermfg=darkgrey
 
+" ******* mappings *******
 " automatically close braces
 inoremap {<CR> {<CR>}<Esc>ko<tab>
+" automatically close brackets
 inoremap [<CR> [<CR>]<Esc>ko<tab>
+" automatically close parentheses
 inoremap (<CR> (<CR>)<Esc>ko<tab>
-
-" map esc to jj
+" use jj to esc
 inoremap jj <Esc>
+" use a to jump to end of word and insert
+nmap a f<Space>i
 
 
 " --------------------------------------------------------------
