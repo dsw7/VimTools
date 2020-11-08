@@ -53,21 +53,7 @@ set incsearch " highlight as soon as typing begins
 set hlsearch " highlight the search results
 
 " set comment color
-hi Comment ctermfg=darkgrey
-
-" ******* mappings *******
-" automatically close braces
-inoremap {<CR> {<CR>}<Esc>ko<tab>
-" automatically close brackets
-inoremap [<CR> [<CR>]<Esc>ko<tab>
-" automatically close parentheses
-inoremap (<CR> (<CR>)<Esc>ko<tab>
-" use jj to esc
-inoremap jj <Esc>
-" use a to jump to end of word and insert
-nmap a f<Space>i
-" use nt to toggle between absolute and relative numbering
-nnoremap nt :call NumberToggle()<CR>
+highlight Comment ctermfg=darkgrey
 
 
 " --------------------------------------------------------------
@@ -342,6 +328,14 @@ call setline('.', [hline, row, hline, ''])
 +3
 endfunction
 
+function NumberToggle()
+    if(&relativenumber == 1)
+        set norelativenumber
+    else
+        set relativenumber
+    endif
+endfunction
+
 function Help(...)
 if a:0 > 0
     call HelpHelp()
@@ -364,14 +358,6 @@ else
 endif
 endfunction
 
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set norelativenumber
-  else
-    set relativenumber
-  endif
-endfunc
-
 
 " --------------------------------------------------------------
 " COMMANDS
@@ -389,6 +375,33 @@ command -nargs=+ Mv     :call Move(<f-args>)                       " Move a bloc
 command -nargs=? Paste  :call Paste(<f-args>)                      " Paste text from system clipboard
 command -nargs=+ Header :call Header(<f-args>)                     " Create some header text
 command -nargs=? Help   :call Help(<f-args>)                       " Print a list of the preceding commands
+
+
+" --------------------------------------------------------------
+" MAPPINGS
+" --------------------------------------------------------------
+" Commands                        Mode
+" --------                        ----
+" nmap, nnoremap, nunmap          Normal mode
+" imap, inoremap, iunmap          Insert and Replace mode
+" vmap, vnoremap, vunmap          Visual and Select mode
+" xmap, xnoremap, xunmap          Visual mode
+" smap, snoremap, sunmap          Select mode
+" cmap, cnoremap, cunmap          Command-line mode
+" omap, onoremap, ounmap          Operator pending mode
+
+" Automatically close braces
+imap {<CR> {<CR>}<Esc>ko<tab>
+" Automatically close brackets
+imap [<CR> [<CR>]<Esc>ko<tab>
+" Automatically close parentheses
+imap (<CR> (<CR>)<Esc>ko<tab>
+" Use jj to esc
+imap jj <Esc>
+" Use a to jump to end of word and insert
+nmap a f<Space>i
+" Use nt to toggle between absolute and relative numbering
+nmap nt :call NumberToggle()<CR>
 
 
 " --------------------------------------------------------------
