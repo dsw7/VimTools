@@ -19,7 +19,6 @@ set expandtab
 
 " set line numbers and set the number color
 set number
-set relativenumber
 set numberwidth=2
 hi LineNr ctermfg=lightgreen
 
