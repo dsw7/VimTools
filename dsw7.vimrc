@@ -66,6 +66,8 @@ inoremap (<CR> (<CR>)<Esc>ko<tab>
 inoremap jj <Esc>
 " use a to jump to end of word and insert
 nmap a f<Space>i
+" use nt to toggle between absolute and relative numbering
+nnoremap nt :call NumberToggle()<CR>
 
 
 " --------------------------------------------------------------
@@ -362,6 +364,14 @@ else
 endif
 endfunction
 
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set norelativenumber
+  else
+    set relativenumber
+  endif
+endfunc
+
 
 " --------------------------------------------------------------
 " COMMANDS
@@ -396,7 +406,3 @@ command -nargs=? Help   :call Help(<f-args>)                       " Print a lis
 "   -nargs=+    One or more arguments
 " 3: command name (needs to be capitalized)
 " 4: the actual command to run
-
-if (&relativenumber == 1)
-    echom "Relnum on"
-endif
