@@ -396,3 +396,7 @@ command -nargs=? Help   :call Help(<f-args>)                       " Print a lis
 "   -nargs=+    One or more arguments
 " 3: command name (needs to be capitalized)
 " 4: the actual command to run
+
+if (&relativenumber == 1)
+    echom "Relnum on"
+endif
