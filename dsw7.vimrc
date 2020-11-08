@@ -361,6 +361,20 @@ endfunction
 " --------------------------------------------------------------
 " COMMANDS
 " --------------------------------------------------------------
+" -- Command setup syntax:
+" :command -nargs=* Foo :echo "<args>"
+" 1        2        3   4
+"
+" 1: Always need to specify :command
+" 2: Specify number of arguments
+"   -nargs=0    No arguments
+"   -nargs=1    One argument
+"   -nargs=*    Any number of arguments
+"   -nargs=?    Zero or one argument
+"   -nargs=+    One or more arguments
+" 3: Command name (needs to be capitalized)
+" 4: The actual command to run
+
 command Cls :noh                                                   " Clear a search
 command -nargs=? Ws     :call RemoveWhiteSpace(<f-args>)           " Remove all whitespace
 command -nargs=+ Wl     :call RemoveWhiteSpaceBeforeLine(<f-args>) " Remove all whitespace before lines
@@ -401,20 +415,3 @@ imap jj <Esc>
 nmap a f<Space>i
 " Use nt to toggle between absolute and relative numbering
 nmap nt :call NumberToggle()<CR>
-
-
-" --------------------------------------------------------------
-" NOTES
-" --------------------------------------------------------------
-" :command -nargs=* Foo :echo "<args>"
-" 1        2        3   4
-"
-" 1: always need to specify :command
-" 2: specify number of arguments
-"   -nargs=0    No arguments
-"   -nargs=1    One argument
-"   -nargs=*    Any number of arguments
-"   -nargs=?    Zero or one argument
-"   -nargs=+    One or more arguments
-" 3: command name (needs to be capitalized)
-" 4: the actual command to run
