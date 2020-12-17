@@ -415,3 +415,8 @@ imap jj <Esc>
 nmap a f<Space>i
 " Use nt to toggle between absolute and relative numbering
 nmap nt :call NumberToggle()<CR>
+" Use C-{hjkl} to move around while in insert mode
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
