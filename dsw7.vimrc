@@ -404,19 +404,22 @@ command -nargs=? Help   :call Help(<f-args>)                       " Print a lis
 " omap, onoremap, ounmap          Operator pending mode
 
 " Automatically close braces
-imap {<CR> {<CR>}<Esc>ko<tab>
+inoremap {<CR> {<CR>}<Esc>ko<tab>
 " Automatically close brackets
-imap [<CR> [<CR>]<Esc>ko<tab>
+inoremap [<CR> [<CR>]<Esc>ko<tab>
 " Automatically close parentheses
-imap (<CR> (<CR>)<Esc>ko<tab>
+inoremap (<CR> (<CR>)<Esc>ko<tab>
 " Use jj to esc
-imap jj <Esc>
+inoremap jj <Esc>
 " Use a to jump to end of word and insert
-nmap a f<Space>i
+nnoremap a f<Space>i
 " Use nt to toggle between absolute and relative numbering
-nmap nt :call NumberToggle()<CR>
+nnoremap nt :call NumberToggle()<CR>
 " Use C-{hjkl} to move around while in insert mode
 inoremap <C-h> <Left>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-l> <Right>
+" Jump to beginning of line - type /f to jump to start of first word in line
+" Note that you can also just use _
+nnoremap <leader>f 0w
