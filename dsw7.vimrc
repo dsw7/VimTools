@@ -3,55 +3,58 @@
 " --------------------------------------------------------------
 syntax on
 
-" set command bar height
+" Set command bar height
 set cmdheight=1
 
-" show status line
+" Show status line
 " set ls=2
 
-" set colorscheme
+" Set colorscheme
 colorscheme desert
 
-" tabbing
+" Tabbing
 set tabstop=4
 set softtabstop=4
 set expandtab
 
-" set line numbers and set the number color
+" Set line numbers and set the number color
 set number
 set numberwidth=2
 hi LineNr ctermfg=lightgreen
 
-" always show command
+" Always show command
 set showcmd
 
-" set a cursor line
+" Set a cursor line
+" Note that this can make vim slow
 set cursorline
 
-" set a cursor column
+" Set a cursor column
+" Note that this can make vim slow
 " set cursorcolumn
+" highlight CursorColumn ctermbg=233
 
-" allow vim to identify specific file types
+" Allow vim to identify specific file types
 filetype indent on
 
-" enable autocompletion of vim commands
+" Enable autocompletion of vim commands
 set wildmenu
 
-" do not redraw the screen when running a macro
+" Do not redraw the screen when running a macro
 set lazyredraw
 
-" enable parenthesis matching and customize colors
+" Enable parenthesis matching and customize colors
 set showmatch
 hi MatchParen cterm=none ctermbg=darkgrey ctermfg=black
 
-" or disable parenthesis matching
+" Or disable parenthesis matching
 " let g:loaded_matchparen=1
 
-" enable searching
+" Enable searching
 set incsearch " highlight as soon as typing begins
 set hlsearch " highlight the search results
 
-" set comment color
+" Set comment color
 highlight Comment ctermfg=darkgrey
 
 
@@ -410,16 +413,16 @@ inoremap [<CR> [<CR>]<Esc>ko<tab>
 " Automatically close parentheses
 inoremap (<CR> (<CR>)<Esc>ko<tab>
 " Use jj to esc
-inoremap jj <Esc>
+inoremap jj <Esc>l
 " Use a to jump to end of word and insert
 nnoremap a f<Space>i
-" Use nt to toggle between absolute and relative numbering
-nnoremap nt :call NumberToggle()<CR>
+" Toggle between absolute and relative numbering
+nnoremap mm :call NumberToggle()<CR>
 " Use C-{hjkl} to move around while in insert mode
 inoremap <C-h> <Left>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-l> <Right>
-" Jump to beginning of line - type /f to jump to start of first word in line
+" Jump to beginning of line
 " Note that you can also just use _
-nnoremap <leader>f 0w
+nnoremap ff 0w
