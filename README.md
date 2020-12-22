@@ -312,3 +312,6 @@ Yields:
 2 =============== FOOBARBAZ ===============
 3 =========================================
 ```
+### Col
+_Description_:  
+- The _Col_ command simply toggles `cursorcolumn`. The command takes no arguments.
