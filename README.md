@@ -314,4 +314,4 @@ Yields:
 ```
 ### Col
 _Description_:  
-- The _Col_ command simply toggles `cursorcolumn`. The command takes no arguments.
+- The _Col_ command simply enables `cursorcolumn`. Calling the command a second time will disable `cursorcolumn`. The command takes no arguments.
