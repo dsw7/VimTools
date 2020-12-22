@@ -29,10 +29,11 @@ set showcmd
 " Note that this can make vim slow
 set cursorline
 
-" Set a cursor column
+" Set a cursor column by default
 " Note that this can make vim slow
 " set cursorcolumn
-" highlight CursorColumn ctermbg=233
+" Set default highlighting in case user calls :Col
+highlight CursorColumn ctermbg=234
 
 " Allow vim to identify specific file types
 filetype indent on
@@ -338,6 +339,14 @@ function NumberToggle()
     endif
 endfunction
 
+function ColumnToggle()
+    if(&cursorcolumn == 1)
+        set nocursorcolumn
+    else
+        set cursorcolumn
+    endif
+endfunction
+
 function Help(...)
 if a:0 > 0
     call HelpHelp()
@@ -355,6 +364,7 @@ else
     echom ":SubAll -> Replace a string in many files"
     echom ":Mv     -> Move a block of text"
     echom ":Paste  -> Paste a block of text from system clipboard"
+    echom ":Col    -> Toggle cursorcolumn"
     echom ":Header -> Create a header"
     echom "=========================================================="
 endif
@@ -390,6 +400,7 @@ command -nargs=+ SubAll :call ReplaceInAllFiles(<f-args>)          " Replace a s
 command -nargs=+ Mv     :call Move(<f-args>)                       " Move a block of text
 command -nargs=? Paste  :call Paste(<f-args>)                      " Paste text from system clipboard
 command -nargs=+ Header :call Header(<f-args>)                     " Create some header text
+command -nargs=? Col    :call ColumnToggle(<f-args>)               " Toggle cursorcolumn
 command -nargs=? Help   :call Help(<f-args>)                       " Print a list of the preceding commands
 
 
