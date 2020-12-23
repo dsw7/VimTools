@@ -374,7 +374,7 @@ endfunction
 " --------------------------------------------------------------
 " COMMANDS
 " --------------------------------------------------------------
-" -- Command setup syntax:
+" Command setup syntax:
 " :command -nargs=* Foo :echo "<args>"
 " 1        2        3   4
 "
