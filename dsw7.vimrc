@@ -63,111 +63,111 @@ highlight Comment ctermfg=darkgrey
 " HELP FUNCTIONS
 " --------------------------------------------------------------
 function ReplaceHelp()
-echohl ErrorMsg
-echom "Invalid syntax!"
-echohl None
-echom "Usage:"
-echom "  1. Search for <foo> using Shift + 3 or /"
-echom "  2. Type :S <bar>"
-echom "This will replace all occurrences of <foo> with <bar>"
-echom "A range of lines can also be specified:"
-echom "  1. Search for <foo> using Shift + 3 or /"
-echom "  2. Type :S <bar> <start-line> <end-line>"
-echom "This will replace all occurrences of <foo> with <bar> between <start-line> and <end-line>"
+    echohl ErrorMsg
+    echo "Invalid syntax!"
+    echohl None
+    echo "Usage:"
+    echo "  1. Search for <foo> using Shift + 3 or /"
+    echo "  2. Type :S <bar>"
+    echo "This will replace all occurrences of <foo> with <bar>"
+    echo "A range of lines can also be specified:"
+    echo "  1. Search for <foo> using Shift + 3 or /"
+    echo "  2. Type :S <bar> <start-line> <end-line>"
+    echo "This will replace all occurrences of <foo> with <bar> between <start-line> and <end-line>"
 endfunction
 
 function ReplaceInAllFilesHelp()
-echohl ErrorMsg
-echom "Invalid syntax!"
-echohl None
-echom "Valid syntax follows:"
-echom ":SubAll <foo> <bar> <*|**>"
+    echohl ErrorMsg
+    echo "Invalid syntax!"
+    echohl None
+    echo "Valid syntax follows:"
+    echo ":SubAll <foo> <bar> <*|**>"
 endfunction
 
 function InsertHelp()
-echohl ErrorMsg
-echom "Invalid syntax!"
-echohl None
-echom "Valid syntax follows:"
-echom ":Ins <foo>"
-echom ":Ins <foo> <start-line> <end-line>"
+    echohl ErrorMsg
+    echo "Invalid syntax!"
+    echohl None
+    echo "Valid syntax follows:"
+    echo ":Ins <foo>"
+    echo ":Ins <foo> <start-line> <end-line>"
 endfunction
 
 function DeleteHelp()
-echohl ErrorMsg
-echom "Invalid syntax!"
-echohl None
-echom "Valid syntax follows:"
-echom ":Del <start-line> <end-line>"
+    echohl ErrorMsg
+    echo "Invalid syntax!"
+    echohl None
+    echo "Valid syntax follows:"
+    echo ":Del <start-line> <end-line>"
 endfunction
 
 function IndentHelp()
-echohl ErrorMsg
-echom "Invalid syntax!"
-echohl None
-echom "Valid syntax follows:"
-echom ":Ind <start-line> <end-line>"
+    echohl ErrorMsg
+    echo "Invalid syntax!"
+    echohl None
+    echo "Valid syntax follows:"
+    echo ":Ind <start-line> <end-line>"
 endfunction
 
 function CopyHelp()
-echohl ErrorMsg
-echom "Invalid syntax!"
-echohl None
-echom "Valid syntax follows:"
-echom ":Cp <start-line> <end-line> <destination-line>"
+    echohl ErrorMsg
+    echo "Invalid syntax!"
+    echohl None
+    echo "Valid syntax follows:"
+    echo ":Cp <start-line> <end-line> <destination-line>"
 endfunction
 
 function RemoveWhiteSpaceHelp()
-echohl ErrorMsg
-echom "Invalid syntax!"
-echohl None
-echom "Function takes no arguments."
+    echohl ErrorMsg
+    echo "Invalid syntax!"
+    echohl None
+    echo "Function takes no arguments."
 endfunction
 
 function RemoveWhiteSpaceBeforeLineHelp()
-echohl ErrorMsg
-echom "Invalid syntax!"
-echohl None
-echom "Valid syntax follows:"
-echom ":Wl <start-line> <end-line>"
+    echohl ErrorMsg
+    echo "Invalid syntax!"
+    echohl None
+    echo "Valid syntax follows:"
+    echo ":Wl <start-line> <end-line>"
 endfunction
 
 function MoveHelp()
-echohl ErrorMsg
-echom "Invalid syntax!"
-echohl None
-echom "Valid syntax follows:"
-echom ":Mv <start-line> <end-line> <destination-line>"
+    echohl ErrorMsg
+    echo "Invalid syntax!"
+    echohl None
+    echo "Valid syntax follows:"
+    echo ":Mv <start-line> <end-line> <destination-line>"
 endfunction
 
 function PasteHelp()
-echohl ErrorMsg
-echom "Invalid syntax!"
-echohl None
-echom "Function takes no arguments."
+    echohl ErrorMsg
+    echo "Invalid syntax!"
+    echohl None
+    echo "Function takes no arguments."
 endfunction
 
 function HelpHelp()
-echohl ErrorMsg
-echom "Invalid syntax!"
-echohl None
-echom "Function takes no arguments."
+    echohl ErrorMsg
+    echo "Invalid syntax!"
+    echohl None
+    echo "Function takes no arguments."
 endfunction
 
 function HeaderHelp()
-echohl ErrorMsg
-echom "Invalid syntax!"
-echohl None
-echom "Valid syntax follows:"
-echom ":Header <my-header-text>"
-echom ":Header <my-header-text> <padding>"
+    echohl ErrorMsg
+    echo "Invalid syntax!"
+    echohl None
+    echo "Valid syntax follows:"
+    echo ":Header <my-header-text>"
+    echo ":Header <my-header-text> <padding>"
 endfunction
 
 function LineError()
-echohl ErrorMsg
-echom "Invalid syntax!"
-echohl None
-echom "The <start-line> value must not exceed the <end-line> value."
+    echohl ErrorMsg
+    echo "Invalid syntax!"
+    echohl None
+    echo "The <start-line> value must not exceed the <end-line> value."
 endfunction
 
 
@@ -175,160 +175,160 @@ endfunction
 " CUSTOM FUNCTIONS
 " --------------------------------------------------------------
 function Replace(output, ...)
-if a:0 == 0                  " a:0 = number of unspecified arguments (...)
-    execute '%s/' . escape(getreg('/'), '/') . '/' . a:output . '/g'
-elseif a:0 == 1              " a:0 = 1 if only the start argument passed
-    call ReplaceHelp()
-elseif a:0 == 2              " a:0 = 2 if start and end line numbers are passed
-    let start = str2nr(a:1)  " a:1 = the first optional value
-    let end = str2nr(a:2)    " a:2 = the second optional value
-    if start <= end
-        execute start . ',' . end . 's/' . escape(getreg('/'), '/') . '/' . a:output . '/g'
-    else
-        call LineError()
+    if a:0 == 0                  " a:0 = number of unspecified arguments (...)
+        execute '%s/' . escape(getreg('/'), '/') . '/' . a:output . '/g'
+    elseif a:0 == 1              " a:0 = 1 if only the start argument passed
+        call ReplaceHelp()
+    elseif a:0 == 2              " a:0 = 2 if start and end line numbers are passed
+        let start = str2nr(a:1)  " a:1 = the first optional value
+        let end = str2nr(a:2)    " a:2 = the second optional value
+        if start <= end
+            execute start . ',' . end . 's/' . escape(getreg('/'), '/') . '/' . a:output . '/g'
+        else
+            call LineError()
+        endif
+    elseif a:0 > 2               " a:0 > 2 if only the start, end and some other arg passed
+        call ReplaceHelp()
     endif
-elseif a:0 > 2               " a:0 > 2 if only the start, end and some other arg passed
-    call ReplaceHelp()
-endif
 endfunction
 
 function ReplaceInAllFiles(input, output, scope, ...)
-if a:0 == 0
-    if a:scope == '*'
-        arg *                " add all files in current directory
-        argdo execute '%s/' . a:input . '/' . a:output. '/ge' | update
-    elseif a:scope == '**'   " add all files in current and sub directories
-        arg **
-        argdo execute '%s/' . a:input . '/' . a:output. '/ge' | update
+    if a:0 == 0
+        if a:scope == '*'
+            arg *                " add all files in current directory
+            argdo execute '%s/' . a:input . '/' . a:output. '/ge' | update
+        elseif a:scope == '**'   " add all files in current and sub directories
+            arg **
+            argdo execute '%s/' . a:input . '/' . a:output. '/ge' | update
+        else
+            call ReplaceInAllFilesHelp()
+        endif
     else
         call ReplaceInAllFilesHelp()
     endif
-else
-    call ReplaceInAllFilesHelp()
-endif
 endfunction
 
 function Insert(char, ...)
-if a:0 == 0
-    execute '%s/^/' . a:char. '/g'
-elseif a:0 == 1
-    call InsertHelp()
-elseif a:0 == 2
-    let start = str2nr(a:1)
-    let end = str2nr(a:2)
-    if start <= end
-        execute start . ',' . end . 's/^/' . a:char . '/g'
-    else
-        call LineError()
+    if a:0 == 0
+        execute '%s/^/' . a:char. '/g'
+    elseif a:0 == 1
+        call InsertHelp()
+    elseif a:0 == 2
+        let start = str2nr(a:1)
+        let end = str2nr(a:2)
+        if start <= end
+            execute start . ',' . end . 's/^/' . a:char . '/g'
+        else
+            call LineError()
+        endif
+    elseif a:0 > 2
+        call InsertHelp()
     endif
-elseif a:0 > 2
-    call InsertHelp()
-endif
 endfunction
 
 function Delete(...)
-if a:0 == 2
-    let start = str2nr(a:1)
-    let end = str2nr(a:2)
-    if start <= end
-        execute start . ',' . end . 'd'
+    if a:0 == 2
+        let start = str2nr(a:1)
+        let end = str2nr(a:2)
+        if start <= end
+            execute start . ',' . end . 'd'
+        else
+            call LineError()
+        endif
     else
-        call LineError()
+        call DeleteHelp()
     endif
-else
-    call DeleteHelp()
-endif
 endfunction
 
 function Indent(...)
-if a:0 == 2
-    let start = str2nr(a:1)
-    let end = str2nr(a:2)
-    if start <= end
-        execute start . ',' . end . 's/^/    /g'
+    if a:0 == 2
+        let start = str2nr(a:1)
+        let end = str2nr(a:2)
+        if start <= end
+            execute start . ',' . end . 's/^/    /g'
+        else
+            call LineError()
+        endif
     else
-        call LineError()
+        call IndentHelp()
     endif
-else
-    call IndentHelp()
-endif
 endfunction
 
 function Copy(...)
-if a:0 == 3
-    let start = str2nr(a:1)
-    let end = str2nr(a:2)
-    let pos = str2nr(a:3)
-    if start <= end
-        execute start . ',' . end . 't' . pos
+    if a:0 == 3
+        let start = str2nr(a:1)
+        let end = str2nr(a:2)
+        let position = str2nr(a:3)
+        if start <= end
+            execute start . ',' . end . 't' . position
+        else
+            call LineError()
+        endif
     else
-        call LineError()
+        call CopyHelp()
     endif
-else
-    call CopyHelp()
-endif
 endfunction
 
 function RemoveWhiteSpace(...)
-if a:0 > 0
-    call RemoveWhiteSpaceHelp()
-else
-    execute '%s/\s\+$//g'
-endif
+    if a:0 > 0
+        call RemoveWhiteSpaceHelp()
+    else
+        execute '%s/\s\+$//g'
+    endif
 endfunction
 
 function RemoveWhiteSpaceBeforeLine(...)
-if a:0 == 2
-    let start = str2nr(a:1)
-    let end = str2nr(a:2)
-    if start <= end
-        execute start . ',' . end . 's/^\s\+//g'
+    if a:0 == 2
+        let start = str2nr(a:1)
+        let end = str2nr(a:2)
+        if start <= end
+            execute start . ',' . end . 's/^\s\+//g'
+        else
+            call LineError()
+        endif
     else
-        call LineError()
+        call RemoveWhiteSpaceBeforeLineHelp()
     endif
-else
-    call RemoveWhiteSpaceBeforeLineHelp()
-endif
 endfunction
 
 function Move(...)
-if a:0 == 3
-    let start = str2nr(a:1)
-    let end = str2nr(a:2)
-    let pos = str2nr(a:3)
-    if start <= end
-        execute start . ',' . end . 'm' . pos
+    if a:0 == 3
+        let start = str2nr(a:1)
+        let end = str2nr(a:2)
+        let position = str2nr(a:3)
+        if start <= end
+            execute start . ',' . end . 'm' . position
+        else
+            call LineError()
+        endif
     else
-        call LineError()
+        call MoveHelp()
     endif
-else
-    call MoveHelp()
-endif
 endfunction
 
 function Paste(...)
-if a:0 > 0
-    call PasteHelp()
-else
-    normal! "+p
-endif
+    if a:0 > 0
+        call PasteHelp()
+    else
+        normal! "+p
+    endif
 endfunction
 
 function Header(...)
-if a:0 == 1
-    let padding = 5
-elseif a:0 == 2
-    let padding = str2nr(a:2)
-else  " unreachable because blocked by -nargs=+ in COMMANDS section
-    call HeaderHelp()
-    return
-endif
-let strsize = strlen(a:1)
-let hline = repeat('=', strsize + 2 * padding + 2)
-let mid = repeat('=', padding)
-let row = mid . ' ' . a:1 . ' ' . mid
-call setline('.', [hline, row, hline, ''])
-+3
+    if a:0 == 1
+        let padding = 5
+    elseif a:0 == 2
+        let padding = str2nr(a:2)
+    else  " unreachable because blocked by -nargs=+ in COMMANDS section
+        call HeaderHelp()
+        return
+    endif
+    let strsize = strlen(a:1)
+    let hline = repeat('=', strsize + 2 * padding + 2)
+    let mid = repeat('=', padding)
+    let row = mid . ' ' . a:1 . ' ' . mid
+    call setline('.', [hline, row, hline, ''])
+    +3
 endfunction
 
 function NumberToggle()
@@ -348,26 +348,26 @@ function ColumnToggle()
 endfunction
 
 function Help(...)
-if a:0 > 0
-    call HelpHelp()
-else
-    echom "List of commands:"
-    echom "=========================================================="
-    echom ":Cls    -> Clear a search"
-    echom ":Ws     -> Remove all whitespace"
-    echom ":Wl     -> Remove all whitespace before a set of lines"
-    echom ":Cp     -> Copy a block of lines"
-    echom ":Ind    -> Indent by 4 spaces"
-    echom ":Del    -> Delete between a range of lines"
-    echom ":Ins    -> Insert a delimiter at beginning of lines"
-    echom ":S      -> Replace a string in current file"
-    echom ":SubAll -> Replace a string in many files"
-    echom ":Mv     -> Move a block of text"
-    echom ":Paste  -> Paste a block of text from system clipboard"
-    echom ":Col    -> Toggle cursorcolumn"
-    echom ":Header -> Create a header"
-    echom "=========================================================="
-endif
+    if a:0 > 0
+        call HelpHelp()
+    else
+        echo "List of commands:"
+        echo "=========================================================="
+        echo ":Cls    -> Clear a search"
+        echo ":Ws     -> Remove all whitespace"
+        echo ":Wl     -> Remove all whitespace before a set of lines"
+        echo ":Cp     -> Copy a block of lines"
+        echo ":Ind    -> Indent by 4 spaces"
+        echo ":Del    -> Delete between a range of lines"
+        echo ":Ins    -> Insert a delimiter at beginning of lines"
+        echo ":S      -> Replace a string in current file"
+        echo ":SubAll -> Replace a string in many files"
+        echo ":Mv     -> Move a block of text"
+        echo ":Paste  -> Paste a block of text from system clipboard"
+        echo ":Col    -> Toggle cursorcolumn"
+        echo ":Header -> Create a header"
+        echo "=========================================================="
+    endif
 endfunction
 
 
