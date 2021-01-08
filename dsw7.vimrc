@@ -408,3 +408,6 @@ inoremap <C-l> <Right>
 " Jump to beginning of line
 " Note that you can also just use _
 nnoremap ff 0w
+" Remap PGUP and PGDN to slide viewport
+nnoremap <PageDown> <C-d>
+nnoremap <PageUp> <C-u>
