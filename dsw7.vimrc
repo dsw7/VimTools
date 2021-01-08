@@ -6,9 +6,6 @@ syntax on
 " Set command bar height
 set cmdheight=1
 
-" Show status line
-" set ls=2
-
 " Set colorscheme
 colorscheme desert
 
@@ -20,7 +17,7 @@ set expandtab
 " Set line numbers and set the number color
 set number
 set numberwidth=2
-hi LineNr ctermfg=lightgreen
+highlight LineNr ctermfg=lightgreen
 
 " Always show command
 set showcmd
@@ -46,10 +43,7 @@ set lazyredraw
 
 " Enable parenthesis matching and customize colors
 set showmatch
-hi MatchParen cterm=none ctermbg=darkgrey ctermfg=black
-
-" Or disable parenthesis matching
-" let g:loaded_matchparen=1
+highlight MatchParen cterm=none ctermbg=darkgrey ctermfg=black
 
 " Enable searching
 set incsearch " highlight as soon as typing begins
@@ -62,6 +56,7 @@ highlight Comment ctermfg=darkgrey
 " PRIVATE FUNCTIONS
 " --------------------------------------------------------------
 function s:ErrorMsgHeader()
+    " Do not use echoerr("message") because this actually throws an error
     echohl ErrorMsg
     echo "Invalid syntax!"
     echohl None
