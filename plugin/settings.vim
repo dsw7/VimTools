@@ -1,3 +1,4 @@
+" Turn on color syntax
 syntax on
 
 " Set command bar height

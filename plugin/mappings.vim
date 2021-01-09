@@ -26,3 +26,6 @@ nnoremap ff 0w
 " Remap PGUP and PGDN to slide viewport
 nnoremap <PageDown> <C-d>
 nnoremap <PageUp> <C-u>
+
+" Toggle between absolute and relative numbering
+nnoremap mm :call NumberToggle()<CR>
