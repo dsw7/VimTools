@@ -52,6 +52,9 @@ set hlsearch " highlight the search results
 " Set comment color
 highlight Comment ctermfg=darkgrey
 
+" Disable line wrapping
+set nowrap
+
 " --------------------------------------------------------------
 " PRIVATE FUNCTIONS
 " --------------------------------------------------------------
