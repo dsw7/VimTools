@@ -1,5 +1,5 @@
 " Command setup syntax:
-" :command -nargs=* Foo :echo "<args>"
+" command -nargs=* Foo :echo "<args>"
 " 1        2        3   4
 "
 " 1: Always need to specify :command
