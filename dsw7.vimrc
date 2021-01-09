@@ -26,10 +26,7 @@ set showcmd
 " Note that this can make vim slow
 set cursorline
 
-" Set a cursor column by default
-" Note that this can make vim slow
-" set cursorcolumn
-" Set default highlighting in case user calls :Col
+" Set default cursorcolumn highlighting in case user calls :Col
 highlight CursorColumn ctermbg=234
 
 " Allow vim to identify specific file types
