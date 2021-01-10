@@ -2,20 +2,22 @@
 An awesome, user friendly set of `vim` commands (and other configurations) for improving developer workflow! This repository basically just contains a `.vimrc` file that enables some basic settings and also defines some user friendly shortcuts for common operations such as substitutions, inserts, etc.  
 
 ## Setup
-Easy! Start by grabbing the `dsw7.vimrc` file:
+I recommend grabbing the contents of the `curl_vimtools.sh` file and appending the contents directly into a `.bashrc` file:
 ```
-$ curl https://raw.githubusercontent.com/dsw7/VimTools/master/dsw7.vimrc --output dsw7.vimrc
+$ curl https://raw.githubusercontent.com/dsw7/VimTools/master/curl_vimtools.sh >> .bashrc
 ```
-Then simply source the `dsw7.vimrc` file in your user home's `.vimrc` file if you want to preserve existing configurations:
+The `curl_vimtools.sh` script simply downloads a `.zip` archive of this project and unpacks it into `${PWD}/.vim`. I would suggest then setting
+an alias for the `fetch_vimtools` that comes with the `curl_vimtools.sh` script in `.bashrc`:
 ```
-source /path/to/dsw7.vimrc
+alias vimrc=fetch_vimtools
 ```
-Alternatively, if you don't have an existing `.vimrc` file in your home directory and want to keep things simple:
+To run the setup:
 ```
-$ cd
-$ curl https://raw.githubusercontent.com/dsw7/VimTools/master/dsw7.vimrc --output .vimrc
+cd
+source .bashrc
+vimrc
 ```
-
+**Warning: this will remove existing an existing .vim directory!**
 ## List of custom commands (implemented to date)
 ### S
 _Description_:  
