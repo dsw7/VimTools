@@ -6,7 +6,7 @@ I recommend grabbing the contents of the `vimtools.sh` file and appending the co
 $ curl https://raw.githubusercontent.com/dsw7/VimTools/master/vimtools.sh >> .bashrc
 ```
 The `vimtools.sh` script simply downloads a `.zip` archive of this project and unpacks it into `${PWD}/.vim`. I would suggest then setting
-an alias for the `fetch_vimtools` that comes with the `vimtools.sh` script in `.bashrc`:
+an alias for the `fetch_vimtools` function that comes with the `vimtools.sh` script in `.bashrc`:
 ```
 alias vimtools=fetch_vimtools
 ```
