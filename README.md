@@ -1,6 +1,5 @@
 # VimTools
-An awesome, user friendly set of `vim` commands (and other configurations) for improving developer workflow! This repository basically just contains a `.vimrc` file that enables some basic settings and also defines some user friendly shortcuts for common operations such as substitutions, inserts, etc.  
-
+This repository contains the `.vim` directory that I use in my day to day programming, both professionally and leisurely.
 ## Setup
 I recommend grabbing the contents of the `curl_vimtools.sh` file and appending the contents directly into a `.bashrc` file:
 ```
