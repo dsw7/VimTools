@@ -8,13 +8,13 @@ $ curl https://raw.githubusercontent.com/dsw7/VimTools/master/vimtools.sh >> .ba
 The `vimtools.sh` script simply downloads a `.zip` archive of this project and unpacks it into `${PWD}/.vim`. I would suggest then setting
 an alias for the `fetch_vimtools` that comes with the `vimtools.sh` script in `.bashrc`:
 ```
-alias vimrc=fetch_vimtools
+alias vimtools=fetch_vimtools
 ```
 To run the setup:
 ```
 cd
 source .bashrc
-vimrc
+vimtools
 ```
 **Warning: this will remove existing an existing .vim directory!**
 ## List of custom commands (implemented to date)
