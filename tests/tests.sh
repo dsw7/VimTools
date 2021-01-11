@@ -56,6 +56,14 @@ EOF
     assert_files_equal ${FUNCNAME[0]}
 }
 
+test_remove_whitespace() {
+    echo "foo bar baz  " > $FILENAME_ACTUAL
+    echo "foo bar baz" > $FILENAME_EXPECTED
+    vim -es -c ":Ws" -c "wq" $FILENAME_ACTUAL
+    assert_files_equal ${FUNCNAME[0]}
+}
+
 test_sub_command_one_line
 test_sub_command_two_lines
 test_sub_command_add_limits
+test_remove_whitespace
