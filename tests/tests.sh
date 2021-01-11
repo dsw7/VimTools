@@ -21,14 +21,7 @@ assert_files_equal() {
     fi
 }
 
-test_sub_command_one_line() {
-    echo "foo bar baz" > $FILENAME_ACTUAL
-    echo "cat bar baz" > $FILENAME_EXPECTED
-    vim -es -c "/foo" -c ":S cat" -c "wq" $FILENAME_ACTUAL
-    assert_files_equal ${FUNCNAME[0]}
-}
-
-test_sub_command_two_lines() {
+test_sub_command_no_limits() {
     cat > $FILENAME_ACTUAL << EOF
 foo bar baz
 foo bar baz
@@ -63,7 +56,24 @@ test_remove_whitespace() {
     assert_files_equal ${FUNCNAME[0]}
 }
 
-test_sub_command_one_line
-test_sub_command_two_lines
+test_remove_preceding_whitelines() {
+    cat > $FILENAME_ACTUAL << EOF
+foo bar baz
+    foo bar baz
+    foo bar baz
+    foo bar baz
+EOF
+    cat > $FILENAME_EXPECTED << EOF
+foo bar baz
+    foo bar baz
+foo bar baz
+foo bar baz
+EOF
+    vim -es -c ":Wl 3 4" -c "wq" $FILENAME_ACTUAL
+    assert_files_equal ${FUNCNAME[0]}
+}
+
+test_sub_command_no_limits
 test_sub_command_add_limits
 test_remove_whitespace
+test_remove_preceding_whitelines
