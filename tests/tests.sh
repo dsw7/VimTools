@@ -107,9 +107,40 @@ EOF
     assert_files_equal ${FUNCNAME[0]}
 }
 
+test_insert_command() {
+    cat > $FILENAME_ACTUAL << EOF
+foo bar baz
+foo bar baz
+foo bar baz
+EOF
+    cat > $FILENAME_EXPECTED << EOF
+>foo bar baz
+>foo bar baz
+>foo bar baz
+EOF
+    vim -es -c ":Ins > 1 3" -c "wq" $FILENAME_ACTUAL
+    assert_files_equal ${FUNCNAME[0]}
+}
+
+test_insert_command() {
+    cat > $FILENAME_ACTUAL << EOF
+foo bar baz
+foo bar baz
+foo bar baz
+EOF
+    cat > $FILENAME_EXPECTED << EOF
+>foo bar baz
+>foo bar baz
+>foo bar baz
+EOF
+    vim -es -c ":Ins > 1 3" -c "wq" $FILENAME_ACTUAL
+    assert_files_equal ${FUNCNAME[0]}
+}
+
 test_sub_command_no_limits
 test_sub_command_add_limits
 test_remove_whitespace
 test_remove_preceding_whitelines
 test_copy_command
 test_indent_command
+test_insert_command
