@@ -122,18 +122,35 @@ EOF
     assert_files_equal ${FUNCNAME[0]}
 }
 
-test_insert_command() {
+test_delete_command() {
     cat > $FILENAME_ACTUAL << EOF
+foo bar baz
 foo bar baz
 foo bar baz
 foo bar baz
 EOF
     cat > $FILENAME_EXPECTED << EOF
->foo bar baz
->foo bar baz
->foo bar baz
+foo bar baz
+foo bar baz
 EOF
-    vim -es -c ":Ins > 1 3" -c "wq" $FILENAME_ACTUAL
+    vim -es -c ":Del 3 4" -c "wq" $FILENAME_ACTUAL
+    assert_files_equal ${FUNCNAME[0]}
+}
+
+test_move_command() {
+    cat > $FILENAME_ACTUAL << EOF
+foo bar baz
+foo bar baz
+
+
+EOF
+    cat > $FILENAME_EXPECTED << EOF
+
+foo bar baz
+foo bar baz
+
+EOF
+    vim -es -c ":Mv 1 2 3" -c "wq" $FILENAME_ACTUAL
     assert_files_equal ${FUNCNAME[0]}
 }
 
@@ -144,3 +161,5 @@ test_remove_preceding_whitelines
 test_copy_command
 test_indent_command
 test_insert_command
+test_delete_command
+test_move_command
