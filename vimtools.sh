@@ -1,7 +1,8 @@
-LIGHT_PURPLE='\033[1;35m'
-LIGHT_RED='\033[1;31m'
-LIGHT_YELLOW='\033[1;33m'
-NO_COLOR='\033[0m'
+BRANCH="master"
+LIGHT_PURPLE="\033[1;35m"
+LIGHT_RED="\033[1;31m"
+LIGHT_YELLOW="\033[1;33m"
+NO_COLOR="\033[0m"
 
 echo_step() {
     echo -e "${LIGHT_PURPLE}$1${NO_COLOR}"
@@ -16,15 +17,14 @@ echo_warning() {
 }
 
 fetch_vimtools() {
-    local branch="master"
     local repo="VimTools"
-    local archive="${repo}-${branch}.zip"
-    local inflated="${repo}-${branch}"
+    local archive="${repo}-${BRANCH}.zip"
+    local inflated="${repo}-${BRANCH}"
     local vim_directory=".vim"
     local test_filename="${vim_directory}/tests.sh"
 
     echo_step "[Step 1] - Downloading ${archive}..."
-    curl -L https://github.com/dsw7/${repo}/archive/${branch}.zip --output $archive --fail
+    curl -L https://github.com/dsw7/${repo}/archive/${BRANCH}.zip --output $archive --fail
     if [ $? -ne 0 ]
     then
         echo_error "Failed to fetch VimTools!"
