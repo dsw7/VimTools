@@ -1,4 +1,4 @@
-BRANCH="run-tests"
+BRANCH="master"
 REPOSITORY_NAME="VimTools"
 LIGHT_PURPLE="\033[1;35m"
 LIGHT_RED="\033[1;31m"
@@ -54,7 +54,9 @@ fetch_vimtools() {
     echo
 
     echo_step "[Step 6] - Run tests..."
+    echo "Adding executable permissions to $test_filename"
     chmod +x $test_filename
+    echo "Running test script $test_filename"
     $test_filename
     echo
 }

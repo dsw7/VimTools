@@ -1,4 +1,5 @@
-FILENAME_ACTUAL="/tmp/vimtools_test_actual"
+LOCATION_TEST_FILES="/tmp"
+FILENAME_ACTUAL="${LOCATION_TEST_FILES}/vimtools_test_actual"
 FILENAME_EXPECTED="/tmp/vimtools_test_expected"
 LIGHT_RED="\033[1;31m"
 GREEN="\033[0;32m"
@@ -165,6 +166,12 @@ run_all_tests() {
     test_insert_command
     test_delete_command
     test_move_command
+
+    echo
+    echo "Tests complete!"
+    echo "Feel free to delete both of:"
+    echo "$FILENAME_ACTUAL"
+    echo "$FILENAME_EXPECTED"
 }
 
 run_all_tests
