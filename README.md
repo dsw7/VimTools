@@ -1,22 +1,11 @@
 # VimTools
 This repository contains the `.vim` directory that I use in my day to day programming, both professionally and leisurely.
 ## Setup
-I recommend grabbing the contents of the `vimtools.sh` file and appending the contents directly into a `.bashrc` file:
+I recommend grabbing the contents of the `vimtools.sh` file as follows:
 ```
-$ curl https://raw.githubusercontent.com/dsw7/VimTools/master/vimtools.sh >> .bashrc
+$ curl https://raw.githubusercontent.com/dsw7/VimTools/master/vimtools.sh > vimtools.sh && source vimtools.sh && fetch_vimtools
 ```
-The `vimtools.sh` script simply downloads a `.zip` archive of this project and unpacks it into `${PWD}/.vim`. I would suggest then setting
-an alias for the `fetch_vimtools` function that comes with the `vimtools.sh` script in `.bashrc`:
-```
-alias vimtools=fetch_vimtools
-```
-To run the setup:
-```
-cd
-source .bashrc
-vimtools
-```
-**Warning: this will remove existing an existing .vim directory!**
+The `vimtools.sh` script simply downloads a `.zip` archive of this project and unpacks it into `${PWD}/.vim`. **Warning: this will remove existing an existing .vim directory!**
 ## List of custom commands (implemented to date)
 ### S
 _Description_:  
