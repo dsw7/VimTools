@@ -12,12 +12,12 @@ assert_files_equal() {
 
     if [ $exit_code == 0 ]
     then
-        echo -e "${DARK_GREEN}[ PASSED ]${NO_COLOR} - $function_name"
+        echo -e "${DARK_GREEN}  [ PASSED ]${NO_COLOR} - $function_name"
     elif [ $exit_code == 1 ]
     then
-        echo -e "${LIGHT_RED}[ FAILED ]${NO_COLOR} - $function_name"
+        echo -e "${LIGHT_RED}  [ FAILED ]${NO_COLOR} - $function_name"
     else
-        echo -e "${LIGHT_RED}[ ERROR ]${NO_COLOR} - $function_name"
+        echo -e "${LIGHT_RED}  [ ERROR ]${NO_COLOR} - $function_name"
     fi
 }
 
@@ -154,12 +154,17 @@ EOF
     assert_files_equal ${FUNCNAME[0]}
 }
 
-test_sub_command_no_limits
-test_sub_command_add_limits
-test_remove_whitespace
-test_remove_preceding_whitelines
-test_copy_command
-test_indent_command
-test_insert_command
-test_delete_command
-test_move_command
+run_all_tests() {
+    echo
+    test_sub_command_no_limits
+    test_sub_command_add_limits
+    test_remove_whitespace
+    test_remove_preceding_whitelines
+    test_copy_command
+    test_indent_command
+    test_insert_command
+    test_delete_command
+    test_move_command
+}
+
+run_all_tests
