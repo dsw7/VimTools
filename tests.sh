@@ -1,7 +1,7 @@
 FILENAME_ACTUAL="/tmp/vimtools_test_actual"
 FILENAME_EXPECTED="/tmp/vimtools_test_expected"
 LIGHT_RED="\033[1;31m"
-DARK_GREEN="\033[0;32m"
+GREEN="\033[0;32m"
 NO_COLOR="\033[0m"
 
 assert_files_equal() {
@@ -12,7 +12,7 @@ assert_files_equal() {
 
     if [ $exit_code == 0 ]
     then
-        echo -e "${DARK_GREEN}  [ PASSED ]${NO_COLOR} - $function_name"
+        echo -e "${GREEN}  [ PASSED ]${NO_COLOR} - $function_name"
     elif [ $exit_code == 1 ]
     then
         echo -e "${LIGHT_RED}  [ FAILED ]${NO_COLOR} - $function_name"
