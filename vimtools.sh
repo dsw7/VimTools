@@ -1,4 +1,4 @@
-BRANCH="master"
+BRANCH="run-tests"
 REPOSITORY_NAME="VimTools"
 LIGHT_PURPLE="\033[1;35m"
 LIGHT_RED="\033[1;31m"
