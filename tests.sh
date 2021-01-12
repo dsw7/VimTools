@@ -1,5 +1,5 @@
-FILENAME_ACTUAL="${TMP}/vimtools_test_actual"
-FILENAME_EXPECTED="${TMP}/vimtools_test_expected"
+FILENAME_ACTUAL="/tmp/vimtools_test_actual"
+FILENAME_EXPECTED="/tmp/vimtools_test_expected"
 LIGHT_RED="\033[1;31m"
 DARK_GREEN="\033[0;32m"
 NO_COLOR="\033[0m"
