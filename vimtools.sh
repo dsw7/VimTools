@@ -1,4 +1,5 @@
 BRANCH="master"
+REPOSITORY_NAME="VimTools"
 LIGHT_PURPLE="\033[1;35m"
 LIGHT_RED="\033[1;31m"
 LIGHT_YELLOW="\033[1;33m"
@@ -17,14 +18,13 @@ echo_warning() {
 }
 
 fetch_vimtools() {
-    local repo="VimTools"
-    local archive="${repo}-${BRANCH}.zip"
-    local inflated="${repo}-${BRANCH}"
+    local archive="${REPOSITORY_NAME}-${BRANCH}.zip"
+    local inflated="${REPOSITORY_NAME}-${BRANCH}"
     local vim_directory=".vim"
     local test_filename="${vim_directory}/tests.sh"
 
     echo_step "[Step 1] - Downloading ${archive}..."
-    curl -L https://github.com/dsw7/${repo}/archive/${BRANCH}.zip --output $archive --fail
+    curl -L https://github.com/dsw7/${REPOSITORY_NAME}/archive/${BRANCH}.zip --output $archive --fail
     if [ $? -ne 0 ]
     then
         echo_error "Failed to fetch VimTools!"
