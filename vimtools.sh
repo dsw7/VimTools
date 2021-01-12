@@ -21,6 +21,7 @@ fetch_vimtools() {
     local archive="${repo}-${branch}.zip"
     local inflated="${repo}-${branch}"
     local vim_directory=".vim"
+    local test_filename="${vim_directory}/tests.sh"
 
     echo_step "[Step 1] - Downloading ${archive}..."
     curl -L https://github.com/dsw7/${repo}/archive/${branch}.zip --output $archive --fail
@@ -50,5 +51,10 @@ fetch_vimtools() {
 
     echo_step "[Step 5] - Clean up any remaining files..."
     rm -v $archive
+    echo
+
+    echo_step "[Step 6] - Run tests..."
+    chmod +x $test_filename
+    $test_filename
     echo
 }
