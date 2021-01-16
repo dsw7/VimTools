@@ -94,19 +94,20 @@ endfunction
 " PUBLIC FUNCTIONS
 " --------------------------------------------------------------
 function Replace(output, ...)
-    if a:0 == 0
+    if a:0 == 0        " Replace whatever is in / register throughout file
         execute '%s/' . escape(getreg('/'), '/') . '/' . a:output . '/g'
-    elseif a:0 == 1
-        call s:ReplaceHelp()
-    elseif a:0 == 2
-        let start = str2nr(a:1)
-        let end = str2nr(a:2)
-        if start <= end
-            execute start . ',' . end . 's/' . escape(getreg('/'), '/') . '/' . a:output . '/g'
+    elseif a:0 == 1    " Replace whatever is in / register on line line_start
+        let line_start = str2nr(a:1)
+        execute line_start . 's/' . escape(getreg('/'), '/') . '/' . a:output . '/g'
+    elseif a:0 == 2    " Replace whatever is in / between lines line_start and line_end
+        let line_start = str2nr(a:1)
+        let line_end = str2nr(a:2)
+        if line_start <= line_end
+            execute line_start . ',' . line_end . 's/' . escape(getreg('/'), '/') . '/' . a:output . '/g'
         else
             call s:LineError()
         endif
-    elseif a:0 > 2
+    else
         call s:ReplaceHelp()
     endif
 endfunction
