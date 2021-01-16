@@ -35,7 +35,22 @@ EOF
     assert_files_equal ${FUNCNAME[0]}
 }
 
-test_sub_command_add_limits() {
+test_sub_command_one_line() {
+    cat > $FILENAME_ACTUAL << EOF
+foo bar foo
+foo bar foo
+foo bar foo
+EOF
+    cat > $FILENAME_EXPECTED << EOF
+foo bar foo
+cat bar cat
+foo bar foo
+EOF
+    vim -es -c "/foo" -c ":S cat 2" -c "wq" $FILENAME_ACTUAL
+    assert_files_equal ${FUNCNAME[0]}
+}
+
+test_sub_command_between_lines() {
     cat > $FILENAME_ACTUAL << EOF
 foo bar baz
 foo bar baz
@@ -158,7 +173,8 @@ EOF
 run_all_tests() {
     echo
     test_sub_command_no_limits
-    test_sub_command_add_limits
+    test_sub_command_one_line
+    test_sub_command_between_lines
     test_remove_whitespace
     test_remove_preceding_whitelines
     test_copy_command
