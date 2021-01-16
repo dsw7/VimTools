@@ -24,6 +24,11 @@ _Syntax_:
 Or:
 ```
 :/<foo>
+:S <bar> <line-to-replace-<foo>-on>
+```
+Or:
+```
+:/<foo>
 :S <bar> <start-line> <end-line>
 ```
 _Examples_:  
