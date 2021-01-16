@@ -94,19 +94,19 @@ endfunction
 " PUBLIC FUNCTIONS
 " --------------------------------------------------------------
 function Replace(output, ...)
-    if a:0 == 0                  " a:0 = number of unspecified arguments (...)
+    if a:0 == 0
         execute '%s/' . escape(getreg('/'), '/') . '/' . a:output . '/g'
-    elseif a:0 == 1              " a:0 = 1 if only the start argument passed
-        call s:ReplaceHelp()     " s:Foobar() <- the s: indicates that Foobar is local to this file
-    elseif a:0 == 2              " a:0 = 2 if start and end line numbers are passed
-        let start = str2nr(a:1)  " a:1 = the first optional value
-        let end = str2nr(a:2)    " a:2 = the second optional value
+    elseif a:0 == 1
+        call s:ReplaceHelp()
+    elseif a:0 == 2
+        let start = str2nr(a:1)
+        let end = str2nr(a:2)
         if start <= end
             execute start . ',' . end . 's/' . escape(getreg('/'), '/') . '/' . a:output . '/g'
         else
             call s:LineError()
         endif
-    elseif a:0 > 2               " a:0 > 2 if only the start, end and some other arg passed
+    elseif a:0 > 2
         call s:ReplaceHelp()
     endif
 endfunction
