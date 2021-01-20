@@ -29,3 +29,6 @@ nnoremap <PageUp> <C-u>
 
 " Toggle between absolute and relative numbering
 nnoremap mm :call NumberToggle()<CR>
+
+" Jump between last two positions
+nnoremap t ``
