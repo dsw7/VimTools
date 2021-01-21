@@ -37,5 +37,8 @@ command -nargs=+ Header :call Header(<f-args>)
 " Toggle cursorcolumn
 command -nargs=? Col :call ColumnToggle(<f-args>)
 
+" Insert block of text from another file
+command -nargs=+ Block :call Block(<f-args>)
+
 " Print a list of the preceding commands
 command -nargs=? Help :call Help(<f-args>)
