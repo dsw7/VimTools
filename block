@@ -1,0 +1,44 @@
+function Block(start_line, end_line, input_filename)
+    let start_line = str2nr(a:start_line)
+    let end_line = str2nr(a:end_line)
+
+    if start_line < 0 || end_line < 0
+        echohl ErrorMsg
+        echo "Start and end lines must be greater than 0"
+        echohl None
+        return
+    endif
+
+    if start_line > end_line
+        echohl ErrorMsg
+        echo "Start line cannot be greater than end line"
+        echohl None
+        return
+    endif
+
+    if !filereadable(a:input_filename)
+        echohl ErrorMsg
+        echo "File " . a:input_filename . " does not exist!"
+        echohl None
+        return
+    endif
+
+    let line_count = str2nr(system("wc -l " . a:input_filename . " | awk '{print $1}'"))
+    if end_line > line_count
+        echohl ErrorMsg
+        echo "End line exceeds file line count!"
+        echohl None
+        return
+    endif
+
+    " Note that vimscript automatically coerces str to int
+    let offset = end_line - start_line + 1
+    let block = "head -n " . a:end_line . " " . a:input_filename . " | tail -n " . offset
+
+    echo "Running command: " . block
+    let stdout = split(system(block), "\n")
+    call add(stdout, "")
+    call append('.', stdout)
+endfunction
+
+command -nargs=+ Block :call Block(<f-args>)
