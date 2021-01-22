@@ -69,6 +69,7 @@ function s:RemoveWhiteSpaceBeforeLineHelp()
 endfunction
 
 function s:MoveHelp()
+    " Deprecated function - move this to help docs
     call s:ErrorMsgHeader()
     echo "Valid syntax follows:"
     echo ":Mv <start-line> <end-line> <destination-line>"
@@ -152,6 +153,7 @@ endfunction
 function Delete(start_line, end_line)
     let start_line = str2nr(a:start_line)
     let end_line = str2nr(a:end_line)
+
     if start_line <= end_line
         execute start_line . ',' . end_line . 'd'
     else
@@ -162,6 +164,7 @@ endfunction
 function Indent(start_line, end_line)
     let start_line = str2nr(a:start_line)
     let end_line = str2nr(a:end_line)
+
     if start_line <= end_line
         execute start_line . ',' . end_line . 's/^/    /g'
     else
@@ -173,6 +176,7 @@ function Copy(start_line, end_line, position)
     let start_line = str2nr(a:start_line)
     let end_line = str2nr(a:end_line)
     let position = str2nr(a:position)
+
     if start_line <= end_line
         execute start_line . ',' . end_line . 't' . position
     else
@@ -187,6 +191,7 @@ endfunction
 function RemoveWhiteSpaceBeforeLine(start_line, end_line)
     let start_line = str2nr(a:start_line)
     let end_line = str2nr(a:end_line)
+
     if start_line <= end_line
         execute start_line . ',' . end_line . 's/^\s\+//g'
     else
@@ -194,18 +199,15 @@ function RemoveWhiteSpaceBeforeLine(start_line, end_line)
     endif
 endfunction
 
-function Move(...)
-    if a:0 == 3
-        let start = str2nr(a:1)
-        let end = str2nr(a:2)
-        let position = str2nr(a:3)
-        if start <= end
-            execute start . ',' . end . 'm' . position
-        else
-            call s:LineError()
-        endif
+function Move(start_line, end_line, position)
+    let start_line = str2nr(a:start_line)
+    let end_line = str2nr(a:end_line)
+    let position = str2nr(a:position)
+
+    if start_line <= end_line
+        execute start_line . ',' . end_line . 'm' . position
     else
-        call s:MoveHelp()
+        call s:LineError()
     endif
 endfunction
 
