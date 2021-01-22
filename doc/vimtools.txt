@@ -1,0 +1,24 @@
+*vimtools.txt*
+
+    *** Plugin that integrates VimTools with Vim ***
+
+==============================================================================
+USAGE INSTRUCTIONS                                              *vimtools-usage*
+
+1. *:Cls*
+    Description: Clear the / register
+          Usage: `Cls` <no-arguments>
+
+2. *:Ws*
+    Description: Remove all whitespace between the last word and the newline
+          Usage: `Ws` <no-arguments>
+
+==============================================================================
+ADDING VIMTOOLS COMMANDS                              *adding-vimtools-commands*
+
+1. Make sure to add a relevant tag, say for a new command, i.e. *:Foo*
+2. Run `:helptags` `/path/to/.vim/doc` to rebuild the list of tags
+3. Run `:help` `Foo` to make sure the new tag is found
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:
