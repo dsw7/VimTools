@@ -34,19 +34,21 @@ function s:InsertHelp()
 endfunction
 
 function s:DeleteHelp()
-    " Deprecated function
+    " Deprecated function - move this to help docs
     call s:ErrorMsgHeader()
     echo "Valid syntax follows:"
     echo ":Del <start-line> <end-line>"
 endfunction
 
 function s:IndentHelp()
+    " Deprecated function - move this to help docs
     call s:ErrorMsgHeader()
     echo "Valid syntax follows:"
     echo ":Ind <start-line> <end-line>"
 endfunction
 
 function s:CopyHelp()
+    " Deprecated function - move this to help docs
     call s:ErrorMsgHeader()
     echo "Valid syntax follows:"
     echo ":Cp <start-line> <end-line> <destination-line>"
@@ -153,32 +155,24 @@ function Delete(start_line, end_line)
     endif
 endfunction
 
-function Indent(...)
-    if a:0 == 2
-        let start = str2nr(a:1)
-        let end = str2nr(a:2)
-        if start <= end
-            execute start . ',' . end . 's/^/    /g'
-        else
-            call s:LineError()
-        endif
+function Indent(start_line, end_line)
+    let start_line = str2nr(a:start_line)
+    let end_line = str2nr(a:end_line)
+    if start_line <= end_line
+        execute start . ',' . end . 's/^/    /g'
     else
-        call s:IndentHelp()
+        call s:LineError()
     endif
 endfunction
 
-function Copy(...)
-    if a:0 == 3
-        let start = str2nr(a:1)
-        let end = str2nr(a:2)
-        let position = str2nr(a:3)
-        if start <= end
-            execute start . ',' . end . 't' . position
-        else
-            call s:LineError()
-        endif
+function Copy(start_line, end_line, position)
+    let start_line = str2nr(a:start_line)
+    let end_line = str2nr(a:end_line)
+    let position = str2nr(a:position)
+    if start_line <= end_line
+        execute start . ',' . end . 't' . position
     else
-        call s:CopyHelp()
+        call s:LineError()
     endif
 endfunction
 
