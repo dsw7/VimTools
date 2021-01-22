@@ -55,11 +55,13 @@ function s:CopyHelp()
 endfunction
 
 function s:RemoveWhiteSpaceHelp()
+    " Deprecated function - move this to help docs
     call s:ErrorMsgHeader()
     echo "Function takes no arguments."
 endfunction
 
 function s:RemoveWhiteSpaceBeforeLineHelp()
+    " Deprecated function - move this to help docs
     call s:ErrorMsgHeader()
     echo "Valid syntax follows:"
     echo ":Wl <start-line> <end-line>"
@@ -176,25 +178,17 @@ function Copy(start_line, end_line, position)
     endif
 endfunction
 
-function RemoveWhiteSpace(...)
-    if a:0 > 0
-        call s:RemoveWhiteSpaceHelp()
-    else
-        execute '%s/\s\+$//g'
-    endif
+function RemoveWhiteSpace()
+    execute '%s/\s\+$//g'
 endfunction
 
-function RemoveWhiteSpaceBeforeLine(...)
-    if a:0 == 2
-        let start = str2nr(a:1)
-        let end = str2nr(a:2)
-        if start <= end
-            execute start . ',' . end . 's/^\s\+//g'
-        else
-            call s:LineError()
-        endif
+function RemoveWhiteSpaceBeforeLine(start_line, end_line)
+    let start_line = str2nr(a:start_line)
+    let end_line = str2nr(a:end_line)
+    if start_line <= end_line
+        execute start_line . ',' . end_line . 's/^\s\+//g'
     else
-        call s:RemoveWhiteSpaceBeforeLineHelp()
+        call s:LineError()
     endif
 endfunction
 
