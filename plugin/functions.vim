@@ -159,7 +159,7 @@ function Indent(start_line, end_line)
     let start_line = str2nr(a:start_line)
     let end_line = str2nr(a:end_line)
     if start_line <= end_line
-        execute start . ',' . end . 's/^/    /g'
+        execute start_line . ',' . end_line . 's/^/    /g'
     else
         call s:LineError()
     endif
@@ -170,7 +170,7 @@ function Copy(start_line, end_line, position)
     let end_line = str2nr(a:end_line)
     let position = str2nr(a:position)
     if start_line <= end_line
-        execute start . ',' . end . 't' . position
+        execute start_line . ',' . end_line . 't' . position
     else
         call s:LineError()
     endif
