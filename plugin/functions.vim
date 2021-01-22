@@ -34,6 +34,7 @@ function s:InsertHelp()
 endfunction
 
 function s:DeleteHelp()
+    " Deprecated function
     call s:ErrorMsgHeader()
     echo "Valid syntax follows:"
     echo ":Del <start-line> <end-line>"
@@ -96,14 +97,14 @@ endfunction
 function Replace(output, ...)
     if a:0 == 0        " Replace whatever is in / register throughout file
         execute '%s/' . escape(getreg('/'), '/') . '/' . a:output . '/g'
-    elseif a:0 == 1    " Replace whatever is in / register on line line_start
-        let line_start = str2nr(a:1)
-        execute line_start . 's/' . escape(getreg('/'), '/') . '/' . a:output . '/g'
-    elseif a:0 == 2    " Replace whatever is in / between lines line_start and line_end
-        let line_start = str2nr(a:1)
-        let line_end = str2nr(a:2)
-        if line_start <= line_end
-            execute line_start . ',' . line_end . 's/' . escape(getreg('/'), '/') . '/' . a:output . '/g'
+    elseif a:0 == 1    " Replace whatever is in / register on line start_line
+        let start_line = str2nr(a:1)
+        execute start_line . 's/' . escape(getreg('/'), '/') . '/' . a:output . '/g'
+    elseif a:0 == 2    " Replace whatever is in / between lines start_line and end_line
+        let start_line = str2nr(a:1)
+        let end_line = str2nr(a:2)
+        if start_line <= end_line
+            execute start_line . ',' . end_line . 's/' . escape(getreg('/'), '/') . '/' . a:output . '/g'
         else
             call s:LineError()
         endif
@@ -112,32 +113,28 @@ function Replace(output, ...)
     endif
 endfunction
 
-function ReplaceInAllFiles(input, output, scope, ...)
-    if a:0 == 0
-        if a:scope == '*'
-            arg *                " add all files in current directory
-            argdo execute '%s/' . a:input . '/' . a:output. '/ge' | update
-        elseif a:scope == '**'   " add all files in current and sub directories
-            arg **
-            argdo execute '%s/' . a:input . '/' . a:output. '/ge' | update
-        else
-            call s:ReplaceInAllFilesHelp()
-        endif
+function ReplaceInAllFiles(input, output, scope)
+    if a:scope == '*'
+        arg *                " add all files in current directory
+        argdo execute '%s/' . a:input . '/' . a:output. '/ge' | update
+    elseif a:scope == '**'   " add all files in current and sub directories
+        arg **
+        argdo execute '%s/' . a:input . '/' . a:output. '/ge' | update
     else
         call s:ReplaceInAllFilesHelp()
     endif
 endfunction
 
-function Insert(char, ...)
+function Insert(character, ...)
     if a:0 == 0
-        execute '%s/^/' . a:char. '/g'
+        execute '%s/^/' . a:character. '/g'
     elseif a:0 == 1
         call s:InsertHelp()
     elseif a:0 == 2
-        let start = str2nr(a:1)
-        let end = str2nr(a:2)
-        if start <= end
-            execute start . ',' . end . 's/^/' . a:char . '/g'
+        let start_line = str2nr(a:1)
+        let end_line = str2nr(a:2)
+        if start_line <= end_line
+            execute start_line . ',' . end_line . 's/^/' . a:character . '/g'
         else
             call s:LineError()
         endif
@@ -146,17 +143,13 @@ function Insert(char, ...)
     endif
 endfunction
 
-function Delete(...)
-    if a:0 == 2
-        let start = str2nr(a:1)
-        let end = str2nr(a:2)
-        if start <= end
-            execute start . ',' . end . 'd'
-        else
-            call s:LineError()
-        endif
+function Delete(start_line, end_line)
+    let start_line = str2nr(a:start_line)
+    let end_line = str2nr(a:end_line)
+    if start_line <= end_line
+        execute start_line . ',' . end_line . 'd'
     else
-        call s:DeleteHelp()
+        call s:LineError()
     endif
 endfunction
 
