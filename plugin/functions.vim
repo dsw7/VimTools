@@ -9,6 +9,7 @@ function s:ErrorMsgHeader()
 endfunction
 
 function s:ReplaceHelp()
+    " Deprecated function - move this to help docs
     call s:ErrorMsgHeader()
     echo "Usage:"
     echo "  1. Search for <foo> using Shift + 3 or /"
@@ -74,6 +75,7 @@ function s:MoveHelp()
 endfunction
 
 function s:PasteHelp()
+    " Deprecated function - move this to help docs
     call s:ErrorMsgHeader()
     echo "Function takes no arguments."
 endfunction
@@ -85,6 +87,7 @@ function s:HelpHelp()
 endfunction
 
 function s:HeaderHelp()
+    " Deprecated function - move this to help docs
     call s:ErrorMsgHeader()
     echo "Valid syntax follows:"
     echo ":Header <my-header-text>"
@@ -143,8 +146,6 @@ function Insert(character, ...)
         else
             call s:LineError()
         endif
-    elseif a:0 > 2
-        call s:InsertHelp()
     endif
 endfunction
 
@@ -208,27 +209,20 @@ function Move(...)
     endif
 endfunction
 
-function Paste(...)
-    if a:0 > 0
-        call s:PasteHelp()
-    else
-        normal! "+p
-    endif
+function Paste()
+    normal! "+p
 endfunction
 
-function Header(...)
-    if a:0 == 1
+function Header(text, ...)
+    if a:0 == 0
         let padding = 5
-    elseif a:0 == 2
-        let padding = str2nr(a:2)
-    else  " unreachable because blocked by -nargs=+ in COMMANDS section
-        call s:HeaderHelp()
-        return
+    elseif a:0 == 1
+        let padding = str2nr(a:1)
     endif
-    let strsize = strlen(a:1)
-    let hline = repeat('=', strsize + 2 * padding + 2)
+    let text_size = strlen(a:text)
+    let hline = repeat('=', text_size + 2 * padding + 2)
     let mid = repeat('=', padding)
-    let row = mid . ' ' . a:1 . ' ' . mid
+    let row = mid . ' ' . a:text . ' ' . mid
     call setline('.', [hline, row, hline, ''])
     +3
 endfunction
