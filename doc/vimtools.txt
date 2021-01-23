@@ -13,6 +13,10 @@ USAGE INSTRUCTIONS                                              *vimtools-usage*
     Description: Remove all whitespace between the last word and the newline
           Usage: `Ws` <no-arguments>
 
+3. *:Wl*
+    Description: Remove all whitespace before a set of lines (i.e. de-indent)
+          Usage: `Wl` <start-line> <end-line>
+
 ==============================================================================
 ADDING VIMTOOLS COMMANDS                              *adding-vimtools-commands*
 
