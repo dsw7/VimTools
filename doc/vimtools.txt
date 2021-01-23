@@ -5,17 +5,21 @@
 ==============================================================================
 USAGE INSTRUCTIONS                                              *vimtools-usage*
 
-1. *:Cls*
+1. *Cls*
     Description: Clear the / register
           Usage: `Cls` <no-arguments>
 
-2. *:Ws*
+2. *Ws*
     Description: Remove all whitespace between the last word and the newline
           Usage: `Ws` <no-arguments>
 
-3. *:Wl*
+3. *Wl*
     Description: Remove all whitespace before a set of lines (i.e. de-indent)
           Usage: `Wl` <start-line> <end-line>
+
+4. *Cp*
+    Description: Copy a set of lines to some new location
+          Usage: `Cp` <start-line> <end-line> <destination-line>
 
 ==============================================================================
 ADDING VIMTOOLS COMMANDS                              *adding-vimtools-commands*

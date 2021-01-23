@@ -1,7 +1,7 @@
-:Cls	vimtools.txt	/*:Cls*
 :Foo	vimtools.txt	/*:Foo*
 :Wl	vimtools.txt	/*:Wl*
 :Ws	vimtools.txt	/*:Ws*
+Cls	vimtools.txt	/*Cls*
 adding-vimtools-commands	vimtools.txt	/*adding-vimtools-commands*
 vimtools-usage	vimtools.txt	/*vimtools-usage*
 vimtools.txt	vimtools.txt	/*vimtools.txt*
