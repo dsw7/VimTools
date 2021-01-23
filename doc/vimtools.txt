@@ -6,63 +6,85 @@
 USAGE INSTRUCTIONS                                              *vimtools-usage*
 
 1. *Cls*
-    Description: Clear the / register
-          Usage: `Cls` <no-arguments>
+    {Description}: Clear the / register
+          {Usage}: `Cls` <no-arguments>
 
 2. *Ws*
-    Description: Remove all whitespace between the last word and the newline
-          Usage: `Ws` <no-arguments>
+    {Description}: Remove all whitespace between the last word and the newline
+          {Usage}: `Ws` <no-arguments>
 
 3. *Wl*
-    Description: Remove all whitespace before a set of lines (i.e. de-indent)
-          Usage: `Wl` <start-line> <end-line>
-        Example: Deindent a function between lines 2 and 5
-               : -> `:Wl` `2` `5`
+    {Description}: Remove all whitespace before a set of lines (i.e. de-indent)
+          {Usage}: `Wl` <start-line> <end-line>
+        {Example}: Deindent a function between lines 2 and 5
+                 : -> `:Wl` `2` `5`
 
 4. *Cp*
-    Description: Copy a set of lines to some new location
-          Usage: `Cp` <start-line> <end-line> <destination-line>
-        Example: Copy lines 2 through 5 to line 7
-               :-> `:Cp` `2` `5` `7`
+    {Description}: Copy a set of lines to some new location
+          {Usage}: `Cp` <start-line> <end-line> <destination-line>
+        {Example}: Copy lines 2 through 5 to line 7
+                 : -> `:Cp` `2` `5` `7`
 
 5. *Ind*
-    Description: Indent by 4 spaces between a set of line numbers
-          Usage: `Ind` <start-line> <end-line>
-        Example: Indent a function between lines 2 and 5
-               : -> `:Ind` `2` `5`
+    {Description}: Indent by 4 spaces between a set of line numbers
+          {Usage}: `Ind` <start-line> <end-line>
+        {Example}: Indent a function between lines 2 and 5
+                 : -> `:Ind` `2` `5`
 
 6. *Del*
-    Description: Delete lines between a set of line numbers
-          Usage: `Del` <start-line> <end-line>
-        Example: Delete a function between lines 2 and 5
-               : -> `:Del` `2` `5`
+    {Description}: Delete lines between a set of line numbers
+          {Usage}: `Del` <start-line> <end-line>
+        {Example}: Delete a function between lines 2 and 5
+                 : -> `:Del` `2` `5`
 
 7. *Ins*
-    Description: Insert a delimiter before a set of lines
-          Usage: `Ins` <character> <start-line> <end-line>
-        Example: Comment out a Python function between lines 2 and 5
-               : -> `:Ins` `#` `2` `5`
+    {Description}: Insert a delimiter before a set of lines
+          {Usage}: `Ins` <character> <start-line> <end-line>
+        {Example}: Comment out a Python function between lines 2 and 5
+                 : -> `:Ins` `#` `2` `5`
 
 8. *S*
-    Description: Replace a pattern between a set of lines or globally
+    {Description}: Replace a pattern between a set of lines or globally
 
-     Scenario 1: Replace a pattern globally
-          Usage: `/`<pattern> -> `S` <new-string>
-        Example: Replace "foo" with "bar" throughout file
-               : -> `:/foo`
-               : -> `:S` `bar`
+       {Scenario}: Replace a pattern globally
+          {Usage}: `/`<pattern> -> `S` <new-string>
+        {Example}: Replace "foo" with "bar" throughout file
+                 : -> `:/foo`
+                 : -> `:S` `bar`
 
-     Scenario 2: Replace a pattern on one line only
-          Usage: `/`<pattern> -> `S` <new-string> <line-number>
-        Example: Replace "foo" with "bar" only on line 5
-               : -> `:/foo`
-               : -> `:S` `bar 5`
+       {Scenario}: Replace a pattern on one line only
+          {Usage}: `/`<pattern> -> `S` <new-string> <line-number>
+        {Example}: Replace "foo" with "bar" only on line 5
+                 : -> `:/foo`
+                 : -> `:S` `bar 5`
 
-     Scenario 3: Replace a pattern between a set of lines
-          Usage: `/`<pattern> -> `S` <new-string> <start-line> <end-line>
-        Example: Replace "foo" with "bar" between lines 2 and 5
-               : -> `:/foo`
-               : -> `:S` `bar` `2` `5`
+       {Scenario}: Replace a pattern between a set of lines
+          {Usage}: `/`<pattern> -> `S` <new-string> <start-line> <end-line>
+        {Example}: Replace "foo" with "bar" between lines 2 and 5
+                 : -> `:/foo`
+                 : -> `:S` `bar` `2` `5`
+
+9. *Mv*
+    {Description}: Drag a set of lines to some new line
+          {Usage}: `Mv` <start-line> <end-line> <destination-line>
+        {Example}: Drag lines 2 through 5 to line 7
+                 : -> `:Mv` `2` `5` `7`
+
+10. *Paste*
+    {Description}: Paste system clipboard contents to current cursor position
+          {Usage}: `Paste` <no-arguments>
+
+11. *Col*
+    {Description}: Toggle cursor column. Useful for checking vertical alignment
+          {Usage}: `Col` <no-arguments>
+
+12. *Block*
+    {Description}: Copy the contents of some external file between a set of lines
+                 to current cursor position
+          {Usage}: `Block` <filepath> <start-line> <end-line>
+        {Example}: Copy a function from /tmp/foo.cpp on lines 5-10 to the
+                 current cursor position
+                 : -> `:Block` `/tmp/foo.cpp` `5` `10`
 
 ==============================================================================
 ADDING VIMTOOLS COMMANDS                              *adding-vimtools-commands*
