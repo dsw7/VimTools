@@ -87,14 +87,6 @@ function s:HelpHelp()
     echo "Function takes no arguments."
 endfunction
 
-function s:HeaderHelp()
-    " Deprecated function - move this to help docs
-    call s:ErrorMsgHeader()
-    echo "Valid syntax follows:"
-    echo ":Header <my-header-text>"
-    echo ":Header <my-header-text> <padding>"
-endfunction
-
 function s:LineError()
     call s:ErrorMsgHeader()
     echo "The <start-line> value must not exceed the <end-line> value."
@@ -215,20 +207,6 @@ function Paste()
     normal! "+p
 endfunction
 
-function Header(text, ...)
-    if a:0 == 0
-        let padding = 5
-    elseif a:0 == 1
-        let padding = str2nr(a:1)
-    endif
-    let text_size = strlen(a:text)
-    let hline = repeat('=', text_size + 2 * padding + 2)
-    let mid = repeat('=', padding)
-    let row = mid . ' ' . a:text . ' ' . mid
-    call setline('.', [hline, row, hline, ''])
-    +3
-endfunction
-
 function NumberToggle()
     if(&relativenumber == 1)
         set norelativenumber
@@ -303,7 +281,6 @@ function Help()
     echo ":Mv     -> Move a block of text"
     echo ":Paste  -> Paste a block of text from system clipboard"
     echo ":Col    -> Toggle cursorcolumn"
-    echo ":Header -> Create a header"
     echo ":Block  -> Insert a block of text from another file"
     echo "=========================================================="
 endfunction

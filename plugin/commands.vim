@@ -31,9 +31,6 @@ command -nargs=+ Mv :call Move(<f-args>)
 " Paste text from system clipboard
 command -nargs=? Paste :call Paste(<f-args>)
 
-" Create some header text
-command -nargs=? Header :call Header(<f-args>)
-
 " Toggle cursorcolumn
 command -nargs=? Col :call ColumnToggle(<f-args>)
 
