@@ -238,9 +238,6 @@ run_all_tests() {
     test_block_command
     echo
     echo "Tests complete!"
-    echo "Feel free to delete both of:"
-    echo "$FILENAME_ACTUAL"
-    echo "$FILENAME_EXPECTED"
 }
 
 run_all_tests
