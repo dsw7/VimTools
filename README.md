@@ -279,39 +279,6 @@ Which would yield:
 5 amet...
 ```
 
-### Header
-_Description_:  
-- The _Header_ command inserts some sort of header in a README or related file.
-
-_Syntax_:  
-```
-:Header <header-text>
-```
-Or:
-```
-:Header <header-text> <padding>
-```
-_Examples_:  
-- Insert a title with default padding:
-```
-:Header FOOBARBAZ
-```
-Yields:
-```
-1 =====================
-2 ===== FOOBARBAZ =====
-3 =====================
-```
-The `<padding>` option specifies how much lateral padding to add:
-```
-:Header FOOBARBAZ 15
-```
-Yields:
-```
-1 =========================================
-2 =============== FOOBARBAZ ===============
-3 =========================================
-```
 ### Col
 _Description_:  
 - The _Col_ command simply enables `cursorcolumn`. Calling the command a second time will disable `cursorcolumn`. The command takes no arguments.
