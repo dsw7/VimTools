@@ -54,6 +54,7 @@ fetch_vimtools() {
     echo
 
     echo_step "[Step 6] - Run tests..."
+    # replace with python3 -m unittest discover --start-directory ${PWD}/test -v
     echo "Adding executable permissions to $test_filename"
     chmod +x $test_filename
     echo "Running test script $test_filename"
