@@ -1,10 +1,9 @@
 import filecmp
-from os import path, remove, stat, chmod
+from os import remove, stat, chmod
 from stat import S_IEXEC
 from subprocess import call
-from tempfile import gettempdir
 from unittest import TestCase
-from consts import (
+from utils.consts import (
     FILENAME_ACTUAL,
     FILENAME_EXPECTED,
     TEMPORARY_COMMAND_FILE
