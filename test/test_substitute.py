@@ -1,5 +1,6 @@
 import filecmp
 from os import remove
+from textwrap import dedent
 from subprocess import call
 from unittest import TestCase
 from utils.consts import (
@@ -14,8 +15,14 @@ from utils.primitives import (
 
 class TestSubCommand(TestCase):
     def setUp(self):
+        input_string = """\
+        foo bar baz
+        foo bar baz
+        foo bar baz
+        """
+
         with open(FILENAME_ACTUAL, 'w') as f:
-            f.write('foo bar baz\nfoo bar baz\nfoo bar baz\n')
+            f.write(dedent(input_string))
 
     def tearDown(self):
         remove(FILENAME_ACTUAL)
@@ -23,8 +30,14 @@ class TestSubCommand(TestCase):
         remove(TEMPORARY_COMMAND_FILE)
 
     def test_sub_no_limits(self):
+        input_string = """\
+        cat bar baz
+        cat bar baz
+        cat bar baz
+        """
+
         with open(FILENAME_EXPECTED, 'w') as f:
-            f.write('cat bar baz\ncat bar baz\ncat bar baz\n')
+            f.write(dedent(input_string))
 
         command = f'vim -es -c "/foo" -c ":S cat" -c "wq" {FILENAME_ACTUAL}'
         write_executable_command_file(command, TEMPORARY_COMMAND_FILE)
@@ -35,8 +48,14 @@ class TestSubCommand(TestCase):
         )
 
     def test_sub_one_line(self):
+        input_string = """\
+        foo bar baz
+        cat bar baz
+        foo bar baz
+        """
+
         with open(FILENAME_EXPECTED, 'w') as f:
-            f.write('foo bar baz\ncat bar baz\nfoo bar baz\n')
+            f.write(dedent(input_string))
 
         command = f'vim -es -c "/foo" -c ":S cat 2" -c "wq" {FILENAME_ACTUAL}'
         write_executable_command_file(command, TEMPORARY_COMMAND_FILE)
@@ -47,8 +66,14 @@ class TestSubCommand(TestCase):
         )
 
     def test_sub_between_lines(self):
+        input_string = """\
+        cat bar baz
+        cat bar baz
+        foo bar baz
+        """
+
         with open(FILENAME_EXPECTED, 'w') as f:
-            f.write('cat bar baz\ncat bar baz\nfoo bar baz\n')
+            f.write(dedent(input_string))
 
         command = f'vim -es -c "/foo" -c ":S cat 1 2" -c "wq" {FILENAME_ACTUAL}'
         write_executable_command_file(command, TEMPORARY_COMMAND_FILE)
@@ -59,10 +84,16 @@ class TestSubCommand(TestCase):
         )
 
     def test_sub_or_condition(self):
-        with open(FILENAME_EXPECTED, 'w') as f:
-            f.write('cat bar cat\ncat bar cat\ncat bar cat\n')
+        input_string = """\
+        cat bar cat
+        cat bar cat
+        cat bar cat
+        """
 
-        command = f'vim -es -c "/foo\|baz" -c ":S cat" -c "wq" {FILENAME_ACTUAL}'
+        with open(FILENAME_EXPECTED, 'w') as f:
+            f.write(dedent(input_string))
+
+        command = rf'vim -es -c "/foo\|baz" -c ":S cat" -c "wq" {FILENAME_ACTUAL}'
         write_executable_command_file(command, TEMPORARY_COMMAND_FILE)
 
         call(TEMPORARY_COMMAND_FILE)
@@ -71,8 +102,13 @@ class TestSubCommand(TestCase):
         )
 
     def test_sub_and_condition(self):
+        input_string = """\
+        cat
+        cat
+        cat
+        """
         with open(FILENAME_EXPECTED, 'w') as f:
-            f.write('cat\ncat\ncat\n')
+            f.write(dedent(input_string))
 
         command = f'vim -es -c "/foo.*baz" -c ":S cat" -c "wq" {FILENAME_ACTUAL}'
         write_executable_command_file(command, TEMPORARY_COMMAND_FILE)

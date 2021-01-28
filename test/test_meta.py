@@ -64,3 +64,21 @@ class TestMeta(TestCase):
         self.assertFalse(
             filecmp.cmp(FILENAME_ACTUAL, FILENAME_EXPECTED)
         )
+
+    def test_false_indents(self):
+        expected_string = """\
+        cat bar baz
+        cat bar baz
+            cat bar baz
+        """
+
+        with open(FILENAME_EXPECTED, 'w') as f:
+            f.write(expected_string)
+
+        command = f'vim -es -c "/foo" -c ":S cat" -c "wq" {FILENAME_ACTUAL}'
+        write_executable_command_file(command, TEMPORARY_COMMAND_FILE)
+
+        call(TEMPORARY_COMMAND_FILE)
+        self.assertFalse(
+            filecmp.cmp(FILENAME_ACTUAL, FILENAME_EXPECTED)
+        )
