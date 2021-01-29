@@ -13,7 +13,7 @@ from utils.primitives import (
 )
 
 
-class TestIns(TestCase):
+class TestInd(TestCase):
     def setUp(self):
         input_string = """\
         foo bar baz
@@ -29,33 +29,16 @@ class TestIns(TestCase):
         remove(FILENAME_EXPECTED)
         remove(TEMPORARY_COMMAND_FILE)
 
-    def test_comment_out_python(self):
+    def test_ind(self):
         expected_string = """\
-        #foo bar baz
-        #foo bar baz
+            foo bar baz
+            foo bar baz
         foo bar baz
         """
         with open(FILENAME_EXPECTED, 'w') as f:
             f.write(dedent(expected_string))
 
-        command = f'vim -es -c ":Ins # 1 2" -c "wq" {FILENAME_ACTUAL}'
-        write_executable_command_file(command, TEMPORARY_COMMAND_FILE)
-
-        call(TEMPORARY_COMMAND_FILE)
-        self.assertTrue(
-            filecmp.cmp(FILENAME_ACTUAL, FILENAME_EXPECTED)
-        )
-
-    def test_comment_out_cpp(self):
-        expected_string = """\
-        foo bar baz
-        //foo bar baz
-        //foo bar baz
-        """
-        with open(FILENAME_EXPECTED, 'w') as f:
-            f.write(dedent(expected_string))
-
-        command = rf'vim -es -c ":Ins \/\/ 2 3" -c "wq" {FILENAME_ACTUAL}'
+        command = f'vim -es -c ":Ind 1 2" -c "wq" {FILENAME_ACTUAL}'
         write_executable_command_file(command, TEMPORARY_COMMAND_FILE)
 
         call(TEMPORARY_COMMAND_FILE)
