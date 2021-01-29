@@ -37,7 +37,7 @@ class TestMeta(TestCase):
         """
 
         with open(FILENAME_EXPECTED, 'w') as f:
-            f.write(expected_string)
+            f.write(dedent(expected_string))
 
         command = f'vim -es -c "/foo" -c ":S cat" -c "wq" {FILENAME_ACTUAL}'
         write_executable_command_file(command, TEMPORARY_COMMAND_FILE)
@@ -55,13 +55,13 @@ class TestMeta(TestCase):
         """
 
         with open(FILENAME_EXPECTED, 'w') as f:
-            f.write(expected_string)
+            f.write(dedent(expected_string))
 
         command = f'vim -es -c "/foo" -c ":S cat" -c "wq" {FILENAME_ACTUAL}'
         write_executable_command_file(command, TEMPORARY_COMMAND_FILE)
 
         call(TEMPORARY_COMMAND_FILE)
-        self.assertFalse(
+        self.assertTrue(
             filecmp.cmp(FILENAME_ACTUAL, FILENAME_EXPECTED)
         )
 
@@ -73,7 +73,7 @@ class TestMeta(TestCase):
         """
 
         with open(FILENAME_EXPECTED, 'w') as f:
-            f.write(expected_string)
+            f.write(dedent(expected_string))
 
         command = f'vim -es -c "/foo" -c ":S cat" -c "wq" {FILENAME_ACTUAL}'
         write_executable_command_file(command, TEMPORARY_COMMAND_FILE)

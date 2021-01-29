@@ -13,12 +13,12 @@ from utils.primitives import (
 )
 
 
-class TestDel(TestCase):
+class TestIns(TestCase):
     def setUp(self):
         input_string = """\
-        foo bar 1
-        foo bar 2
-        foo bar 3
+        foo bar baz
+        foo bar baz
+        foo bar baz
         """
 
         with open(FILENAME_ACTUAL, 'w') as f:
@@ -29,14 +29,33 @@ class TestDel(TestCase):
         remove(FILENAME_EXPECTED)
         remove(TEMPORARY_COMMAND_FILE)
 
-    def test_del(self):
+    def test_comment_out_python(self):
         expected_string = """\
-        foo bar 3
+        #foo bar baz
+        #foo bar baz
+        foo bar baz
         """
         with open(FILENAME_EXPECTED, 'w') as f:
-            f.write(dedent(expected_string))
+            f.write(expected_string)
 
-        command = f'vim -es -c ":Del 1 2" -c "wq" {FILENAME_ACTUAL}'
+        command = f'vim -es -c ":Ins # 1 2" -c "wq" {FILENAME_ACTUAL}'
+        write_executable_command_file(command, TEMPORARY_COMMAND_FILE)
+
+        call(TEMPORARY_COMMAND_FILE)
+        self.assertTrue(
+            filecmp.cmp(FILENAME_ACTUAL, FILENAME_EXPECTED)
+        )
+
+    def test_comment_out_cpp(self):
+        expected_string = """\
+        foo bar baz
+        //foo bar baz
+        //foo bar baz
+        """
+        with open(FILENAME_EXPECTED, 'w') as f:
+            f.write(expected_string)
+
+        command = f'vim -es -c ":Ins \/\/ 1 2" -c "wq" {FILENAME_ACTUAL}'
         write_executable_command_file(command, TEMPORARY_COMMAND_FILE)
 
         call(TEMPORARY_COMMAND_FILE)
