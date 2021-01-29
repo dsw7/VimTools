@@ -64,7 +64,7 @@ cleanup_files() {
 
 run_all_tests() {
     echo_step "[Step 6] - Run tests..."
-    python3 -m unittest discover --start-directory ${VIMTOOLS_HOME}/test -v
+    python3 -m unittest discover --start-directory ${VIMTOOLS_HOME}/tests -v
     echo
 }
 
