@@ -16,7 +16,7 @@ from utils.primitives import (
 class TestCp(TestCase):
     def setUp(self):
         input_string = """\
-        namespace foo {
+         namespace foo {
             void bar() {
                 std::cout << "A foo that bars!" << std::endl;
                 std::cout << "What does that even mean?" << std::endl;
