@@ -72,7 +72,7 @@ run_all_tests() {
 fetch_vimtools() {
     download_zip_archive
     unzip_archive
-    remove_existing_vim_directory
+    remove_existing_runtime_directory
     rename_inflated_directory
     cleanup_files
     run_all_tests
