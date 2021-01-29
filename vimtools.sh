@@ -24,7 +24,7 @@ echo_warning() {
 
 download_zip_archive() {
     echo_step "[Step 1] - Downloading ${FILENAME_ZIP_ARCHIVE}..."
-    local url=https://github.com/dsw7/${REPOSITORY_NAME}/archive/${BRANCH}.zip 
+    local url=https://github.com/dsw7/${REPOSITORY_NAME}/archive/${BRANCH}.zip
     curl -L $url --output $FILENAME_ZIP_ARCHIVE --fail
     if [ $? -ne 0 ]
     then
