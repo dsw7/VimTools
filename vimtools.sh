@@ -1,9 +1,14 @@
 BRANCH="master"
-REPOSITORY_NAME="VimTools"
+
 LIGHT_PURPLE="\033[1;35m"
 LIGHT_RED="\033[1;31m"
 LIGHT_YELLOW="\033[1;33m"
 NO_COLOR="\033[0m"
+
+REPOSITORY_NAME="VimTools"
+FILENAME_ZIP_ARCHIVE="${REPOSITORY_NAME}-${BRANCH}.zip"
+FILENAME_INFLATED="${REPOSITORY_NAME}-${BRANCH}"
+VIMTOOLS_HOME="${PWD}/.vim"
 
 echo_step() {
     echo -e "${LIGHT_PURPLE}$1${NO_COLOR}"
@@ -17,43 +22,57 @@ echo_warning() {
     echo -e "${LIGHT_YELLOW}WARNING: $1${NO_COLOR}"
 }
 
-fetch_vimtools() {
-    local archive="${REPOSITORY_NAME}-${BRANCH}.zip"
-    local inflated="${REPOSITORY_NAME}-${BRANCH}"
-    local vim_directory=".vim"
-    local test_filename="${vim_directory}/tests.sh"
-
-    echo_step "[Step 1] - Downloading ${archive}..."
-    curl -L https://github.com/dsw7/${REPOSITORY_NAME}/archive/${BRANCH}.zip --output $archive --fail
+download_zip_archive() {
+    echo_step "[Step 1] - Downloading ${FILENAME_ZIP_ARCHIVE}..."
+    curl -L https://github.com/dsw7/${REPOSITORY_NAME}/archive/${BRANCH}.zip --output $FILENAME_ZIP_ARCHIVE --fail
     if [ $? -ne 0 ]
     then
         echo_error "Failed to fetch VimTools!"
         return
     fi
     echo
+}
 
-    echo_step "[Step 2] - Inflating ${archive}..."
-    unzip -o ${archive}
+unzip_archive() {
+    echo_step "[Step 2] - Inflating ${FILENAME_ZIP_ARCHIVE}..."
+    unzip -o ${FILENAME_ZIP_ARCHIVE}
     echo
+}
 
-    echo_step "[Step 3] - Remove existing $vim_directory directory..."
-    if [ -d $vim_directory ]
+remove_existing_vim_directory() {
+    echo_step "[Step 3] - Remove existing $VIMTOOLS_HOME directory..."
+    if [ -d $VIMTOOLS_HOME ]
     then
-        rm -rfv $vim_directory
+        rm -rfv $VIMTOOLS_HOME
     else
-        echo_warning "No existing $vim_directory directory found!"
+        echo_warning "No existing $VIMTOOLS_HOME directory found!"
     fi
     echo
+}
 
+rename_inflated_directory() {
     echo_step "[Step 4] - Rename inflated directory..."
-    mv -v $inflated $vim_directory
+    mv -v $FILENAME_INFLATED $VIMTOOLS_HOME
     echo
+}
 
+cleanup_files() {
     echo_step "[Step 5] - Clean up any remaining files..."
-    rm -v $archive
+    rm -v $FILENAME_ZIP_ARCHIVE
     echo
+}
 
+run_all_tests() {
     echo_step "[Step 6] - Run tests..."
-    python3 -m unittest discover --start-directory ${vim_directory}/test -v
+    python3 -m unittest discover --start-directory ${VIMTOOLS_HOME}/test -v
     echo
+}
+
+fetch_vimtools() {
+    download_zip_archive
+    unzip_archive
+    remove_existing_vim_directory
+    rename_inflated_directory
+    cleanup_files
+    run_all_tests
 }
