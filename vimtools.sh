@@ -51,7 +51,7 @@ remove_existing_runtime_directory() {
     echo_step "[Step 3] - Remove existing $USER_RUNTIME_DIRECTORY runtime directory..."
     if [ -d $USER_RUNTIME_DIRECTORY ]
     then
-        rm -rfv $USER_RUNTIME_DIRECTORY
+        rm -rv $USER_RUNTIME_DIRECTORY
         if [ $? -ne 0 ]
         then
             echo_error "Failed to remove ${USER_RUNTIME_DIRECTORY}!"
