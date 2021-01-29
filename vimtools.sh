@@ -1,5 +1,7 @@
 BRANCH="master"
 
+EXIT_FAILURE=1
+
 LIGHT_PURPLE="\033[1;35m"
 LIGHT_RED="\033[1;31m"
 LIGHT_YELLOW="\033[1;33m"
@@ -29,7 +31,7 @@ download_zip_archive() {
     if [ $? -ne 0 ]
     then
         echo_error "Failed to fetch VimTools!"
-        return
+        exit $EXIT_FAILURE
     fi
     echo
 }
@@ -37,6 +39,11 @@ download_zip_archive() {
 unzip_archive() {
     echo_step "[Step 2] - Inflating ${FILENAME_ZIP_ARCHIVE}..."
     unzip -o ${FILENAME_ZIP_ARCHIVE}
+    if [ $? -ne 0 ]
+    then
+        echo_error "Failed to unzip ${FILENAME_ZIP_ARCHIVE}!"
+        exit $EXIT_FAILURE
+    fi
     echo
 }
 
@@ -45,6 +52,11 @@ remove_existing_runtime_directory() {
     if [ -d $USER_RUNTIME_DIRECTORY ]
     then
         rm -rfv $USER_RUNTIME_DIRECTORY
+        if [ $? -ne 0 ]
+        then
+            echo_error "Failed to remove ${USER_RUNTIME_DIRECTORY}!"
+            exit $EXIT_FAILURE
+        fi
     else
         echo_warning "No existing $USER_RUNTIME_DIRECTORY directory found!"
     fi
@@ -54,18 +66,32 @@ remove_existing_runtime_directory() {
 rename_inflated_directory() {
     echo_step "[Step 4] - Rename inflated directory..."
     mv -v $FILENAME_INFLATED $USER_RUNTIME_DIRECTORY
+    if [ $? -ne 0 ]
+    then
+        echo_error "Failed to rename $FILENAME_INFLATED to ${USER_RUNTIME_DIRECTORY}!"
+        exit $EXIT_FAILURE
+    fi
     echo
 }
 
 cleanup_files() {
     echo_step "[Step 5] - Clean up any remaining files..."
     rm -v $FILENAME_ZIP_ARCHIVE
+    if [ $? -ne 0 ]
+    then
+        echo_warning "Failed to clean up one or more remaining files!"
+    fi
     echo
 }
 
 run_all_tests() {
     echo_step "[Step 6] - Run tests..."
     python3 -m unittest discover --start-directory ${USER_RUNTIME_DIRECTORY}/tests -v
+    if [ $? -ne 0 ]
+    then
+        echo_warning "One or more tests failed!"
+        exit $EXIT_FAILURE
+    fi
     echo
 }
 
