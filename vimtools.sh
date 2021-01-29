@@ -1,5 +1,4 @@
 BRANCH="master"
-
 EXIT_FAILURE=1
 
 LIGHT_PURPLE="\033[1;35m"
