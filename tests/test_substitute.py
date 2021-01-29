@@ -13,7 +13,7 @@ from utils.primitives import (
 )
 
 
-class TestSubCommand(TestCase):
+class TestSub(TestCase):
     def setUp(self):
         input_string = """\
         foo bar baz
