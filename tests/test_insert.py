@@ -36,7 +36,7 @@ class TestIns(TestCase):
         foo bar baz
         """
         with open(FILENAME_EXPECTED, 'w') as f:
-            f.write(expected_string)
+            f.write(dedent(expected_string))
 
         command = f'vim -es -c ":Ins # 1 2" -c "wq" {FILENAME_ACTUAL}'
         write_executable_command_file(command, TEMPORARY_COMMAND_FILE)
@@ -53,9 +53,9 @@ class TestIns(TestCase):
         //foo bar baz
         """
         with open(FILENAME_EXPECTED, 'w') as f:
-            f.write(expected_string)
+            f.write(dedent(expected_string))
 
-        command = f'vim -es -c ":Ins \/\/ 1 2" -c "wq" {FILENAME_ACTUAL}'
+        command = f'vim -es -c ":Ins \/\/ 2 3" -c "wq" {FILENAME_ACTUAL}'
         write_executable_command_file(command, TEMPORARY_COMMAND_FILE)
 
         call(TEMPORARY_COMMAND_FILE)
