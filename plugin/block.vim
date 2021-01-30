@@ -6,6 +6,11 @@ function s:IsValidRange(start_line, end_line)
         let exit_status = 0
     endif
 
+    if a:start_line > a:end_line
+        echoerr "Start line cannot exceed end line!"
+        let exit_status = 0
+    endif
+
     return exit_status
 endfunction
 
@@ -34,6 +39,7 @@ endfunction
 function Block(input_filename, start_line, end_line) abort
     let start_line = str2nr(a:start_line)
     let end_line = str2nr(a:end_line)
+    let offset = end_line - start_line + 1 " Note that vimscript automatically coerces str to int
 
     if !s:IsValidRange(start_line, end_line)
         return
@@ -47,11 +53,10 @@ function Block(input_filename, start_line, end_line) abort
         return
     endif
 
-    let offset = end_line - start_line + 1 " Note that vimscript automatically coerces str to int
     let block = "head -n " . a:end_line . " " . a:input_filename . " | tail -n " . offset
     echo "Running command: " . block
-    let stdout = split(system(block), "\n")
 
+    let stdout = split(system(block), "\n")
     call add(stdout, "")
     call append('.', stdout)
 
