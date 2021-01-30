@@ -8,19 +8,6 @@ function s:ErrorMsgHeader()
     echohl None
 endfunction
 
-function s:ReplaceHelp()
-    " Deprecated function - move this to help docs
-    call s:ErrorMsgHeader()
-    echo "Usage:"
-    echo "  1. Search for <foo> using Shift + 3 or /"
-    echo "  2. Type :S <bar>"
-    echo "This will replace all occurrences of <foo> with <bar>"
-    echo "A range of lines can also be specified:"
-    echo "  1. Search for <foo> using Shift + 3 or /"
-    echo "  2. Type :S <bar> <start-line> <end-line>"
-    echo "This will replace all occurrences of <foo> with <bar> between <start-line> and <end-line>"
-endfunction
-
 function s:ReplaceInAllFilesHelp()
     call s:ErrorMsgHeader()
     echo "Valid syntax follows:"
@@ -95,25 +82,6 @@ endfunction
 " --------------------------------------------------------------
 " PUBLIC FUNCTIONS
 " --------------------------------------------------------------
-function Replace(output, ...)
-    if a:0 == 0        " Replace whatever is in / register throughout file
-        execute '%s/' . escape(getreg('/'), '/') . '/' . a:output . '/g'
-    elseif a:0 == 1    " Replace whatever is in / register on line start_line
-        let start_line = str2nr(a:1)
-        execute start_line . 's/' . escape(getreg('/'), '/') . '/' . a:output . '/g'
-    elseif a:0 == 2    " Replace whatever is in / between lines start_line and end_line
-        let start_line = str2nr(a:1)
-        let end_line = str2nr(a:2)
-        if start_line <= end_line
-            execute start_line . ',' . end_line . 's/' . escape(getreg('/'), '/') . '/' . a:output . '/g'
-        else
-            call s:LineError()
-        endif
-    else
-        call s:ReplaceHelp()
-    endif
-endfunction
-
 function ReplaceInAllFiles(input, output, scope)
     if a:scope == '*'
         arg *                " add all files in current directory
