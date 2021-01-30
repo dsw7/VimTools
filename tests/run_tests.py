@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import sys
 from os import path
 from unittest import (
@@ -12,6 +11,9 @@ EXIT_FAILURE = 1
 
 def main():
     test_directory = path.dirname(__file__)
+    realpath = path.realpath(test_directory)
+
+    print(f'Running tests in directory: {realpath}')
     test_filenames = 'test_*'
 
     suite = TestLoader().discover(
