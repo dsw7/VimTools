@@ -85,7 +85,10 @@ cleanup_files() {
 
 run_all_tests() {
     echo_step "[Step 6] - Run tests..."
-    python3 -m unittest discover --start-directory ${USER_RUNTIME_DIRECTORY}/tests -v
+    local test_runner=${USER_RUNTIME_DIRECTORY}/tests/run_tests.py
+    chmod +x $test_runner
+    ./$test_runner
+    #python3 -m unittest discover --start-directory ${USER_RUNTIME_DIRECTORY}/tests -v
     if [ $? -ne 0 ]
     then
         echo_warning "One or more tests failed!"
