@@ -21,59 +21,6 @@ function s:InsertHelp()
     echo ":Ins <foo> <start-line> <end-line>"
 endfunction
 
-function s:DeleteHelp()
-    " Deprecated function - move this to help docs
-    call s:ErrorMsgHeader()
-    echo "Valid syntax follows:"
-    echo ":Del <start-line> <end-line>"
-endfunction
-
-function s:IndentHelp()
-    " Deprecated function - move this to help docs
-    call s:ErrorMsgHeader()
-    echo "Valid syntax follows:"
-    echo ":Ind <start-line> <end-line>"
-endfunction
-
-function s:CopyHelp()
-    " Deprecated function - move this to help docs
-    call s:ErrorMsgHeader()
-    echo "Valid syntax follows:"
-    echo ":Cp <start-line> <end-line> <destination-line>"
-endfunction
-
-function s:RemoveWhiteSpaceHelp()
-    " Deprecated function - move this to help docs
-    call s:ErrorMsgHeader()
-    echo "Function takes no arguments."
-endfunction
-
-function s:RemoveWhiteSpaceBeforeLineHelp()
-    " Deprecated function - move this to help docs
-    call s:ErrorMsgHeader()
-    echo "Valid syntax follows:"
-    echo ":Wl <start-line> <end-line>"
-endfunction
-
-function s:MoveHelp()
-    " Deprecated function - move this to help docs
-    call s:ErrorMsgHeader()
-    echo "Valid syntax follows:"
-    echo ":Mv <start-line> <end-line> <destination-line>"
-endfunction
-
-function s:PasteHelp()
-    " Deprecated function - move this to help docs
-    call s:ErrorMsgHeader()
-    echo "Function takes no arguments."
-endfunction
-
-function s:HelpHelp()
-    " Deprecated function - move this to help docs
-    call s:ErrorMsgHeader()
-    echo "Function takes no arguments."
-endfunction
-
 function s:LineError()
     call s:ErrorMsgHeader()
     echo "The <start-line> value must not exceed the <end-line> value."
