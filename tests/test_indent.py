@@ -45,3 +45,20 @@ class TestInd(TestCase):
         self.assertTrue(
             filecmp.cmp(FILENAME_ACTUAL, FILENAME_EXPECTED)
         )
+
+    def test_ind_multiple_tabs(self):
+        expected_string = """\
+                    foo bar baz
+                    foo bar baz
+        foo bar baz
+        """
+        with open(FILENAME_EXPECTED, 'w') as f:
+            f.write(dedent(expected_string))
+
+        command = f'vim -es -c ":Ind 1 2 3" -c "wq" {FILENAME_ACTUAL}'
+        write_executable_command_file(command, TEMPORARY_COMMAND_FILE)
+
+        call(TEMPORARY_COMMAND_FILE)
+        self.assertTrue(
+            filecmp.cmp(FILENAME_ACTUAL, FILENAME_EXPECTED)
+        )
