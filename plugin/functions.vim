@@ -8,19 +8,6 @@ function s:ErrorMsgHeader()
     echohl None
 endfunction
 
-function s:ReplaceInAllFilesHelp()
-    call s:ErrorMsgHeader()
-    echo "Valid syntax follows:"
-    echo ":SubAll <foo> <bar> <*|**>"
-endfunction
-
-function s:InsertHelp()
-    call s:ErrorMsgHeader()
-    echo "Valid syntax follows:"
-    echo ":Ins <foo>"
-    echo ":Ins <foo> <start-line> <end-line>"
-endfunction
-
 function s:LineError()
     call s:ErrorMsgHeader()
     echo "The <start-line> value must not exceed the <end-line> value."
@@ -29,35 +16,12 @@ endfunction
 " --------------------------------------------------------------
 " PUBLIC FUNCTIONS
 " --------------------------------------------------------------
-function ReplaceInAllFiles(input, output, scope)
-    if a:scope == '*'
-        arg *                " add all files in current directory
-        argdo execute '%s/' . a:input . '/' . a:output. '/ge' | update
-    elseif a:scope == '**'   " add all files in current and sub directories
-        arg **
-        argdo execute '%s/' . a:input . '/' . a:output. '/ge' | update
-    else
-        call s:ReplaceInAllFilesHelp()
-    endif
-endfunction
-
 function Delete(start_line, end_line)
     let start_line = str2nr(a:start_line)
     let end_line = str2nr(a:end_line)
 
     if start_line <= end_line
         execute start_line . ',' . end_line . 'd'
-    else
-        call s:LineError()
-    endif
-endfunction
-
-function Indent(start_line, end_line)
-    let start_line = str2nr(a:start_line)
-    let end_line = str2nr(a:end_line)
-
-    if start_line <= end_line
-        execute start_line . ',' . end_line . 's/^/    /g'
     else
         call s:LineError()
     endif
@@ -102,7 +66,6 @@ function Help()
     echo ":Del    -> Delete between a range of lines"
     echo ":Ins    -> Insert a delimiter at beginning of lines"
     echo ":S      -> Replace a string in current file"
-    echo ":SubAll -> Replace a string in many files"
     echo ":Mv     -> Move a block of text"
     echo ":Paste  -> Paste a block of text from system clipboard"
     echo ":Col    -> Toggle cursorcolumn"
