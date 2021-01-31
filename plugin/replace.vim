@@ -17,9 +17,9 @@ function Replace(replacement, ...)
     if a:0 == 0
         call s:ReplaceGlobally(a:replacement)
     elseif a:0 == 1
-        call s:ReplaceOnOneLine(a:replacement, str2nr(a:1))
+        call s:ReplaceOnOneLine(a:replacement, a:1)
     elseif a:0 == 2
-        call s:ReplaceBetweenLines(a:replacement, str2nr(a:1), str2nr(a:2))
+        call s:ReplaceBetweenLines(a:replacement, a:1, a:2)
     else
         echoerr "Too many arguments given!"
     endif

@@ -80,3 +80,38 @@ class TestSubTwoDigitRanges(TestCase):
         self.assertTrue(
             filecmp.cmp(FILENAME_ACTUAL, FILENAME_EXPECTED)
         )
+
+    def test_sub_between_lines(self):
+        expected_string = """\
+        foo bar baz
+        foo bar baz
+        foo bar baz
+        foo bar baz
+        foo bar baz
+        foo bar baz
+        foo bar baz
+        foo bar baz
+        foo bar baz
+        foo bar baz
+        foo bar baz
+        foo bar baz
+        foo bar baz
+        foo bar baz
+        foo bar baz
+        cat bar baz
+        cat bar baz
+        cat bar baz
+        cat bar baz
+        cat bar baz
+        """
+
+        with open(FILENAME_EXPECTED, 'w') as f:
+            f.write(dedent(expected_string))
+
+        command = f'vim -es -c "/foo" -c ":S cat 16 20" -c "wq" {FILENAME_ACTUAL}'
+        write_executable_command_file(command, TEMPORARY_COMMAND_FILE)
+
+        call(TEMPORARY_COMMAND_FILE)
+        self.assertTrue(
+            filecmp.cmp(FILENAME_ACTUAL, FILENAME_EXPECTED)
+        )
