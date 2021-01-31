@@ -26,10 +26,17 @@ USAGE INSTRUCTIONS                                              *vimtools-usage*
                  : -> `:Cp` `2` `5` `7`
 
 5. *Ind*
-    {Description}: Indent by 4 spaces between a set of line numbers
+    {Description}: Indent by a set number of tabs between a set of line numbers
+
+       {Scenario}: Indent by 4 spaces
           {Usage}: `Ind` <start-line> <end-line>
         {Example}: Indent a function between lines 2 and 5
                  : -> `:Ind` `2` `5`
+
+       {Scenario}: Indent by more than 4 spaces
+          {Usage}: `Ind` <start-line> <end-line> <number-tabs>
+        {Example}: Indent between lines 2 and 5 by 12 spaces (3 tabs)
+                 : -> `:Ind` `2` `5` `3`
 
 6. *Del*
     {Description}: Delete lines between a set of line numbers
