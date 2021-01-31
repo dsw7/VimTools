@@ -39,7 +39,11 @@ endfunction
 function Block(input_filename, start_line, end_line) abort
     let start_line = str2nr(a:start_line)
     let end_line = str2nr(a:end_line)
-    let offset = end_line - start_line + 1 " Note that vimscript automatically coerces str to int
+
+    " Note that vimscript automatically coerces str to int
+    " This is why we have to str2nr start and end lines in advance
+    " This arithmetic would otherwise return weird results
+    let offset = end_line - start_line + 1
 
     if !s:IsValidRange(start_line, end_line)
         return
