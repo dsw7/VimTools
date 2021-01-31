@@ -1,10 +1,13 @@
-function Indent(start_line, end_line)
-    let start_line = str2nr(a:start_line)
-    let end_line = str2nr(a:end_line)
+function s:IndentBySingleTab(start_line, end_line)
+    execute a:start_line . ',' . a:end_line . 's/^/    /g'
+endfunction
 
-    if start_line <= end_line
-        execute start_line . ',' . end_line . 's/^/    /g'
+function Indent(start_line, end_line, ...)
+    if a:0 == 0
+        call s:IndentBySingleTab(a:start_line, a:end_line)
+    elseif a:0 == 1
+        call s:IndentByMultipleTabs(a:start_line, a:end_line, a:1)
     else
-        call s:LineError()
+        echoerr 'Function takes only one additional argument'
     endif
 endfunction
