@@ -49,3 +49,6 @@ highlight Comment ctermfg=darkgrey
 
 " Disable line wrapping
 set nowrap
+
+" Disable swap files
+set noswapfile
