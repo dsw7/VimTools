@@ -21,6 +21,11 @@ class TestWl(TestCase):
             dolor
               sit
                 amet...
+        Lorem
+          ipsum
+            dolor
+              sit
+                amet...
         """
         with open(FILENAME_ACTUAL, 'w') as f:
             f.write(dedent(input_string))
@@ -37,11 +42,40 @@ class TestWl(TestCase):
         dolor
         sit
         amet...
+        Lorem
+          ipsum
+            dolor
+              sit
+                amet...
         """
         with open(FILENAME_EXPECTED, 'w') as f:
             f.write(dedent(expected_string))
 
         command = f'vim -es -c ":Wl 1 5" -c "wq" {FILENAME_ACTUAL}'
+        write_executable_command_file(command, TEMPORARY_COMMAND_FILE)
+
+        call(TEMPORARY_COMMAND_FILE)
+        self.assertTrue(
+            filecmp.cmp(FILENAME_ACTUAL, FILENAME_EXPECTED)
+        )
+
+    def test_remove_whitelines_two_digit_range(self):
+        expected_string = """\
+        Lorem
+          ipsum
+            dolor
+              sit
+                amet...
+        Lorem
+        ipsum
+        dolor
+        sit
+        amet...
+        """
+        with open(FILENAME_EXPECTED, 'w') as f:
+            f.write(dedent(expected_string))
+
+        command = f'vim -es -c ":Wl 6 10" -c "wq" {FILENAME_ACTUAL}'
         write_executable_command_file(command, TEMPORARY_COMMAND_FILE)
 
         call(TEMPORARY_COMMAND_FILE)
