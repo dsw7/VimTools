@@ -19,6 +19,13 @@ class TestIns(TestCase):
         foo bar baz
         foo bar baz
         foo bar baz
+        foo bar baz
+        foo bar baz
+        foo bar baz
+        foo bar baz
+        foo bar baz
+        foo bar baz
+        foo bar baz
         """
 
         with open(FILENAME_ACTUAL, 'w') as f:
@@ -34,6 +41,13 @@ class TestIns(TestCase):
         #foo bar baz
         #foo bar baz
         foo bar baz
+        foo bar baz
+        foo bar baz
+        foo bar baz
+        foo bar baz
+        foo bar baz
+        foo bar baz
+        foo bar baz
         """
         with open(FILENAME_EXPECTED, 'w') as f:
             f.write(dedent(expected_string))
@@ -46,11 +60,42 @@ class TestIns(TestCase):
             filecmp.cmp(FILENAME_ACTUAL, FILENAME_EXPECTED)
         )
 
+    def test_comment_out_python_two_digit_range(self):
+        expected_string = """\
+        foo bar baz
+        foo bar baz
+        foo bar baz
+        foo bar baz
+        foo bar baz
+        #foo bar baz
+        #foo bar baz
+        #foo bar baz
+        #foo bar baz
+        #foo bar baz
+        """
+        with open(FILENAME_EXPECTED, 'w') as f:
+            f.write(dedent(expected_string))
+
+        command = f'vim -es -c ":Ins # 6 10" -c "wq" {FILENAME_ACTUAL}'
+        write_executable_command_file(command, TEMPORARY_COMMAND_FILE)
+
+        call(TEMPORARY_COMMAND_FILE)
+        self.assertTrue(
+            filecmp.cmp(FILENAME_ACTUAL, FILENAME_EXPECTED)
+        )
+
     def test_comment_out_cpp(self):
         expected_string = """\
         foo bar baz
         //foo bar baz
         //foo bar baz
+        foo bar baz
+        foo bar baz
+        foo bar baz
+        foo bar baz
+        foo bar baz
+        foo bar baz
+        foo bar baz
         """
         with open(FILENAME_EXPECTED, 'w') as f:
             f.write(dedent(expected_string))
