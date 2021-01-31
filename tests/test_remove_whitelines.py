@@ -60,6 +60,9 @@ class TestWl(TestCase):
         )
 
     def test_remove_whitelines_two_digit_range(self):
+        # This test ensures that a range 6 - 10 is not coerced to a range
+        # 6 - 1 by Vimscript
+
         expected_string = """\
         Lorem
           ipsum
