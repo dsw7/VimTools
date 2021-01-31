@@ -3,7 +3,8 @@ function s:IndentBySingleTab(start_line, end_line)
 endfunction
 
 function s:IndentByMultipleTabs(start_line, end_line, count)
-    execute a:start_line . ',' . a:end_line . 's/^/' . repeat('    ', str2nr(a:count)) . '/g'
+    let tabs = repeat('    ', str2nr(a:count))
+    execute a:start_line . ',' . a:end_line . 's/^/' . tabs . '/g'
 endfunction
 
 function Indent(start_line, end_line, ...)
