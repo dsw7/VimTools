@@ -2,6 +2,10 @@ function s:IndentBySingleTab(start_line, end_line)
     execute a:start_line . ',' . a:end_line . 's/^/    /g'
 endfunction
 
+function s:IndentByMultipleTabs(start_line, end_line, count)
+    execute a:start_line . ',' . a:end_line . 's/^/' . repeat('    ', str2nr(a:count)) . '/g'
+endfunction
+
 function Indent(start_line, end_line, ...)
     if a:0 == 0
         call s:IndentBySingleTab(a:start_line, a:end_line)
