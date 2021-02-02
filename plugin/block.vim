@@ -36,7 +36,15 @@ function s:IsValidEndLine(end_line, filename)
     return exit_status
 endfunction
 
-function Block(input_filename, start_line, end_line) abort
+function s:ResolvePathType(path)
+    let path_to_file = a:path
+    if a:path[0] != '/'
+        path_to_file = getcwd() . '/' . a:path
+    endif
+    return path_to_file
+
+function Block(path_to_file, start_line, end_line) abort
+    let path_to_file = s:ResolvePathType(a:path_to_file)
     let start_line = str2nr(a:start_line)
     let end_line = str2nr(a:end_line)
 
@@ -49,15 +57,15 @@ function Block(input_filename, start_line, end_line) abort
         return
     endif
 
-    if !s:FileExists(a:input_filename)
+    if !s:FileExists(path_to_file)
         return
     endif
 
-    if !s:IsValidEndLine(end_line, a:input_filename)
+    if !s:IsValidEndLine(end_line, path_to_file)
         return
     endif
 
-    let block = "head -n " . a:end_line . " " . a:input_filename . " | tail -n " . offset
+    let block = "head -n " . a:end_line . " " . path_to_file . " | tail -n " . offset
     echo "Running command: " . block
 
     let stdout = split(system(block), "\n")
