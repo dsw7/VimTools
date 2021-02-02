@@ -44,7 +44,7 @@ function s:ResolvePathType(path)
     return path_to_file
 endfunction
 
-function Block(path_to_file, start_line, end_line) abort
+function Block(path_to_file, start_line, end_line) 
     let path_to_file = s:ResolvePathType(a:path_to_file)
     let start_line = str2nr(a:start_line)
     let end_line = str2nr(a:end_line)
