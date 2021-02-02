@@ -42,6 +42,7 @@ function s:ResolvePathType(path)
         path_to_file = getcwd() . '/' . a:path
     endif
     return path_to_file
+endfunction
 
 function Block(path_to_file, start_line, end_line) abort
     let path_to_file = s:ResolvePathType(a:path_to_file)
