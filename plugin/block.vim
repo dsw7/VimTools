@@ -39,12 +39,12 @@ endfunction
 function s:ResolvePathType(path)
     let path_to_file = a:path
     if a:path[0] != '/'
-        path_to_file = getcwd() . '/' . a:path
+        let path_to_file = getcwd() . '/' . a:path
     endif
     return path_to_file
 endfunction
 
-function Block(path_to_file, start_line, end_line) 
+function Block(path_to_file, start_line, end_line)
     let path_to_file = s:ResolvePathType(a:path_to_file)
     let start_line = str2nr(a:start_line)
     let end_line = str2nr(a:end_line)
