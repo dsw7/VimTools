@@ -88,7 +88,7 @@ USAGE INSTRUCTIONS                                              *vimtools-usage*
 12. *Block*
     {Description}: Copy the contents of some external file between a set of lines
                  to current cursor position
-          {Usage}: `Block` <filepath> <start-line> <end-line>
+          {Usage}: `Block` <relative-or-absolute-path> <start-line> <end-line>
         {Example}: Copy a function from /tmp/foo.cpp on lines 5-10 to the
                  current cursor position
                  : -> `:Block` `/tmp/foo.cpp` `5` `10`
