@@ -13,12 +13,17 @@ function s:ReplaceBetweenLines(replacement, start_line, end_line)
     execute a:start_line . ',' . a:end_line . 's/' . escape(getreg('/'), '/') . '/' . a:replacement . '/g'
 endfunction
 
+" Replace whatever is in / register from line 1 to specific line
+function s:ReplaceFromStartToLine(replacement, end_line)
+    execute '1,' . a:end_line . 's/' . escape(getreg('/'), '/') . '/' . a:replacement . '/g'
+endfunction
+
 function Replace(replacement, ...)
     if a:0 == 0
         call s:ReplaceGlobally(a:replacement)
     elseif a:0 == 1
         if a:1[0] == ":"
-            echo "start"
+            call s:ReplaceFromStartToLine(a:replacement, a:1[1:-1])
         elseif a:1[-1:] == ":"
             echo "end"
         else
