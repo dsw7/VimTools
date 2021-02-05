@@ -71,6 +71,18 @@ USAGE INSTRUCTIONS                                              *vimtools-usage*
                  : -> `:/foo`
                  : -> `:S` `bar` `2` `5`
 
+       {Scenario}: Replace from start of file to specific line
+          {Usage}: `/`<pattern> -> `S` <new-string> :<line>
+        {Example}: Replace "foo" with "bar" up to line 5
+                 : -> `:/foo`
+                 : -> `:S` `bar` `:5`
+
+       {Scenario}: Replace from specific line to end of file
+          {Usage}: `/`<pattern> -> `S` <new-string> <line>:
+        {Example}: Replace "foo" with "bar" from line 5 to end of file
+                 : -> `:/foo`
+                 : -> `:S` `bar` `5:`
+
 9. *Mv*
     {Description}: Drag a set of lines to some new line
           {Usage}: `Mv` <start-line> <end-line> <destination-line>
