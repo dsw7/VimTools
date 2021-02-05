@@ -18,6 +18,11 @@ function s:ReplaceFromStartToLine(replacement, end_line)
     execute '1,' . a:end_line . 's/' . escape(getreg('/'), '/') . '/' . a:replacement . '/g'
 endfunction
 
+" Replace whatever is in / register from specific line to last line in file
+function s:ReplaceFromLineToEndOfFile(replacement, start_line)
+    execute a:start_line . ',$s/' . escape(getreg('/'), '/') . '/' . a:replacement . '/g'
+endfunction
+
 function Replace(replacement, ...)
     if a:0 == 0
         call s:ReplaceGlobally(a:replacement)
@@ -25,7 +30,7 @@ function Replace(replacement, ...)
         if a:1[0] == ":"
             call s:ReplaceFromStartToLine(a:replacement, a:1[1:-1])
         elseif a:1[-1:] == ":"
-            echo "end"
+            call s:ReplaceFromLineToEndOfFile(a:replacement, a:1[0:-2])
         else
             call s:ReplaceOnOneLine(a:replacement, a:1)
         endif
