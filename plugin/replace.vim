@@ -17,7 +17,13 @@ function Replace(replacement, ...)
     if a:0 == 0
         call s:ReplaceGlobally(a:replacement)
     elseif a:0 == 1
-        call s:ReplaceOnOneLine(a:replacement, a:1)
+        if a:1[0] == ":"
+            echo "start"
+        elseif a:1[-1:] == ":"
+            echo "end"
+        else
+            call s:ReplaceOnOneLine(a:replacement, a:1)
+        endif
     elseif a:0 == 2
         call s:ReplaceBetweenLines(a:replacement, a:1, a:2)
     else
