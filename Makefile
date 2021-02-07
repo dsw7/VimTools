@@ -36,6 +36,7 @@ define unzip_archive
     @unzip -o $(FILENAME_ZIP_ARCHIVE)
 endef
 
+# XXX use makefile conditional instead of shell conditional here
 define remove_existing_runtime_directory
     $(call echo_step,Remove $(USER_RUNTIME_DIRECTORY) runtime directory if exists)
     if [ -d $(USER_RUNTIME_DIRECTORY) ]; then rm -rv $(USER_RUNTIME_DIRECTORY); fi
