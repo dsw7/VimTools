@@ -4,15 +4,15 @@ GIT_URL_VIMTOOLS = https://github.com/dsw7/$(GIT_REPOSITORY_NAME)/archive/$(GIT_
 FILENAME_ZIP_ARCHIVE = $(GIT_REPOSITORY_NAME)-$(GIT_BRANCH).zip
 FILENAME_INFLATED = $(GIT_REPOSITORY_NAME)-$(GIT_BRANCH)
 USER_RUNTIME_DIRECTORY = $(PWD)/.vim
-TEST_RUNNER = $(USER_RUNTIME_DIRECTORY)/tests/run_tests.py
+PATH_PYTHON_UNITTEST_RUNNER = $(USER_RUNTIME_DIRECTORY)/tests/run_tests.py
 
-LIGHT_PURPLE = "\033[1;35m"
+LIGHT_PURPLE = "\033[4;1;35m"
 LIGHT_RED = "\033[1;31m"
 LIGHT_YELLOW = "\033[1;33m"
 NO_COLOR = "\033[0m"
 
 define echo_step
-	@echo -e $(LIGHT_PURPLE)[$(1)]$(NO_COLOR)
+	@echo -e $(LIGHT_PURPLE)$(1)$(NO_COLOR)
 endef
 
 define echo_error
@@ -25,7 +25,10 @@ endef
 
 define download_zip_archive
     $(call echo_step,Downloading $(FILENAME_ZIP_ARCHIVE))
+	@echo Using branch: $(GIT_BRANCH)
+	@echo Querying URL: $(GIT_URL_VIMTOOLS)
     @curl -L $(GIT_URL_VIMTOOLS) --output $(FILENAME_ZIP_ARCHIVE) --fail
+	@echo Repository will be dumped to: $(FILENAME_ZIP_ARCHIVE)
 endef
 
 define unzip_archive
@@ -50,8 +53,8 @@ endef
 
 define run_all_tests
     $(call echo_step,Run all unit tests)
-    @chmod +x $(TEST_RUNNER)
-	@$(TEST_RUNNER)
+    @chmod +x $(PATH_PYTHON_UNITTEST_RUNNER)
+	@$(PATH_PYTHON_UNITTEST_RUNNER)
 endef
 
 all: install run-tests
