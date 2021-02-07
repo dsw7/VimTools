@@ -1,8 +1,8 @@
-BRANCH = master
-REPOSITORY_NAME = VimTools
-GIT_URL_VIMTOOLS = https://github.com/dsw7/$(REPOSITORY_NAME)/archive/$(BRANCH).zip
-FILENAME_ZIP_ARCHIVE = $(REPOSITORY_NAME)-$(BRANCH).zip
-FILENAME_INFLATED = $(REPOSITORY_NAME)-$(BRANCH)
+GIT_BRANCH = master
+GIT_REPOSITORY_NAME = VimTools
+GIT_URL_VIMTOOLS = https://github.com/dsw7/$(GIT_REPOSITORY_NAME)/archive/$(GIT_BRANCH).zip
+FILENAME_ZIP_ARCHIVE = $(GIT_REPOSITORY_NAME)-$(GIT_BRANCH).zip
+FILENAME_INFLATED = $(GIT_REPOSITORY_NAME)-$(GIT_BRANCH)
 USER_RUNTIME_DIRECTORY = $(PWD)/.vim
 TEST_RUNNER = $(USER_RUNTIME_DIRECTORY)/tests/run_tests.py
 
@@ -54,6 +54,8 @@ define run_all_tests
 	@$(TEST_RUNNER)
 endef
 
+all: install run-tests
+
 install:
 	$(call download_zip_archive)
 	$(call unzip_archive)
@@ -62,12 +64,4 @@ install:
 	$(call cleanup_files)
 
 run-tests:
-	$(call run_all_tests)
-
-install-test:
-	$(call download_zip_archive)
-	$(call unzip_archive)
-	$(call remove_existing_runtime_directory)
-	$(call rename_inflated_directory)
-	$(call cleanup_files)
 	$(call run_all_tests)
