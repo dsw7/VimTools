@@ -23,49 +23,33 @@ define echo_warning
     @echo -e $(LIGHT_YELLOW)WARNING: $(1)$(NO_COLOR)
 endef
 
-define download_zip_archive
-    $(call echo_step,Downloading $(FILENAME_ZIP_ARCHIVE))
-	@echo Using branch: $(GIT_BRANCH)
-	@echo Querying URL: $(GIT_URL_VIMTOOLS)
-    @curl -L $(GIT_URL_VIMTOOLS) --output $(FILENAME_ZIP_ARCHIVE) --fail
-	@echo Repository will be dumped to: $(FILENAME_ZIP_ARCHIVE)
-endef
-
-define unzip_archive
-    $(call echo_step,Inflating $(FILENAME_ZIP_ARCHIVE))
-    @unzip -o $(FILENAME_ZIP_ARCHIVE)
-endef
-
-# XXX use makefile conditional instead of shell conditional here
-define remove_existing_runtime_directory
-    $(call echo_step,Remove $(USER_RUNTIME_DIRECTORY) runtime directory if exists)
-    if [ -d $(USER_RUNTIME_DIRECTORY) ]; then rm -rv $(USER_RUNTIME_DIRECTORY); fi
-endef
-
-define rename_inflated_directory
-    $(call echo_step,Rename inflated directory)
-    @mv -v $(FILENAME_INFLATED) $(USER_RUNTIME_DIRECTORY)
-endef
-
-define cleanup_files
-    $(call echo_step,Clean up any remaining files)
-    @rm -v $(FILENAME_ZIP_ARCHIVE)
-endef
-
-define run_all_tests
-    $(call echo_step,Run all unit tests)
-    @chmod +x $(PATH_PYTHON_UNITTEST_RUNNER)
-	@$(PATH_PYTHON_UNITTEST_RUNNER)
-endef
-
 all: install run-tests
 
 install:
-	$(call download_zip_archive)
-	$(call unzip_archive)
-	$(call remove_existing_runtime_directory)
-	$(call rename_inflated_directory)
-	$(call cleanup_files)
+	$(call echo_step,Downloading $(FILENAME_ZIP_ARCHIVE))
+	@echo Using branch: $(GIT_BRANCH)
+	@echo Querying URL: $(GIT_URL_VIMTOOLS)
+	@curl -L $(GIT_URL_VIMTOOLS) --output $(FILENAME_ZIP_ARCHIVE) --fail
+	@echo Repository will be dumped to: $(FILENAME_ZIP_ARCHIVE)
+
+	$(call echo_step,Inflating $(FILENAME_ZIP_ARCHIVE))
+	@unzip -o $(FILENAME_ZIP_ARCHIVE)
+
+	$(call echo_step,Removing $(USER_RUNTIME_DIRECTORY) runtime directory if exists)
+ifneq ($(wildcard $(USER_RUNTIME_DIRECTORY)/.),)
+	$(call echo_warning,Found existing $(USER_RUNTIME_DIRECTORY) user runtime directory. Removing it!)
+	@rm -rv $(USER_RUNTIME_DIRECTORY)
+else
+	@echo No existing $(USER_RUNTIME_DIRECTORY) found
+endif
+
+	$(call echo_step,Renamimg inflated directory)
+	@mv -v $(FILENAME_INFLATED) $(USER_RUNTIME_DIRECTORY)
+
+	$(call echo_step,Cleaning up any remaining files)
+	@rm -v $(FILENAME_ZIP_ARCHIVE)
 
 run-tests:
-	$(call run_all_tests)
+	$(call echo_step,Running all unit tests)
+	@chmod +x $(PATH_PYTHON_UNITTEST_RUNNER)
+	@$(PATH_PYTHON_UNITTEST_RUNNER)
