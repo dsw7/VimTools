@@ -5,12 +5,10 @@ This project is both set up and tested using `make`. To install the project:
 ```
 $ curl https://raw.githubusercontent.com/dsw7/VimTools/master/Makefile > Makefile && make
 ```
-The `vimtools.sh` script simply downloads a `.zip` archive of this project and unpacks it into `${PWD}/.vim`. **Warning: this will remove existing an existing .vim directory!** To make life a little easier, the contents of the `vimtools.sh` script can be appended to a `.bashrc` file and the latest VimTools package can obtained as follows:
-```
-cd
-source .bashrc
-fetch_vimtools
-```
+The `make (all)` target simply downloads a `.zip` archive of this project and unpacks it into `${PWD}/.vim`. **Warning: this will remove existing an existing .vim directory!**
+## Build targets
+The default target is `all` which wraps the following targets: `install` and `run-tests`.
+
 ## List of custom commands (implemented to date)
 ### S
 _Description_:  
