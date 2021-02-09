@@ -27,3 +27,8 @@ Open up a `vim` session and run:
 ```
 :help VimTools
 ```
+## Keeping the installation up to date
+I suggest setting an alias for running `make` in a `.bashrc` or `.bash_aliases` file. Having a `Makefile` in `~` is ugly however. A great bypass for this is to rename the `Makefile` and put it somewhere away from plain sight then set up the alias as follows:
+```
+alias fetch_vimtools="make -f /path/to/MakeVimTools"
+```
