@@ -2,6 +2,9 @@
 This repository contains the `.vim` directory that I use in my day to day programming, both professionally and leisurely.
 ## Table of Contents
 - [Setup](#setup)
+- [Build targets](#build-targets)
+- [Accessing the commands](#accessing-the-commands)
+- [Keeping the installation up to date](#keeping-the-installation-up-to-date)
 ## Setup
 This project is both set up and tested using `make`. To install the project:
 ```
