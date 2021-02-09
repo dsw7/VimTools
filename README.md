@@ -1,9 +1,9 @@
 # VimTools
 This repository contains the `.vim` directory that I use in my day to day programming, both professionally and leisurely.
 ## Setup
-I recommend grabbing the contents of the `vimtools.sh` file as follows:
+This project is both set up and tested using `make`. To install the project:
 ```
-$ curl https://raw.githubusercontent.com/dsw7/VimTools/master/vimtools.sh > vimtools.sh && source vimtools.sh && fetch_vimtools
+$ curl https://raw.githubusercontent.com/dsw7/VimTools/master/Makefile > Makefile && make
 ```
 The `vimtools.sh` script simply downloads a `.zip` archive of this project and unpacks it into `${PWD}/.vim`. **Warning: this will remove existing an existing .vim directory!** To make life a little easier, the contents of the `vimtools.sh` script can be appended to a `.bashrc` file and the latest VimTools package can obtained as follows:
 ```
