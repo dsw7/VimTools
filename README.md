@@ -22,3 +22,8 @@ This target runs unit tests under the `${PWD}/.vim/tests` directory. To run the 
 ```
 make run-tests
 ```
+## Accessing the commands
+Open up a `vim` session and run:
+```
+:help VimTools
+```
