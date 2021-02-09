@@ -8,8 +8,20 @@ $ curl https://raw.githubusercontent.com/dsw7/VimTools/master/Makefile > Makefil
 The `make (all)` target simply downloads a `.zip` archive of this project and unpacks it into `${PWD}/.vim`. **Warning: this will remove existing an existing .vim directory!**
 ## Build targets
 The default target is `all` which wraps the following targets: `install` and `run-tests`.
-### The `install` target
-
+### The `install` target:
+Run as follows:
+```
+make install
+```
+To download and unpack the VimTools project into `$PWD`. To download a specific branch:
+```
+make install GIT_BRANCH=<branch-name>
+```
+### The `run-tests` target:
+This target runs unit tests under the `${PWD}/.vim/tests` directory. To run the target:
+```
+make run-tests
+```
 ## List of custom commands (implemented to date)
 ### S
 _Description_:  
