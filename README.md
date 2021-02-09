@@ -4,6 +4,7 @@ This repository contains the `.vim` directory that I use in my day to day progra
 - [Setup](#setup)
 - [Build targets](#build-targets)
   - [The `install` target](#the-install-target)
+  - [The `run-tests` target](#the-run-tests-target)
 - [Accessing the commands](#accessing-the-commands)
 - [Keeping the installation up to date](#keeping-the-installation-up-to-date)
 ## Setup
