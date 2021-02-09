@@ -1,5 +1,7 @@
 # VimTools
 This repository contains the `.vim` directory that I use in my day to day programming, both professionally and leisurely.
+## Table of Contents
+- [Setup](#setup)
 ## Setup
 This project is both set up and tested using `make`. To install the project:
 ```
