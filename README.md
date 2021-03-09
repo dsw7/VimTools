@@ -39,3 +39,19 @@ I suggest setting an alias for running `make` in a `.bashrc` or `.bash_aliases` 
 ```
 alias fetch_vimtools="make -f /path/to/MakeVimTools"
 ```
+## Testing with Docker
+I am testing this project with Docker. To run tests with Docker, first make sure that Docker is installed. Then run:
+```
+cd /path/to/VimTools
+docker build -t vimtools-test-image .
+```
+This will generate a Debian based local Docker image. To actually test the product, run a Docker container based
+on the `vimtools-test-image` image:
+```
+docker run -it --name foobar --rm vimtools-test-image bash
+```
+Then run:
+```
+make
+```
+Inside the container.
