@@ -46,13 +46,7 @@ I am testing this project with Docker. To run tests with Docker, first make sure
 cd /path/to/VimTools
 docker build -t vimtools-test-image .
 ```
-This will generate a Debian based local Docker image. To actually test the product, run a Docker container based
-on the `vimtools-test-image` image:
+This will generate a Debian based local Docker image. To actually test the product, run the `vimtools-test-image` image:
 ```
-docker run -it --name foobar --rm vimtools-test-image bash
+docker run -it --name foobar --rm vimtools-test-image
 ```
-Then run:
-```
-make
-```
-Inside the container.
