@@ -17,4 +17,4 @@ WORKDIR /home/qa
 
 RUN curl https://raw.githubusercontent.com/dsw7/VimTools/master/Makefile > Makefile
 
-CMD make
+CMD ["make"]
