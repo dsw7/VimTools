@@ -12,12 +12,8 @@ vim
 RUN useradd -m qa
 USER qa
 
-# Running without -it does not set PWD
-# The PWD env var is needed for running the Makefile
-ENV PWD=/home/qa
-
 # All work will take place in qa home from this point on
-WORKDIR $PWD
+WORKDIR /home/qa
 
 RUN curl https://raw.githubusercontent.com/dsw7/VimTools/master/Makefile > Makefile
 
