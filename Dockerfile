@@ -13,7 +13,8 @@ RUN useradd -m qa
 USER qa
 
 # All work will take place in qa home from this point on
-WORKDIR /home/qa
+ENV PWD=/home/qa
+WORKDIR $PWD
 
 RUN curl https://raw.githubusercontent.com/dsw7/VimTools/master/Makefile > Makefile
 
