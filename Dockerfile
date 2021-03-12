@@ -1,12 +1,12 @@
 FROM debian
 
-RUN apt-get update
-RUN apt-get install -y \
-  curl \
-  make \
-  python3 \
-  unzip \
-  vim
+RUN apt-get update \
+apt-get install -y \
+curl \
+make \
+python3 \
+unzip \
+vim
 
 # System defaults to root user
 RUN useradd -m qa
