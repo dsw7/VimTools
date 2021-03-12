@@ -22,4 +22,4 @@ WORKDIR $PWD
 # Will need to rebuild image every time Makefile is changed
 RUN curl https://raw.githubusercontent.com/dsw7/VimTools/master/Makefile > Makefile
 
-CMD ["make"]
+CMD make
