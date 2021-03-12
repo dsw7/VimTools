@@ -19,4 +19,6 @@ ENV PWD=/home/qa
 # All work will take place in qa home from this point on
 WORKDIR $PWD
 
-CMD curl https://raw.githubusercontent.com/dsw7/VimTools/master/Makefile > Makefile && make
+RUN curl https://raw.githubusercontent.com/dsw7/VimTools/master/Makefile > Makefile
+
+CMD make
