@@ -44,9 +44,9 @@ alias fetch_vimtools="make -f /path/to/MakeVimTools"
 I am testing this project with Docker. To run tests with Docker, first make sure that Docker is installed. Then run:
 ```
 cd /path/to/VimTools
-docker build -t vimtools-test-image .
+docker build -t vimtools .
 ```
-This will generate a Debian based local Docker image. To actually test the product, run the `vimtools-test-image` image:
+This will generate a Debian based local Docker image. To actually test the product, run the `vimtools` image:
 ```
-docker run -it --name foobar --rm vimtools-test-image
+docker run -it --rm -v $(pwd)/:/root/.vim vimntools
 ```
