@@ -48,5 +48,5 @@ docker build -t vimtools .
 ```
 This will generate a Debian based local Docker image. To actually test the product, run the `vimtools` image:
 ```
-docker run -it --rm -v $(pwd)/:/root/.vim vimntools
+docker run -it --rm -v $(pwd)/:/root/.vim vimtools
 ```
