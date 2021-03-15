@@ -8,14 +8,7 @@ python3 \
 unzip \
 vim
 
-# System defaults to root user
-RUN useradd -m qa
-USER qa
-
-# All work will take place in qa home from this point on
-ENV PWD=/home/qa
+ENV PWD=/root/.vim/tests
 WORKDIR $PWD
 
-RUN curl https://raw.githubusercontent.com/dsw7/VimTools/master/Makefile > Makefile
-
-CMD ["make"]
+CMD python3 run_tests.py
