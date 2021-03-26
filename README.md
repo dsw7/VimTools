@@ -48,5 +48,9 @@ docker build -t vimtools .
 ```
 This will generate a Debian based local Docker image. To actually test the product, run the `vimtools` image:
 ```
-docker run -it --rm -v $(pwd)/:/root/.vim vimtools
+docker run -it --rm vimtools
+```
+This will test the `master` branch by default. To test a specific branch:
+```
+docker run -it -e GIT_BRANCH=<branch-name> --rm vimtools
 ```
