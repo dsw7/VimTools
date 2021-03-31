@@ -51,6 +51,7 @@ endif
 	@rm -v $(FILENAME_ZIP_ARCHIVE)
 
 	$(call echo_step,Generating help tags for project)
+	@echo Step ensures \":help VimTools\" information is up to date
 	@vim -es -c ":helptags $(USER_RUNTIME_DIRECTORY)/doc" -c "q!"
 
 run-tests:
