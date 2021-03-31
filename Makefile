@@ -51,7 +51,7 @@ endif
 	@rm -v $(FILENAME_ZIP_ARCHIVE)
 
 	$(call echo_step,Generating help tags for project)
-	@vim -es -c ":helptags $(USER_RUNTIME_DIRECTORY)/docs" -c "q!"
+	@vim -es -c ":helptags $(USER_RUNTIME_DIRECTORY)/doc" -c "q!"
 
 run-tests:
 	$(call echo_step,Running all unit tests)
