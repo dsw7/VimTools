@@ -29,6 +29,7 @@ install:
 	$(call echo_step,Downloading $(FILENAME_ZIP_ARCHIVE))
 	@echo Using branch: $(GIT_BRANCH)
 	@echo Querying URL: $(GIT_URL_VIMTOOLS)
+
 	@curl -L $(GIT_URL_VIMTOOLS) --output $(FILENAME_ZIP_ARCHIVE) --fail
 	@echo Repository will be dumped to: $(FILENAME_ZIP_ARCHIVE)
 
@@ -48,6 +49,9 @@ endif
 
 	$(call echo_step,Cleaning up any remaining files)
 	@rm -v $(FILENAME_ZIP_ARCHIVE)
+
+	$(call echo_step,Generating help tags for project)
+	@vim -es -c ":helptags $(USER_RUNTIME_DIRECTORY)/docs" -c "q!"
 
 run-tests:
 	$(call echo_step,Running all unit tests)
