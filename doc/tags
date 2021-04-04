@@ -6,6 +6,7 @@ Cp	vimtools.txt	/*Cp*
 Del	vimtools.txt	/*Del*
 Ind	vimtools.txt	/*Ind*
 Ins	vimtools.txt	/*Ins*
+Menu	vimtools.txt	/*Menu*
 Mv	vimtools.txt	/*Mv*
 Paste	vimtools.txt	/*Paste*
 S	vimtools.txt	/*S*

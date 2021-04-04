@@ -105,6 +105,10 @@ USAGE INSTRUCTIONS                                              *vimtools-usage*
                  current cursor position
                  : -> `:Block` `/tmp/foo.cpp` `5` `10`
 
+13. *Menu*
+    {Description}: The "main menu" for managing housekeeping tasks
+          {Usage}: `Menu` <no-arguments>
+
 ==============================================================================
 ADDING VIMTOOLS COMMANDS                              *adding-vimtools-commands*
 
