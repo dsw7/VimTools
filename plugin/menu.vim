@@ -24,13 +24,13 @@ function s:DeleteDisableMenuMarker()
 endfunction
 
 function s:CheckIfMarkerExists()
-    let exit_status = 1
+    let l:exit_status = 1
 
     if !filereadable(s:MARKER_FILEPATH)
-        let exit_status = 0
+        let l:exit_status = 0
     endif
 
-    return exit_status
+    return l:exit_status
 endfunction
 
 function MainMenuCallback(id, result)

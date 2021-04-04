@@ -16,18 +16,6 @@ endfunction
 " --------------------------------------------------------------
 " PUBLIC FUNCTIONS
 " --------------------------------------------------------------
-function Move(start_line, end_line, position)
-    let start_line = str2nr(a:start_line)
-    let end_line = str2nr(a:end_line)
-    let position = str2nr(a:position)
-
-    if start_line <= end_line
-        execute start_line . ',' . end_line . 'm' . position
-    else
-        call s:LineError()
-    endif
-endfunction
-
 function Paste()
     normal! "+p
 endfunction
