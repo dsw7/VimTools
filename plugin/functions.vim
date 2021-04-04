@@ -27,18 +27,6 @@ function Delete(start_line, end_line)
     endif
 endfunction
 
-function Copy(start_line, end_line, position)
-    let start_line = str2nr(a:start_line)
-    let end_line = str2nr(a:end_line)
-    let position = str2nr(a:position)
-
-    if start_line <= end_line
-        execute start_line . ',' . end_line . 't' . position
-    else
-        call s:LineError()
-    endif
-endfunction
-
 function Move(start_line, end_line, position)
     let start_line = str2nr(a:start_line)
     let end_line = str2nr(a:end_line)
