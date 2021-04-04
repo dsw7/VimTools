@@ -39,3 +39,6 @@ command -nargs=+ -complete=file Block :call Block(<f-args>)
 
 " Print a list of the preceding commands
 command -nargs=? Help :call Help(<f-args>)
+
+" Open up main menu for various housekeeping tasks
+command Menu :call MainMenu()
