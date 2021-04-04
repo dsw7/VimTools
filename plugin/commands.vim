@@ -29,7 +29,7 @@ command -nargs=+ SubAll :call ReplaceInAllFiles(<f-args>)
 command -nargs=+ Mv :call Move(<f-args>)
 
 " Paste text from system clipboard
-command -nargs=? Paste :call Paste(<f-args>)
+command Paste :call Paste()
 
 " Toggle cursorcolumn
 command Col :call ColumnToggle()
