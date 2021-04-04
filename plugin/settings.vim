@@ -52,6 +52,3 @@ set nowrap
 
 " Disable swap files
 set noswapfile
-
-" Start program with main menu
-call MainMenu()
