@@ -1,21 +1,3 @@
-" --------------------------------------------------------------
-" PRIVATE FUNCTIONS
-" --------------------------------------------------------------
-function s:ErrorMsgHeader()
-    " Do not use echoerr("message") because this actually throws an error
-    echohl ErrorMsg
-    echo "Invalid syntax!"
-    echohl None
-endfunction
-
-function s:LineError()
-    call s:ErrorMsgHeader()
-    echo "The <start-line> value must not exceed the <end-line> value."
-endfunction
-
-" --------------------------------------------------------------
-" PUBLIC FUNCTIONS
-" --------------------------------------------------------------
 function Paste()
     normal! "+p
 endfunction
