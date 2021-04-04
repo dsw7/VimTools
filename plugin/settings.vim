@@ -52,3 +52,6 @@ set nowrap
 
 " Disable swap files
 set noswapfile
+
+" Open main menu on start unless disabled via marker file
+call CallMainMenuOnStart()

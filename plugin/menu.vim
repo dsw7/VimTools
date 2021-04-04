@@ -14,7 +14,7 @@ function s:CreateDisableMenuMarker()
     endif
 endfunction
 
-function s:RemoveDisableMenuMarker()
+function s:DeleteDisableMenuMarker()
     call system("rm " . s:MARKER_FILEPATH)
     if v:shell_error != 0
         echo "Failed to remove marker file. Did it exist?"
@@ -45,7 +45,7 @@ function MainMenuCallback(id, result)
     elseif a:result == 4
         call s:CreateDisableMenuMarker()
     elseif a:result == 5
-        call s:RemoveDisableMenuMarker()
+        call s:DeleteDisableMenuMarker()
     else
         exit
     endif
@@ -78,8 +78,5 @@ function CallMainMenuOnStart()
     if s:CheckIfMarkerExists() == 1
         return
     endif
-
     call MainMenu()
 endfunction
-
-call CallMainMenuOnStart()
