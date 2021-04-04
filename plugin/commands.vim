@@ -2,7 +2,7 @@
 command Cls :noh
 
 " Remove all whitespace
-command -nargs=? Ws :call RemoveWhiteSpace(<f-args>)
+command Ws :call RemoveWhiteSpace()
 
 " Remove all whitespace before lines
 command -nargs=+ Wl :call RemoveWhiteSpaceBeforeLine(<f-args>)
@@ -32,13 +32,13 @@ command -nargs=+ Mv :call Move(<f-args>)
 command -nargs=? Paste :call Paste(<f-args>)
 
 " Toggle cursorcolumn
-command -nargs=? Col :call ColumnToggle(<f-args>)
+command Col :call ColumnToggle()
 
 " Insert block of text from another file (:help command-complete)
 command -nargs=+ -complete=file Block :call Block(<f-args>)
 
 " Print a list of the preceding commands
-command -nargs=? Help :call Help(<f-args>)
+command Help :call Help()
 
 " Open up main menu for various housekeeping tasks
 command Menu :call MainMenu()
