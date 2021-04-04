@@ -16,17 +16,6 @@ endfunction
 " --------------------------------------------------------------
 " PUBLIC FUNCTIONS
 " --------------------------------------------------------------
-function Delete(start_line, end_line)
-    let start_line = str2nr(a:start_line)
-    let end_line = str2nr(a:end_line)
-
-    if start_line <= end_line
-        execute start_line . ',' . end_line . 'd'
-    else
-        call s:LineError()
-    endif
-endfunction
-
 function Move(start_line, end_line, position)
     let start_line = str2nr(a:start_line)
     let end_line = str2nr(a:end_line)
