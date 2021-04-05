@@ -11,8 +11,6 @@ function s:IsCompatibleVersion()
 
     if v:version < s:MINIMUM_VIM_VERSION
         let l:exit_status = 0
-        echo "Menu has been disabled!"
-        echo "Minimum Vim version required: " . s:MINIMUM_VIM_VERSION
     endif
 
     return l:exit_status
@@ -66,6 +64,7 @@ endfunction
 
 function MainMenu()
     if !s:IsCompatibleVersion()
+        echo "Minimum Vim version required: " . s:MINIMUM_VIM_VERSION
         return
     endif
 
