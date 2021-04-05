@@ -4,6 +4,19 @@
 " Cannot resolve path to script from inside function
 let s:DIRNAME_PLUGIN = expand('<sfile>:p:h')
 let s:MARKER_FILEPATH = s:DIRNAME_PLUGIN . "/" . "nomenumarker"
+let s:MINIMUM_VIM_VERSION = 802 " i.e. version 8.02
+
+function s:CheckCompatibleVersion()
+    let l:exit_status = 1
+
+    if v:version < s:MINIMUM_VIM_VERSION
+        let l:exit_status = 0
+        echo "Menu has been disabled!"
+        echo "Minimum Vim version required: " . s:MINIMUM_VIM_VERSION
+    endif
+
+    return l:exit_status
+endfunction
 
 function s:CreateDisableMenuMarker()
     call system("touch " . s:MARKER_FILEPATH)
