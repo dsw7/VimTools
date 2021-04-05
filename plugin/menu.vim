@@ -6,7 +6,7 @@ let s:DIRNAME_PLUGIN = expand('<sfile>:p:h')
 let s:MARKER_FILEPATH = s:DIRNAME_PLUGIN . "/" . "nomenumarker"
 let s:MINIMUM_VIM_VERSION = 802 " i.e. version 8.02
 
-function s:CheckCompatibleVersion()
+function s:IsCompatibleVersion()
     let l:exit_status = 1
 
     if v:version < s:MINIMUM_VIM_VERSION
@@ -36,7 +36,7 @@ function s:DeleteDisableMenuMarker()
     endif
 endfunction
 
-function s:CheckIfMarkerExists()
+function s:NoMenuMarkerExists()
     let l:exit_status = 1
 
     if !filereadable(s:MARKER_FILEPATH)
@@ -65,6 +65,10 @@ function MainMenuCallback(id, result)
 endfunction
 
 function MainMenu()
+    if !s:IsCompatibleVersion()
+        return
+    endif
+
     call popup_menu(
     \   [
     \       '> Continue VimTools normally',
@@ -88,8 +92,13 @@ function MainMenu()
 endfunction
 
 function CallMainMenuOnStart()
-    if s:CheckIfMarkerExists() == 1
+    if !s:IsCompatibleVersion()
         return
     endif
+
+    if s:NoMenuMarkerExists()
+        return
+    endif
+
     call MainMenu()
 endfunction
