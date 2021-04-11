@@ -1,6 +1,10 @@
 " Remove whitespace at end of line and before newline throughout file
 function RemoveWhiteSpace()
-    execute '%s/\s\+$//g'
+    try
+        execute '%s/\s\+$//g'
+    catch
+        echo 'No whitespace found!'
+    endtry
 endfunction
 
 function RemoveWhiteSpaceBeforeLine(start_line, end_line)
