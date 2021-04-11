@@ -1,3 +1,9 @@
+############################################
+#                                          #
+#  DAVID WEBER VIMTOOLS OFFICIAL MAKEFILE  #
+#                                          #
+############################################
+
 GIT_BRANCH = master
 GIT_REPOSITORY_NAME = VimTools
 GIT_URL_VIMTOOLS = https://github.com/dsw7/$(GIT_REPOSITORY_NAME)/archive/$(GIT_BRANCH).zip
