@@ -99,11 +99,27 @@ USAGE INSTRUCTIONS                                              *vimtools-usage*
 
 12. *Block*
     {Description}: Copy the contents of some external file between a set of lines
-                 to current cursor position
+                   to current cursor position. Note that `Block` will start in
+                   two different modes:
+
+                     [1] Normal mode
+                     [2] Vimdiff mode
+
+                   In mode [1], `Block` will require that a hard path be
+                   specified to the file from which lines are being copied. In
+                   mode [2], `Block` will fetch lines from the next vimdiff window
+
+       {Scenario}: Mode [1] - Normal mode
           {Usage}: `Block` <relative-or-absolute-path> <start-line> <end-line>
         {Example}: Copy a function from /tmp/foo.cpp on lines 5-10 to the
-                 current cursor position
+                   current cursor position
                  : -> `:Block` `/tmp/foo.cpp` `5` `10`
+
+       {Scenario}: Mode [2] - Vimdiff mode
+          {Usage}: `Block` <start-line> <end-line>
+        {Example}: Copy a function from /tmp/foo.cpp on lines 5-10 from the
+                   other vimdiff buffer at the current cursor position
+                 : -> `:Block` `5` `10`
 
 13. *Menu*
     {Description}: The "main menu" for managing housekeeping tasks
