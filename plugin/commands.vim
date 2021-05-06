@@ -34,11 +34,11 @@ command Paste :call Paste()
 " Toggle cursorcolumn
 command Col :call ColumnToggle()
 
-" Insert block of text from another file (:help command-complete)
-command -nargs=+ -complete=file Block :call Block(<f-args>)
-
 " Print a list of the preceding commands
 command Help :call Help()
 
 " Open up main menu for various housekeeping tasks
 command Menu :call MainMenu()
+
+" Insert block of text from another file (:help command-complete)
+command -nargs=+ -complete=file Block :call Block(<f-args>)
