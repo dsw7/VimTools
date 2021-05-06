@@ -41,4 +41,8 @@ command Help :call Help()
 command Menu :call MainMenu()
 
 " Insert block of text from another file (:help command-complete)
-command -nargs=+ -complete=file Block :call Block(<f-args>)
+if &diff
+    command -nargs=+ Block :call BlockDiff(<f-args>)
+else
+    command -nargs=+ -complete=file Block :call Block(<f-args>)
+endif
