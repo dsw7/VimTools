@@ -32,3 +32,13 @@ nnoremap mm :call NumberToggle()<CR>
 
 " Jump between last two positions
 nnoremap t ``
+
+" Horizontal split a vimdiff session
+if &diff
+    nnoremap hs <C-w>J
+endif
+
+" Vertical split a vimdiff session
+if &diff
+    nnoremap vs <C-w>H
+endif
