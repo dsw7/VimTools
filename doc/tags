@@ -10,6 +10,7 @@ Menu	vimtools.txt	/*Menu*
 Mv	vimtools.txt	/*Mv*
 Paste	vimtools.txt	/*Paste*
 S	vimtools.txt	/*S*
+Vs	vimtools.txt	/*Vs*
 Wl	vimtools.txt	/*Wl*
 Ws	vimtools.txt	/*Ws*
 adding-vimtools-commands	vimtools.txt	/*adding-vimtools-commands*

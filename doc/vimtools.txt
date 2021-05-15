@@ -125,6 +125,13 @@ USAGE INSTRUCTIONS                                              *vimtools-usage*
     {Description}: The "main menu" for managing housekeeping tasks
           {Usage}: `Menu` <no-arguments>
 
+14. *Vs*
+    {Description}: Toggle between vertical and horizontal vimdiff splits.
+                   I have also added a mapping for this, `hs`, for
+                   speeding this up. Both the `Vs` command and the `hs`
+                   mapping will only work in vimdiff mode!
+          {Usage}: `Vs` <no-arguments>
+
 ==============================================================================
 ADDING VIMTOOLS COMMANDS                              *adding-vimtools-commands*
 
