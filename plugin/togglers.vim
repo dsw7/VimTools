@@ -14,6 +14,8 @@ function ColumnToggle()
     endif
 endfunction
 
+" Use a bool local to this script to store the vimdiff split state throughout
+" the session
 let s:VimDiff_IsVerticalSplit = 1
 
 " Turn a vertical vimdiff split (the default) into a horizontal split
@@ -28,7 +30,7 @@ function s:MakeSplitVertical()
     let s:VimDiff_IsVerticalSplit = 1
 endfunction
 
-" Toggle the splits
+" Toggle the vimdiff splits
 function VimDiffToggle()
     if(s:VimDiff_IsVerticalSplit == 1)
         call s:MakeSplitHorizontal()
