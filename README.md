@@ -8,6 +8,7 @@ This repository contains the `.vim` directory that I use in my day to day progra
 - [Accessing the commands](#accessing-the-commands)
 - [Keeping the installation up to date](#keeping-the-installation-up-to-date)
 - [Testing with Docker](#testing-with-docker)
+- [General code structure](#general-code-structure)
 ## Setup
 This project is both set up and tested using `make`. To install the project:
 ```
