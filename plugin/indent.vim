@@ -7,7 +7,7 @@ function s:IndentByMultipleTabs(start_line, end_line, count)
     execute a:start_line . ',' . a:end_line . 's/^/' . l:tabs . '/g'
 endfunction
 
-function Indent(start_line, end_line, ...)
+function s:Indent(start_line, end_line, ...)
     if a:0 == 0
         call s:IndentBySingleTab(a:start_line, a:end_line)
     elseif a:0 == 1
@@ -16,3 +16,7 @@ function Indent(start_line, end_line, ...)
         echoerr 'Function takes only one additional argument'
     endif
 endfunction
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Indent by 4 spaces
+command -nargs=+ Ind :call s:Indent(<f-args>)

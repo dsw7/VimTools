@@ -1,9 +1,6 @@
 " Clear a search
 command Cls :noh
 
-" Indent by 4 spaces
-command -nargs=+ Ind :call Indent(<f-args>)
-
 " Delete between a range of lines
 command -nargs=+ Del :call Delete(<f-args>)
 
