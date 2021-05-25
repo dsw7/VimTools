@@ -135,9 +135,7 @@ USAGE INSTRUCTIONS                                              *vimtools-usage*
 
 14. *Vs*
     {Description}: Toggle between vertical and horizontal vimdiff splits.
-                   I have also added a mapping for this, `hs`, for
-                   speeding this up. Both the `Vs` command and the `hs`
-                   mapping will only work in vimdiff mode!
+                   The `Vs` command will only work in vimdiff mode!
           {Usage}: `Vs` <no-arguments>
 
 ==============================================================================
