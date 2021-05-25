@@ -44,6 +44,7 @@ function s:NoMenuMarkerExists()
     return l:exit_status
 endfunction
 
+" Does this need to be global?
 function MainMenuCallback(id, result)
     if a:result == 1
         echo "Continuing program normally"
