@@ -27,8 +27,5 @@ nnoremap ff 0w
 nnoremap <PageDown> <C-d>
 nnoremap <PageUp> <C-u>
 
-" Toggle between absolute and relative numbering
-nnoremap mm :call NumberToggle()<CR>
-
 " Jump between :vsplit (:vs) or :split (:sp) splits
 nnoremap tt <C-w>w
