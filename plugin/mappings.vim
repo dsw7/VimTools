@@ -30,10 +30,10 @@ nnoremap <PageUp> <C-u>
 " Toggle between absolute and relative numbering
 nnoremap mm :call NumberToggle()<CR>
 
-" Jump between last two positions
-nnoremap t ``
-
 " Toggle between horizontal and vertical vimdiff splits
 if &diff
     nnoremap hs :call VimDiffToggle()<CR>
 endif
+
+" Jump between :vsplit (:vs) or :split (:sp) splits
+nnoremap ww <C-w>w
