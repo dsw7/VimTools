@@ -1,9 +1,6 @@
 " Clear a search
 command Cls :noh
 
-" Replace a string in all files in working dir
-command -nargs=+ SubAll :call ReplaceInAllFiles(<f-args>)
-
 " Toggle cursorcolumn
 command Col :call ColumnToggle()
 
