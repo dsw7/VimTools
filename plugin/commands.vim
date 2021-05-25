@@ -34,9 +34,6 @@ command Paste :call Paste()
 " Toggle cursorcolumn
 command Col :call ColumnToggle()
 
-" Print a list of the preceding commands
-command Help :call Help()
-
 " Open up main menu for various housekeeping tasks
 command Menu :call MainMenu()
 
