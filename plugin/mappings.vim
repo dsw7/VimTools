@@ -36,4 +36,4 @@ if &diff
 endif
 
 " Jump between :vsplit (:vs) or :split (:sp) splits
-nnoremap ww <C-w>w
+nnoremap tt <C-w>w
