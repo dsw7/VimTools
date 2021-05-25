@@ -13,8 +13,3 @@ if &diff
 else
     command -nargs=+ -complete=file Block :call BlockBasic(<f-args>)
 endif
-
-" Toggle between horizontal and vertical vimdiff splits
-if &diff
-    command Vs :call VimDiffToggle()
-endif
