@@ -26,8 +26,3 @@ endfunction
 if &diff
     command Vs :call s:VimDiffToggle()
 endif
-
-" Toggle between horizontal and vertical vimdiff splits using a mapping
-if &diff
-    nnoremap hs :call s:VimDiffToggle()<CR>
-endif
