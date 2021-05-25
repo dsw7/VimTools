@@ -6,7 +6,6 @@ function s:HandleNoWhiteSpaceError(exception)
     endif
 endfunction
 
-" Remove whitespace at end of line and before newline throughout file
 function s:RemoveWhiteSpace()
     try
         execute '%s/\s\+$//g'
@@ -15,8 +14,7 @@ function s:RemoveWhiteSpace()
     endtry
 endfunction
 
-" Remove whitespace before lines between a range of lines
-function RemoveWhiteSpaceBeforeLine(start_line, end_line)
+function s:RemoveWhiteSpaceBeforeLines(start_line, end_line)
     try
         execute a:start_line . ',' . a:end_line . 's/^\s\+//g'
     catch
@@ -27,3 +25,6 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remove all whitespace
 command Ws :call s:RemoveWhiteSpace()
+
+" Remove all whitespace before lines
+command -nargs=+ Wl :call s:RemoveWhiteSpaceBeforeLines(<f-args>)

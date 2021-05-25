@@ -1,9 +1,6 @@
 " Clear a search
 command Cls :noh
 
-" Remove all whitespace before lines
-command -nargs=+ Wl :call RemoveWhiteSpaceBeforeLine(<f-args>)
-
 " Indent by 4 spaces
 command -nargs=+ Ind :call Indent(<f-args>)
 
