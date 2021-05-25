@@ -5,11 +5,3 @@ function NumberToggle()
         set relativenumber
     endif
 endfunction
-
-function ColumnToggle()
-    if(&cursorcolumn == 1)
-        set nocursorcolumn
-    else
-        set cursorcolumn
-    endif
-endfunction

@@ -1,9 +1,6 @@
 " Clear a search
 command Cls :noh
 
-" Toggle cursorcolumn
-command Col :call ColumnToggle()
-
 " Open up main menu for various housekeeping tasks
 command Menu :call MainMenu()
 
