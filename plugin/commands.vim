@@ -1,9 +1,6 @@
 " Clear a search
 command Cls :noh
 
-" Delete between a range of lines
-command -nargs=+ Del :call Delete(<f-args>)
-
 " Insert a delimiter at beginning of lines
 command -nargs=+ Ins :call Insert(<f-args>)
 
