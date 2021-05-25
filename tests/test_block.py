@@ -100,3 +100,41 @@ class TestBlock(TestCase):
         self.assertTrue(
             filecmp.cmp(FILENAME_ACTUAL, FILENAME_EXPECTED)
         )
+
+    def test_block_invalid_range(self):
+        expected_string = """\
+        foo
+        bar
+        baz
+        """
+        with open(FILENAME_EXPECTED, 'w') as f:
+            f.write(dedent(expected_string))
+
+        # Ensure original file remains untouched...
+
+        command = f'vim -es -c ":Block {FILENAME_AUXILIARY} 2 5" -c "wq" {FILENAME_ACTUAL}'
+        write_executable_command_file(command, TEMPORARY_COMMAND_FILE)
+
+        call(TEMPORARY_COMMAND_FILE)
+        self.assertTrue(
+            filecmp.cmp(FILENAME_ACTUAL, FILENAME_EXPECTED)
+        )
+
+    def test_block_invalid_file(self):
+        expected_string = """\
+        foo
+        bar
+        baz
+        """
+        with open(FILENAME_EXPECTED, 'w') as f:
+            f.write(dedent(expected_string))
+
+        # Ensure original file remains untouched...
+
+        command = f'vim -es -c ":Block /tmp/f4tl2x.txt 1 2" -c "wq" {FILENAME_ACTUAL}'
+        write_executable_command_file(command, TEMPORARY_COMMAND_FILE)
+
+        call(TEMPORARY_COMMAND_FILE)
+        self.assertTrue(
+            filecmp.cmp(FILENAME_ACTUAL, FILENAME_EXPECTED)
+        )
