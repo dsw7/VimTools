@@ -41,7 +41,7 @@ command Menu :call MainMenu()
 if &diff
     command -nargs=+ Block :call BlockDiff(<f-args>)
 else
-    command -nargs=+ -complete=file Block :call Block(<f-args>)
+    command -nargs=+ -complete=file Block :call BlockBasic(<f-args>)
 endif
 
 " Toggle between horizontal and vertical vimdiff splits

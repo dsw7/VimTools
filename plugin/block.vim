@@ -44,67 +44,48 @@ function s:ResolvePathType(path)
     return l:path_to_file
 endfunction
 
-function Block(path_to_file, start_line, end_line)
-    let l:path_to_file = s:ResolvePathType(a:path_to_file)
-    let l:start_line = str2nr(a:start_line)
-    let l:end_line = str2nr(a:end_line)
+function s:BlockPrimitive(path_to_file, start_line, end_line)
+    let l:offset = a:end_line - a:start_line + 1
 
-    " Note that vimscript automatically coerces str to int
-    " This is why we have to str2nr start and end lines in advance
-    " This arithmetic would otherwise return weird results
-    let l:offset = l:end_line - l:start_line + 1
-
-    if !s:IsValidRange(l:start_line, l:end_line)
+    if !s:IsValidRange(a:start_line, a:end_line)
         return
     endif
 
-    if !s:FileExists(l:path_to_file)
+    if !s:FileExists(a:path_to_file)
         return
     endif
 
-    if !s:IsValidEndLine(l:end_line, l:path_to_file)
+    if !s:IsValidEndLine(a:end_line, a:path_to_file)
         return
     endif
 
-    let l:block = "head -n " . a:end_line . " " . l:path_to_file . " | tail -n " . l:offset
+    let l:block = "head -n " . a:end_line . " " . a:path_to_file . " | tail -n " . l:offset
     echo "Running command: " . l:block
 
     let l:stdout = split(system(l:block), "\n")
     call add(l:stdout, "")
     call append('.', l:stdout)
+endfunction
 
+function BlockBasic(path_to_file, start_line, end_line)
+    let l:path_to_file = s:ResolvePathType(a:path_to_file)
+
+    " Note that vimscript automatically coerces str to int
+    " This is why we have to str2nr start and end lines in advance
+    " This arithmetic would otherwise return weird results
+    let l:start_line = str2nr(a:start_line)
+    let l:end_line = str2nr(a:end_line)
+
+    call s:BlockPrimitive(l:path_to_file, l:start_line, l:end_line)
 endfunction
 
 function BlockDiff(start_line, end_line)
-    " #2:p -> vimdiff second window
-    " #3:p -> vimdiff third window if 3 files are being diffed...
+    " #2:p -> Pointer to second buffer
+    " #3:p -> Pointer to third buffer
     " ...
     let l:path_to_file = expand("#2:p")
     let l:start_line = str2nr(a:start_line)
     let l:end_line = str2nr(a:end_line)
 
-    " Note that vimscript automatically coerces str to int
-    " This is why we have to str2nr start and end lines in advance
-    " This arithmetic would otherwise return weird results
-    let l:offset = l:end_line - l:start_line + 1
-
-    if !s:IsValidRange(l:start_line, l:end_line)
-        return
-    endif
-
-    if !s:FileExists(l:path_to_file)
-        return
-    endif
-
-    if !s:IsValidEndLine(l:end_line, l:path_to_file)
-        return
-    endif
-
-    let l:block = "head -n " . a:end_line . " " . l:path_to_file . " | tail -n " . l:offset
-    echo "Running command: " . l:block
-
-    let l:stdout = split(system(l:block), "\n")
-    call add(l:stdout, "")
-    call append('.', l:stdout)
-
+    call s:BlockPrimitive(l:path_to_file, l:start_line, l:end_line)
 endfunction
