@@ -138,6 +138,10 @@ USAGE INSTRUCTIONS                                              *vimtools-usage*
                    The `Vs` command will only work in vimdiff mode!
           {Usage}: `Vs` <no-arguments>
 
+15. *Num*
+    {Description}: Toggle between relative and absolute line numbering.
+          {Usage}: `Num` <no-arguments>
+
 ==============================================================================
 ADDING VIMTOOLS COMMANDS                              *adding-vimtools-commands*
 
