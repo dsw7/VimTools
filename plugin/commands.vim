@@ -25,9 +25,6 @@ command -nargs=+ S :call Replace(<f-args>)
 " Replace a string in all files in working dir
 command -nargs=+ SubAll :call ReplaceInAllFiles(<f-args>)
 
-" Paste text from system clipboard
-command Paste :call Paste()
-
 " Toggle cursorcolumn
 command Col :call ColumnToggle()
 
