@@ -62,7 +62,7 @@ function MainMenuCallback(id, result)
     endif
 endfunction
 
-function MainMenu()
+function s:MainMenu()
     if !s:IsCompatibleVersion()
         echo "Minimum Vim version required: " . s:MINIMUM_VIM_VERSION
         return
@@ -90,7 +90,7 @@ function MainMenu()
     \)
 endfunction
 
-function CallMainMenuOnStart()
+function s:CallMainMenuOnStart()
     if !s:IsCompatibleVersion()
         return
     endif
@@ -99,5 +99,12 @@ function CallMainMenuOnStart()
         return
     endif
 
-    call MainMenu()
+    call s:MainMenu()
 endfunction
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Open main menu on start unless disabled via marker file
+call s:CallMainMenuOnStart()
+
+" Open up main menu for various housekeeping tasks
+command Menu :call s:MainMenu()

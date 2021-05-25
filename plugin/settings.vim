@@ -53,9 +53,6 @@ set nowrap
 " Disable swap files
 set noswapfile
 
-" Open main menu on start unless disabled via marker file
-call CallMainMenuOnStart()
-
 " Split buffer on right when running :vsplit
 set splitright
 
