@@ -1,5 +1,4 @@
-" Use a bool local to this script to store the vimdiff split state throughout
-" the session
+" Use a bool local to this script to store the vimdiff split state throughout the session
 let s:VIMDIFF_IS_VERTICAL_SPLIT = 1
 
 " Turn a vertical vimdiff split (the default) into a horizontal split
@@ -23,7 +22,12 @@ function s:VimDiffToggle()
 endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Toggle between horizontal and vertical vimdiff splits
+" Toggle between horizontal and vertical vimdiff splits using a custom command
 if &diff
     command Vs :call s:VimDiffToggle()
+endif
+
+" Toggle between horizontal and vertical vimdiff splits using a mapping
+if &diff
+    nnoremap hs :call s:VimDiffToggle()<CR>
 endif
