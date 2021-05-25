@@ -67,7 +67,7 @@ function s:BlockPrimitive(path_to_file, start_line, end_line)
     call append('.', l:stdout)
 endfunction
 
-function BlockBasic(path_to_file, start_line, end_line)
+function s:BlockBasic(path_to_file, start_line, end_line)
     let l:path_to_file = s:ResolvePathType(a:path_to_file)
 
     " Note that vimscript automatically coerces str to int
@@ -79,7 +79,7 @@ function BlockBasic(path_to_file, start_line, end_line)
     call s:BlockPrimitive(l:path_to_file, l:start_line, l:end_line)
 endfunction
 
-function BlockDiff(start_line, end_line)
+function s:BlockDiff(start_line, end_line)
     " #2:p -> Pointer to second buffer
     " #3:p -> Pointer to third buffer
     " ...
@@ -89,3 +89,11 @@ function BlockDiff(start_line, end_line)
 
     call s:BlockPrimitive(l:path_to_file, l:start_line, l:end_line)
 endfunction
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Insert block of text from another file (:help command-complete)
+if &diff
+    command -nargs=+ Block :call s:BlockDiff(<f-args>)
+else
+    command -nargs=+ -complete=file Block :call s:BlockBasic(<f-args>)
+endif
