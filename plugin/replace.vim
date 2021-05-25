@@ -23,7 +23,7 @@ function s:ReplaceFromLineToEndOfFile(replacement, start_line)
     execute a:start_line . ',$s/' . escape(getreg('/'), '/') . '/' . a:replacement . '/g'
 endfunction
 
-function Replace(replacement, ...)
+function s:Replace(replacement, ...)
     if a:0 == 0
         call s:ReplaceGlobally(a:replacement)
     elseif a:0 == 1
@@ -40,3 +40,7 @@ function Replace(replacement, ...)
         echoerr "Too many arguments given!"
     endif
 endfunction
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Replace a string in current file
+command -nargs=+ S :call s:Replace(<f-args>)

@@ -1,9 +1,6 @@
 " Clear a search
 command Cls :noh
 
-" Replace a string in current file
-command -nargs=+ S :call Replace(<f-args>)
-
 " Replace a string in all files in working dir
 command -nargs=+ SubAll :call ReplaceInAllFiles(<f-args>)
 
