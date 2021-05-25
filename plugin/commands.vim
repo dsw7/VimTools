@@ -7,9 +7,6 @@ command Ws :call RemoveWhiteSpace()
 " Remove all whitespace before lines
 command -nargs=+ Wl :call RemoveWhiteSpaceBeforeLine(<f-args>)
 
-" Copy a block of lines
-command -nargs=+ Cp :call Copy(<f-args>)
-
 " Indent by 4 spaces
 command -nargs=+ Ind :call Indent(<f-args>)
 
