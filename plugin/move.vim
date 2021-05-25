@@ -1,4 +1,4 @@
-function Move(start_line, end_line, position)
+function s:Move(start_line, end_line, position)
     let l:start_line = str2nr(a:start_line)
     let l:end_line = str2nr(a:end_line)
     let l:position = str2nr(a:position)
@@ -9,3 +9,6 @@ function Move(start_line, end_line, position)
         echoerr "Start line cannot exceed end line!"
     endif
 endfunction
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+command -nargs=+ Mv :call s:Move(<f-args>)
