@@ -1,9 +1,6 @@
 " Clear a search
 command Cls :noh
 
-" Insert a delimiter at beginning of lines
-command -nargs=+ Ins :call Insert(<f-args>)
-
 " Replace a string in current file
 command -nargs=+ S :call Replace(<f-args>)
 
