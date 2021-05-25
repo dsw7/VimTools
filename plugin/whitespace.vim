@@ -7,7 +7,7 @@ function s:HandleNoWhiteSpaceError(exception)
 endfunction
 
 " Remove whitespace at end of line and before newline throughout file
-function RemoveWhiteSpace()
+function s:RemoveWhiteSpace()
     try
         execute '%s/\s\+$//g'
     catch
@@ -23,3 +23,7 @@ function RemoveWhiteSpaceBeforeLine(start_line, end_line)
         call s:HandleNoWhiteSpaceError(v:exception)
     endtry
 endfunction
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remove all whitespace
+command Ws :call s:RemoveWhiteSpace()

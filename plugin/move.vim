@@ -10,6 +10,6 @@ function s:Move(start_line, end_line, position)
     endif
 endfunction
 
-" Move text from one location to another
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Move text from one location to another
 command -nargs=+ Mv :call s:Move(<f-args>)

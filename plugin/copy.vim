@@ -10,6 +10,6 @@ function s:Copy(start_line, end_line, position)
     endif
 endfunction
 
-" Copy a block of lines
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Copy a block of lines
 command -nargs=+ Cp :call s:Copy(<f-args>)

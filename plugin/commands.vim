@@ -1,9 +1,6 @@
 " Clear a search
 command Cls :noh
 
-" Remove all whitespace
-command Ws :call RemoveWhiteSpace()
-
 " Remove all whitespace before lines
 command -nargs=+ Wl :call RemoveWhiteSpaceBeforeLine(<f-args>)
 
