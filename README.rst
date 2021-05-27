@@ -7,8 +7,8 @@ Table of contents
 .. contents::
     :depth: 2
 
-Setup
------
+Setting up VimTools
+-------------------
 This project is both set up and tested using ``make``. To install the project:
 
 .. code-block:: shell
