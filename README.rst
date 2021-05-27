@@ -23,7 +23,7 @@ To install the project:
 The ``make (all)`` target simply downloads a ``.zip`` archive of this project, unpacks it into ``${PWD}/.vim`` and runs unit tests on the installation.
 **Warning: this will remove existing an existing .vim directory!**
 
-The ``make-install`` build target
+The ``install`` build target
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 A more fine-grained installation approach can (and should) be used. To install the software without running tests:
 
@@ -39,4 +39,12 @@ To install a specific branch using the ``Makefile``:
     curl https://raw.githubusercontent.com/dsw7/VimTools/master/Makefile > Makefile
     make install GIT_BRANCH=<branch-name>
 
+The ``run-tests`` build target
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+To run just the unit tests:
 
+.. code-block:: shell
+
+    make run-tests
+
+This feature is useful for local testing. This target runs unit tests under the ``${PWD}/.vim/tests`` directory.
