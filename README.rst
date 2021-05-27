@@ -117,6 +117,7 @@ Almost all scripts in this project follow the general layout:
     command -nargs=<nargs> CommandName :call s:MainFunction(...)
 
 Moving from top to bottom, we have the following:
+
 - **Helper functions**: In this case ``s:Helper{Foo,Bar,Baz}``. These functions serve auxiliary roles
 - **A main function**: In this case ``s:MainFunction``. The main function retains its scope relative to the script and makes use of the helper functions
 - **A vertical separator**: This separator delineates the interface between private and public scope
