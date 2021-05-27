@@ -1,15 +1,15 @@
 VimTools
-========
+==================================================
 This repository contains the ``.vim`` directory that I use in my day to day programming, both professionally and leisurely.
 This is not a true ``vim`` plugin.
 
 Table of Contents
------------------
+--------------------------------------------------
 .. contents::
     :depth: 2
 
 Setting up VimTools
--------------------
+--------------------------------------------------
 This project is both set up and tested using ``make``. To install the project:
 
 .. code-block:: shell
