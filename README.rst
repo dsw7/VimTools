@@ -92,6 +92,7 @@ General code structure
 Almost all scripts in this project follow the general layout:
 
 .. code-block::
+    :linenos:
 
     function s:HelperFoo(<args>)
         ...
