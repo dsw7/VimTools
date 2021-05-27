@@ -6,7 +6,6 @@ Table of contents
 -----------------
 .. contents:: 
     :depth: 2
-    :local:
 
 Setting up VimTools
 -------------------
