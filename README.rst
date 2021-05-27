@@ -4,8 +4,9 @@ This repository contains the ``.vim`` directory that I use in my day to day prog
 
 Table of contents
 -----------------
-.. contents:: null
+.. contents:: 
     :depth: 2
+    :local:
 
 Setting up VimTools
 -------------------
