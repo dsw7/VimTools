@@ -36,7 +36,6 @@ To install a specific branch using the ``Makefile``:
 
 .. code-block:: shell
 
-    curl https://raw.githubusercontent.com/dsw7/VimTools/master/Makefile > Makefile
     make install GIT_BRANCH=<branch-name>
 
 The ``run-tests`` build target
