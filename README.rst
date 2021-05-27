@@ -25,3 +25,18 @@ The ``make (all)`` target simply downloads a ``.zip`` archive of this project, u
 
 The ``make-install`` build target
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+A more fine-grained installation approach can (and should) be used. To install the software without running tests:
+
+.. code-block:: shell
+
+    curl https://raw.githubusercontent.com/dsw7/VimTools/master/Makefile > Makefile
+    make install
+
+To install a specific branch using the ``Makefile``:
+
+.. code-block:: shell
+
+    curl https://raw.githubusercontent.com/dsw7/VimTools/master/Makefile > Makefile
+    make install GIT_BRANCH=<branch-name>
+
+
