@@ -86,3 +86,39 @@ This will test the ``master`` branch by default. To test a specific branch:
 .. code-block:: shell
 
     docker run -it -e GIT_BRANCH=<branch-name> --rm vimtools
+
+General code structure
+--------------------------------------------------
+Almost all scripts in this project follow the general layout:
+
+.. code-block:: vimscript
+    :linenos:
+
+    function s:HelperFoo(<args>)
+        ...
+    endfunction
+    
+    function s:HelperBar(<args>)
+        ...
+    endfunction
+    
+    function s:HelperBaz(<args>)
+        ...
+    endfunction
+    
+    function s:MainFunction(<args>)
+        call s:HelperFoo(...)
+        call s:HelperBar(...)
+        call s:HelperBaz(...)
+    endfunction
+
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " A short description...
+    command -nargs=<nargs> CommandName :call s:MainFunction(...)
+
+Moving from top to bottom, we have the following:
+- **Helper functions**: In this case ``s:Helper{Foo,Bar,Baz}``. These functions serve auxiliary roles
+- **A main function**: In this case ``s:MainFunction``. The main function retains its scope relative to the script and makes use of the helper functions
+- **A vertical separator**: This separator delineates the interface between private and public scope
+- **A short description**: This short description explains what action the consequent command performs
+- **The command**: This line is the adapter between the main function and the global namespace
