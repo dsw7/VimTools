@@ -5,7 +5,7 @@ This is not a true ``vim`` plugin.
 
 Table of Contents
 --------------------------------------------------
-.. contents:: ..rubric:: foo
+.. contents:: -
     :depth: 2
 
 Setting up VimTools
