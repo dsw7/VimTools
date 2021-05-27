@@ -10,7 +10,11 @@ Table of Contents
 
 Setting up VimTools
 --------------------------------------------------
-This project is both set up and tested using ``make``. To install the project:
+This project is both set up and tested using ``make``.
+
+Install - quick and dirty
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+To install the project:
 
 .. code-block:: shell
 
@@ -18,3 +22,6 @@ This project is both set up and tested using ``make``. To install the project:
 
 The ``make (all)`` target simply downloads a ``.zip`` archive of this project, unpacks it into ``${PWD}/.vim`` and runs unit tests on the installation.
 **Warning: this will remove existing an existing .vim directory!**
+
+The ``make-install`` build target
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
