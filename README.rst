@@ -16,4 +16,5 @@ This project is both set up and tested using ``make``. To install the project:
 
     curl https://raw.githubusercontent.com/dsw7/VimTools/master/Makefile > Makefile && make
 
-The ``make (all)`` target simply downloads a ``.zip`` archive of this project, unpacks it into ``${PWD}/.vim`` and runs unit tests on the installation. **Warning: this will remove existing an existing .vim directory!**
+The ``make (all)`` target simply downloads a ``.zip`` archive of this project, unpacks it into ``${PWD}/.vim`` and runs unit tests on the installation.
+**Warning: this will remove existing an existing .vim directory!**
