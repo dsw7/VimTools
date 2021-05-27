@@ -68,7 +68,7 @@ Having a ``Makefile`` in ``~`` is ugly however. A great bypass for this is to re
 
 Testing with Docker
 --------------------------------------------------
-I am testing this project with Docker. To run tests with Docker, first make sure that Docker is installed. Then run:
+This project is tested with Docker. To run tests with Docker, first make sure that Docker is installed. Then run:
 
 .. code-block:: shell
 
@@ -91,20 +91,20 @@ General code structure
 --------------------------------------------------
 Almost all scripts in this project follow the general layout:
 
-.. code-block:: guess
+.. code-block::
 
     function s:HelperFoo(<args>)
         ...
     endfunction
-    
+
     function s:HelperBar(<args>)
         ...
     endfunction
-    
+
     function s:HelperBaz(<args>)
         ...
     endfunction
-    
+
     function s:MainFunction(<args>)
         call s:HelperFoo(...)
         call s:HelperBar(...)
@@ -115,7 +115,7 @@ Almost all scripts in this project follow the general layout:
     " A short description...
     command -nargs=<nargs> CommandName :call s:MainFunction(...)
 
-Moving from top to bottom, we have the following:
+Moving from top to bottom:
 
 - **Helper functions**: In this case ``s:Helper{Foo,Bar,Baz}``. These functions serve auxiliary roles
 - **A main function**: In this case ``s:MainFunction``. The main function retains its scope relative to the script and makes use of the helper functions
