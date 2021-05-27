@@ -1,6 +1,7 @@
 VimTools
 ========
-This repository contains the ``.vim`` directory that I use in my day to day programming, both professionally and leisurely. This is not a true ``vim`` plugin.
+This repository contains the ``.vim`` directory that I use in my day to day programming, both professionally and leisurely.
+This is not a true ``vim`` plugin.
 
 Table of Contents
 -----------------
