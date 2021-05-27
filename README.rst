@@ -20,8 +20,8 @@ To install the project:
 
     curl https://raw.githubusercontent.com/dsw7/VimTools/master/Makefile > Makefile && make
 
-The ``make (all)`` target simply downloads a ``.zip`` archive of this project, unpacks it into ``${PWD}/.vim`` and runs unit tests on the installation.
-**Warning: this will remove existing an existing .vim directory!**
+The ``make (all)`` target simply downloads a ``.zip`` archive of this project, unpacks it into ``${PWD}/.vim`` and
+runs unit tests on the installation. **Warning: this will remove existing an existing .vim directory!**
 
 The ``install`` build target
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -48,3 +48,42 @@ To run just the unit tests:
     make run-tests
 
 This feature is useful for local testing. This target runs unit tests under the ``${PWD}/.vim/tests`` directory.
+
+Accessing the commands
+--------------------------------------------------
+Open up a ``vim`` session and run:
+
+.. code-block::
+
+    :help VimTools
+
+Keeping the installation up to date
+--------------------------------------------------
+I suggest setting an alias for running ``make`` in a ``.bashrc`` or ``.bash_aliases`` file.
+Having a ``Makefile`` in ``~`` is ugly however. A great bypass for this is to rename the
+``Makefile`` and put it somewhere away from plain sight then set up the alias as follows:
+
+.. code-block:: shell
+
+    alias fetch_vimtools="make -f /path/to/MakeVimTools"
+
+Testing with Docker
+--------------------------------------------------
+I am testing this project with Docker. To run tests with Docker, first make sure that Docker is installed. Then run:
+
+.. code-block:: shell
+
+    cd /path/to/VimTools
+    docker build -t vimtools .
+
+This will generate a Debian based local Docker image. To actually test the product, run the ``vimtools`` image:
+
+.. code-block:: shell
+
+    docker run -it --rm vimtools
+
+This will test the ``master`` branch by default. To test a specific branch:
+
+.. code-block:: shell
+
+    docker run -it -e GIT_BRANCH=<branch-name> --rm vimtools
