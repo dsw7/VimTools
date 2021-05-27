@@ -1,5 +1,7 @@
-# VimTools
-This repository contains the `.vim` directory that I use in my day to day programming, both professionally and leisurely.
+VimTools
+========
+This repository contains the ``.vim`` directory that I use in my day to day programming, both professionally and leisurely.
+
 ## Table of Contents
 - [Setup](#setup)
 - [Build targets](#build-targets)
