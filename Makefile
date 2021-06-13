@@ -29,7 +29,7 @@ define echo_warning
     @echo -e $(LIGHT_YELLOW)WARNING: $(1)$(NO_COLOR)
 endef
 
-all: install run-tests
+.PHONY: install test all
 
 install:
 	$(call echo_step,Downloading $(FILENAME_ZIP_ARCHIVE))
@@ -60,7 +60,9 @@ endif
 	@echo Step ensures \":help VimTools\" information is up to date
 	@vim -es -c ":helptags $(USER_RUNTIME_DIRECTORY)/doc" -c "q!"
 
-run-tests:
+test:
 	$(call echo_step,Running all unit tests)
 	@chmod +x $(PATH_PYTHON_UNITTEST_RUNNER)
 	@$(PATH_PYTHON_UNITTEST_RUNNER)
+
+all: install test
