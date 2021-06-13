@@ -37,7 +37,7 @@ fetch:
 	$(call ECHO_STEP,Downloading $(FILENAME_ZIP_ARCHIVE))
 	@echo Using branch: $(GIT_BRANCH)
 	@echo Querying URL: $(GIT_URL_VIMTOOLS)
-	@curl -L $(GIT_URL_VIMTOOLS) --output $(FILENAME_ZIP_ARCHIVE) --fail
+	@curl --location $(GIT_URL_VIMTOOLS) --output $(FILENAME_ZIP_ARCHIVE) --fail
 	@echo Repository will be dumped to: $(FILENAME_ZIP_ARCHIVE)
 
 inflate:
@@ -78,4 +78,4 @@ dockertest:
 	$(call ECHO_STEP,Building docker image $(DOCKER_TAG))
 	@docker build --tag $(DOCKER_TAG) $(PWD)/
 	$(call ECHO_STEP,Running tests in docker container)
-	@docker run --interactive --tty --rm $(DOCKER_TAG)
+	@docker run --interactive --tty --env GIT_BRANCH=$(GIT_BRANCH) --rm $(DOCKER_TAG)
