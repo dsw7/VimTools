@@ -27,7 +27,6 @@ A more fine-grained installation approach can (and should) be used. To install t
 
 .. code-block:: bash
 
-    curl https://raw.githubusercontent.com/dsw7/VimTools/master/Makefile > Makefile
     make setup
 
 To install a specific branch using the ``Makefile``:
