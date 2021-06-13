@@ -66,7 +66,9 @@ tags:
 	@vim -es -c ":helptags $(USER_RUNTIME_DIRECTORY)/doc" -c "q!"
 
 setup: position clean tags
+	@echo ------------------
 	@echo Setup is complete!
+	@echo ------------------
 
 test:
 	$(call ECHO_STEP,Running all unit tests)
