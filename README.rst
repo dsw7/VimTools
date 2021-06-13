@@ -16,33 +16,33 @@ To install the project:
 
 .. code-block:: bash
 
-    curl https://raw.githubusercontent.com/dsw7/VimTools/master/Makefile > Makefile && make
+    curl https://raw.githubusercontent.com/dsw7/VimTools/master/Makefile > Makefile && make full
 
-The ``make (all)`` target simply downloads a ``.zip`` archive of this project, unpacks it into ``${PWD}/.vim`` and
+The ``make full`` target simply downloads a ``.zip`` archive of this project, unpacks it into ``${PWD}/.vim`` and
 runs unit tests on the installation. **Warning: this will remove existing an existing .vim directory!**
 
-The ``install`` build target
+The ``setup`` build target
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 A more fine-grained installation approach can (and should) be used. To install the software without running tests:
 
 .. code-block:: bash
 
     curl https://raw.githubusercontent.com/dsw7/VimTools/master/Makefile > Makefile
-    make install
+    make setup
 
 To install a specific branch using the ``Makefile``:
 
 .. code-block:: bash
 
-    make install GIT_BRANCH=<branch-name>
+    make GIT_BRANCH=<branch-name> setup
 
-The ``run-tests`` build target
+The ``test`` build target
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 To run just the unit tests:
 
 .. code-block:: bash
 
-    make run-tests
+    make test
 
 This feature is useful for local testing. This target runs unit tests under the ``${PWD}/.vim/tests`` directory.
 
@@ -62,7 +62,7 @@ Having a ``Makefile`` in ``~`` is ugly however. A great bypass for this is to re
 
 .. code-block:: bash
 
-    alias fetch_vimtools="make -f /path/to/MakeVimTools"
+    alias fetch_vimtools="make -f /path/to/MakeVimTools full"
 
 Testing with Docker
 --------------------------------------------------
