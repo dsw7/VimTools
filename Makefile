@@ -40,12 +40,12 @@ fetch:
 	@curl --location $(GIT_URL_VIMTOOLS) --output $(FILENAME_ZIP_ARCHIVE) --fail
 	@echo Repository will be dumped to: $(FILENAME_ZIP_ARCHIVE)
 
-inflate:
+inflate: fetch
 	$(call ECHO_STEP,Inflating $(FILENAME_ZIP_ARCHIVE))
 	@unzip -o $(FILENAME_ZIP_ARCHIVE)
 	@echo The inflated directory will be: $(FILENAME_INFLATED)
 
-position:
+position: inflate
 	$(call ECHO_STEP,Removing $(USER_RUNTIME_DIRECTORY) runtime directory if exists)
 ifneq ($(wildcard $(USER_RUNTIME_DIRECTORY)/.),)
 	$(call ECHO_WARNING,Found existing $(USER_RUNTIME_DIRECTORY) user runtime directory. Removing it!)
@@ -65,7 +65,7 @@ tags:
 	@echo Step ensures \":help VimTools\" information is up to date
 	@vim -es -c ":helptags $(USER_RUNTIME_DIRECTORY)/doc" -c "q!"
 
-setup: fetch inflate position clean tags
+setup: position clean tags
 
 test:
 	$(call ECHO_STEP,Running all unit tests)
