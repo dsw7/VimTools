@@ -67,8 +67,7 @@ tags:
 
 setup: position clean tags
 	@echo ----------------------------------
-	@echo         Setup is complete!
-	@echo ----------------------------------
+	@echo Setup is complete!
 
 test:
 	$(call ECHO_STEP,Running all unit tests)
