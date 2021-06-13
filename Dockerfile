@@ -1,5 +1,7 @@
 FROM debian
 
+ARG GIT_BRANCH=master
+
 RUN apt-get update && \
     apt-get install -y \
     curl \
@@ -8,10 +10,9 @@ RUN apt-get update && \
     unzip \
     vim
 
-ENV PWD=/root \
-GIT_BRANCH=master
+ENV PWD=/root
 
 WORKDIR $PWD
 
 CMD curl https://raw.githubusercontent.com/dsw7/VimTools/${GIT_BRANCH}/Makefile > Makefile && \
-    make GIT_BRANCH=${GIT_BRANCH}
+    make GIT_BRANCH=${GIT_BRANCH} full
