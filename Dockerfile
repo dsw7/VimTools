@@ -1,6 +1,6 @@
 FROM debian
 
-ARG GIT_BRANCH=master
+ARG GIT_BRANCH
 
 RUN apt-get update && \
     apt-get install -y \
