@@ -9,7 +9,7 @@ GIT_REPOSITORY_NAME = VimTools
 GIT_URL_VIMTOOLS = https://github.com/dsw7/$(GIT_REPOSITORY_NAME)/archive/$(GIT_BRANCH).zip
 FILENAME_ZIP_ARCHIVE = $(GIT_REPOSITORY_NAME)-$(GIT_BRANCH).zip
 FILENAME_INFLATED = $(GIT_REPOSITORY_NAME)-$(GIT_BRANCH)
-USER_RUNTIME_DIRECTORY = $(HOME)/.vim
+USER_RUNTIME_DIRECTORY = $(PWD)/.vim
 PATH_PYTHON_UNITTEST_RUNNER = $(USER_RUNTIME_DIRECTORY)/tests/run_tests.py
 
 LIGHT_PURPLE = "\033[4;1;35m"
@@ -29,20 +29,21 @@ define echo_warning
     @echo -e $(LIGHT_YELLOW)WARNING: $(1)$(NO_COLOR)
 endef
 
-.PHONY: get-pkg setup test full
+.PHONY: fetch inflate position clean tags setup test full
 
-get-pkg:
+fetch:
 	$(call echo_step,Downloading $(FILENAME_ZIP_ARCHIVE))
 	@echo Using branch: $(GIT_BRANCH)
 	@echo Querying URL: $(GIT_URL_VIMTOOLS)
-
 	@curl -L $(GIT_URL_VIMTOOLS) --output $(FILENAME_ZIP_ARCHIVE) --fail
 	@echo Repository will be dumped to: $(FILENAME_ZIP_ARCHIVE)
 
-setup: get-pkg
+inflate:
 	$(call echo_step,Inflating $(FILENAME_ZIP_ARCHIVE))
 	@unzip -o $(FILENAME_ZIP_ARCHIVE)
+	@echo The inflated directory will be: $(FILENAME_INFLATED)
 
+position:
 	$(call echo_step,Removing $(USER_RUNTIME_DIRECTORY) runtime directory if exists)
 ifneq ($(wildcard $(USER_RUNTIME_DIRECTORY)/.),)
 	$(call echo_warning,Found existing $(USER_RUNTIME_DIRECTORY) user runtime directory. Removing it!)
@@ -50,16 +51,19 @@ ifneq ($(wildcard $(USER_RUNTIME_DIRECTORY)/.),)
 else
 	@echo No existing $(USER_RUNTIME_DIRECTORY) found
 endif
-
 	$(call echo_step,Renamimg inflated directory)
 	@mv -v $(FILENAME_INFLATED) $(USER_RUNTIME_DIRECTORY)
 
+clean:
 	$(call echo_step,Cleaning up any remaining files)
-	@rm -v $(FILENAME_ZIP_ARCHIVE)
+	@rm -vf $(FILENAME_ZIP_ARCHIVE)
 
+tags:
 	$(call echo_step,Generating help tags for project)
 	@echo Step ensures \":help VimTools\" information is up to date
 	@vim -es -c ":helptags $(USER_RUNTIME_DIRECTORY)/doc" -c "q!"
+
+setup: fetch inflate position clean tags
 
 test:
 	$(call echo_step,Running all unit tests)
