@@ -76,6 +76,6 @@ full: setup test
 
 dockertest:
 	$(call ECHO_STEP,Building docker image $(DOCKER_TAG))
-	@docker build --tag $(DOCKER_TAG) $(PWD)/
+	@docker build --tag $(DOCKER_TAG) --build-arg GIT_BRANCH=$(GIT_BRANCH) $(PWD)/
 	$(call ECHO_STEP,Running tests in docker container)
 	@docker run --interactive --tty --rm $(DOCKER_TAG)
