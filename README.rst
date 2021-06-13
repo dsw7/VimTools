@@ -66,24 +66,23 @@ Having a ``Makefile`` in ``~`` is ugly however. A great bypass for this is to re
 
 Testing with Docker
 --------------------------------------------------
-This project is tested with Docker. To run tests with Docker, first make sure that Docker is installed. Then run:
+This project is tested with Docker. To run tests with Docker, first make sure that Docker is installed. then ``git clone`` the project:
 
 .. code-block:: bash
 
-    cd /path/to/VimTools
-    docker build -t vimtools .
+    git clone https://github.com/dsw7/VimTools.git
 
-This will generate a Debian based local Docker image. To actually test the product, run the ``vimtools`` image:
+Change directories into the ``VimTools`` directory and run the following ``make`` target:
 
 .. code-block:: bash
 
-    docker run -it --rm vimtools
+    make dockertest
 
 This will test the ``master`` branch by default. To test a specific branch:
 
 .. code-block:: bash
 
-    docker run -it -e GIT_BRANCH=<branch-name> --rm vimtools
+    make GIT_BRANCH=<branch-name> dockertest
 
 General code structure
 --------------------------------------------------
