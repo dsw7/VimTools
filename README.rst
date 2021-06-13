@@ -16,9 +16,9 @@ To install the project:
 
 .. code-block:: bash
 
-    curl https://raw.githubusercontent.com/dsw7/VimTools/master/Makefile > Makefile && make full
+    curl https://raw.githubusercontent.com/dsw7/VimTools/master/Makefile > Makefile && make
 
-The ``make full`` target simply downloads a ``.zip`` archive of this project, unpacks it into ``${PWD}/.vim`` and
+The default ``make`` target simply downloads a ``.zip`` archive of this project, unpacks it into ``${PWD}/.vim`` and
 runs unit tests on the installation. **Warning: this will remove existing an existing .vim directory!**
 
 The ``setup`` build target
@@ -62,7 +62,7 @@ Having a ``Makefile`` in ``~`` is ugly however. A great bypass for this is to re
 
 .. code-block:: bash
 
-    alias fetch_vimtools="make -f /path/to/MakeVimTools full"
+    alias fetch_vimtools="make -f /path/to/MakeVimTools"
 
 Testing with Docker
 --------------------------------------------------
