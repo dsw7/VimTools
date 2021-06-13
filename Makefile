@@ -29,9 +29,9 @@ define echo_warning
     @echo -e $(LIGHT_YELLOW)WARNING: $(1)$(NO_COLOR)
 endef
 
-.PHONY: install test all
+.PHONY: get-pkg setup test
 
-install:
+get-pkg:
 	$(call echo_step,Downloading $(FILENAME_ZIP_ARCHIVE))
 	@echo Using branch: $(GIT_BRANCH)
 	@echo Querying URL: $(GIT_URL_VIMTOOLS)
@@ -39,6 +39,7 @@ install:
 	@curl -L $(GIT_URL_VIMTOOLS) --output $(FILENAME_ZIP_ARCHIVE) --fail
 	@echo Repository will be dumped to: $(FILENAME_ZIP_ARCHIVE)
 
+setup: get-pkg
 	$(call echo_step,Inflating $(FILENAME_ZIP_ARCHIVE))
 	@unzip -o $(FILENAME_ZIP_ARCHIVE)
 
@@ -64,5 +65,3 @@ test:
 	$(call echo_step,Running all unit tests)
 	@chmod +x $(PATH_PYTHON_UNITTEST_RUNNER)
 	@$(PATH_PYTHON_UNITTEST_RUNNER)
-
-all: install test
