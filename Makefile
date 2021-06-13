@@ -66,7 +66,6 @@ tags:
 	@vim -es -c ":helptags $(USER_RUNTIME_DIRECTORY)/doc" -c "q!"
 
 setup: position clean tags
-	$(call ECHO_STEP,Setting up $(GIT_REPOSITORY_NAME) project)
 	@echo Setup is complete!
 
 test:
