@@ -1,7 +1,5 @@
 FROM debian
 
-ARG GIT_BRANCH
-
 RUN apt-get update && \
     apt-get install -y \
     curl \
@@ -10,7 +8,8 @@ RUN apt-get update && \
     unzip \
     vim
 
-ENV PWD=/root
+ENV PWD=/root \
+GIT_BRANCH=master
 
 WORKDIR $PWD
 
