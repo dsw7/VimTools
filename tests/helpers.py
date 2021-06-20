@@ -14,6 +14,7 @@ from os import (
 
 FILENAME_ACTUAL = path.join(gettempdir(), 'vimtools_test_actual')
 FILENAME_EXPECTED = path.join(gettempdir(), 'vimtools_test_expected')
+FILENAME_AUXILIARY = path.join(gettempdir(), 'vimtools_test_auxiliary')
 TEMPORARY_COMMAND_FILE = path.join(gettempdir(), 'vimtools_command_file')
 
 
