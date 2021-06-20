@@ -40,7 +40,7 @@ class VimToolsTestCase(TestCase):
             f.write(dedent(self.expected_contents))
 
     @contextmanager
-    def context_file(self, *args, **kwargs):
+    def context_file(self, *args, **kwargs) -> None:
         self.write_executable_command_file()
         self.write_actual_contents_to_file()
         self.write_expected_contents_to_file()
