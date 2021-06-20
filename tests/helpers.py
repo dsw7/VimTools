@@ -61,3 +61,11 @@ class VimToolsTestCase(TestCase):
 
         with self.context_file():
             self.assertTrue(filecmp.cmp(FILENAME_ACTUAL, FILENAME_EXPECTED))
+
+    def assert_files_not_equal(self, commands: list, input_contents: str, expected_contents: str) -> None:
+        self.commands = commands
+        self.input_contents = input_contents
+        self.expected_contents = expected_contents
+
+        with self.context_file():
+            self.assertFalse(filecmp.cmp(FILENAME_ACTUAL, FILENAME_EXPECTED))
