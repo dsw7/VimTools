@@ -27,6 +27,5 @@ class TestMv(VimToolsTestCase):
             }
         }
         """
-
         command = [':Mv 1 6 7']
         self.assert_files_equal(command, self.input_string, expected_string)
