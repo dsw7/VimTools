@@ -1,4 +1,6 @@
-import filecmp
+# pylint: disable=W0201 # Disable "Attribute defined outside __init__"
+
+from filecmp import cmp
 from textwrap import dedent
 from subprocess import call
 from unittest import TestCase
@@ -61,7 +63,7 @@ class VimToolsTestCase(TestCase):
         self.expected_contents = expected_contents
 
         with self.context_file():
-            self.assertTrue(filecmp.cmp(FILENAME_ACTUAL, FILENAME_EXPECTED))
+            self.assertTrue(cmp(FILENAME_ACTUAL, FILENAME_EXPECTED))
 
     def assert_files_not_equal(self, commands: list, input_contents: str, expected_contents: str) -> None:
         self.commands = commands
@@ -69,4 +71,4 @@ class VimToolsTestCase(TestCase):
         self.expected_contents = expected_contents
 
         with self.context_file():
-            self.assertFalse(filecmp.cmp(FILENAME_ACTUAL, FILENAME_EXPECTED))
+            self.assertFalse(cmp(FILENAME_ACTUAL, FILENAME_EXPECTED))
