@@ -58,3 +58,6 @@ set splitright
 
 " Split buffer below when running :split
 set splitbelow
+
+" Set spellcheck (English by default)
+set spell
