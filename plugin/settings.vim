@@ -60,4 +60,4 @@ set splitright
 set splitbelow
 
 " Set spellcheck (English by default)
-set spell
+" set spell
