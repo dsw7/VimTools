@@ -18,13 +18,13 @@ def write_report(failures):
             f.write(item[0].__str__())
             f.write(item[1])
             f.write('\n')
-    print(f'Wrote test report to {PATH_REPORT}')
+    print('Wrote test report to {}'.format(PATH_REPORT))
 
 def main():
     test_directory = path.dirname(__file__)
     realpath = path.realpath(test_directory)
 
-    print(f'Running tests in directory: {realpath}')
+    print('Running tests in directory: {}'.format(realpath))
 
     suite = TestLoader().discover(
         test_directory, pattern=TEST_FILENAMES_PATTERN
