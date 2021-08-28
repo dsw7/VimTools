@@ -58,7 +58,7 @@ install:
 	@mv -v $(FILENAME_INFLATED)/plugin/vimtools/* $(USER_RUNTIME_DIRECTORY)
 
 	$(call ECHO_STEP,Extracting doc components from inflated directory)
-	@mkdir -p $(USER_RUNTIME_DIRECTORY)
+	@mkdir -p $(USER_DOC_DIRECTORY)
 	@mv -v $(FILENAME_INFLATED)/doc/vimtools.txt $(USER_DOC_DIRECTORY)/
 
 	$(call ECHO_STEP,Generating help tags for project)
