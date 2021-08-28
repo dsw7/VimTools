@@ -7,8 +7,9 @@
 GIT_BRANCH = master
 GIT_REPOSITORY_NAME = VimTools
 GIT_URL_VIMTOOLS = https://github.com/dsw7/$(GIT_REPOSITORY_NAME)/archive/$(GIT_BRANCH).zip
-FILENAME_ZIP_ARCHIVE = /tmp/$(GIT_REPOSITORY_NAME)-$(GIT_BRANCH).zip
-FILENAME_INFLATED = /tmp/$(GIT_REPOSITORY_NAME)-$(GIT_BRANCH)
+TMPDIR = /tmp
+FILENAME_ZIP_ARCHIVE = $(TMPDIR)/$(GIT_REPOSITORY_NAME)-$(GIT_BRANCH).zip
+FILENAME_INFLATED = $(TMPDIR)/$(GIT_REPOSITORY_NAME)-$(GIT_BRANCH)
 USER_RUNTIME_DIRECTORY = $(PWD)/.vim/plugin/vimtools
 USER_DOC_DIRECTORY = $(PWD)/.vim/doc
 PATH_PYTHON_UNITTEST_RUNNER = $(USER_RUNTIME_DIRECTORY)/tests/run_tests.py
@@ -42,7 +43,7 @@ install:
 	@echo Repository will be dumped to: $(FILENAME_ZIP_ARCHIVE)
 
 	$(call ECHO_STEP,Inflating $(FILENAME_ZIP_ARCHIVE))
-	@unzip -o $(FILENAME_ZIP_ARCHIVE) -d $(FILENAME_INFLATED)
+	@unzip -o $(FILENAME_ZIP_ARCHIVE) -d $(TMPDIR)
 	@echo The inflated directory will be: $(FILENAME_INFLATED)
 
 	$(call ECHO_STEP,Removing $(USER_RUNTIME_DIRECTORY) runtime directory if exists)
