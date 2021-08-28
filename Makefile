@@ -42,7 +42,7 @@ install:
 	@echo Repository will be dumped to: $(FILENAME_ZIP_ARCHIVE)
 
 	$(call ECHO_STEP,Inflating $(FILENAME_ZIP_ARCHIVE))
-	@unzip -o $(FILENAME_ZIP_ARCHIVE)
+	@unzip -o $(FILENAME_ZIP_ARCHIVE) -d $(FILENAME_INFLATED)
 	@echo The inflated directory will be: $(FILENAME_INFLATED)
 
 	$(call ECHO_STEP,Removing $(USER_RUNTIME_DIRECTORY) runtime directory if exists)
@@ -55,7 +55,7 @@ else
 	@mkdir -p $(USER_RUNTIME_DIRECTORY)
 endif
 
-	$(call ECHO_STEP,Renamimg inflated directory)
+	$(call ECHO_STEP,Extracting plugin components from inflated directory)
 	@mv -v $(FILENAME_INFLATED) $(USER_RUNTIME_DIRECTORY)
 
 	$(call ECHO_STEP,Cleaning up any remaining files)
