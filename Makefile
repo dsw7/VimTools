@@ -36,6 +36,7 @@ endef
 .DEFAULT_GOAL = full
 
 install:
+
 	$(call ECHO_STEP,Downloading $(FILENAME_ZIP_ARCHIVE))
 	@echo Using branch: $(GIT_BRANCH)
 	@echo Querying URL: $(GIT_URL_VIMTOOLS)
@@ -57,16 +58,19 @@ else
 endif
 
 	$(call ECHO_STEP,Extracting plugin components from inflated directory)
-	@echo $(FILENAME_INFLATED)/plugin/vimtools -> $(USER_RUNTIME_DIRECTORY)
 	@mv -v $(FILENAME_INFLATED)/plugin/vimtools $(USER_RUNTIME_DIRECTORY)
 
-	$(call ECHO_STEP,Cleaning up any remaining files)
-	@rm -vf $(FILENAME_ZIP_ARCHIVE)
+	$(call ECHO_STEP,Extracting doc components from inflated directory)
+	@mv -v $(FILENAME_INFLATED)/doc $(USER_DOC_DIRECTORY)
 
 	$(call ECHO_STEP,Generating help tags for project)
 	@echo Step ensures \":help VimTools\" information is up to date
 	@echo Scanning $(USER_DOC_DIRECTORY)
 	@vim -es -c ":helptags $(USER_DOC_DIRECTORY)" -c "q!"
+
+	$(call ECHO_STEP,Cleaning up any remaining files)
+	@rm -vf $(FILENAME_ZIP_ARCHIVE)
+	@rm -vf $(FILENAME_INFLATED)
 
 	@echo --------------------------------------------------
 	@echo Setup is complete!
