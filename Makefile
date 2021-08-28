@@ -70,7 +70,7 @@ endif
 
 	$(call ECHO_STEP,Cleaning up any remaining files)
 	@rm -vf $(FILENAME_ZIP_ARCHIVE)
-	@rm -vf $(FILENAME_INFLATED)
+	@rm -vfr $(FILENAME_INFLATED)
 
 	@echo --------------------------------------------------
 	@echo Setup is complete!
