@@ -10,6 +10,7 @@ GIT_URL_VIMTOOLS = https://github.com/dsw7/$(GIT_REPOSITORY_NAME)/archive/$(GIT_
 FILENAME_ZIP_ARCHIVE = $(GIT_REPOSITORY_NAME)-$(GIT_BRANCH).zip
 FILENAME_INFLATED = $(GIT_REPOSITORY_NAME)-$(GIT_BRANCH)
 USER_RUNTIME_DIRECTORY = $(PWD)/.vim/plugin/vimtools
+USER_DOC_DIRECTORY = $(PWD)/.vim/doc
 PATH_PYTHON_UNITTEST_RUNNER = $(USER_RUNTIME_DIRECTORY)/tests/run_tests.py
 DOCKER_TAG = vimtools
 
@@ -62,7 +63,7 @@ endif
 
 	$(call ECHO_STEP,Generating help tags for project)
 	@echo Step ensures \":help VimTools\" information is up to date
-	@vim -es -c ":helptags $(USER_RUNTIME_DIRECTORY)/doc" -c "q!"
+	@vim -es -c ":helptags $(USER_DOC_DIRECTORY)" -c "q!"
 
 	@echo --------------------------------------------------
 	@echo Setup is complete!
