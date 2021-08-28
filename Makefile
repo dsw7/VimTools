@@ -63,6 +63,7 @@ endif
 
 	$(call ECHO_STEP,Generating help tags for project)
 	@echo Step ensures \":help VimTools\" information is up to date
+	@echo Scanning $(USER_DOC_DIRECTORY)
 	@vim -es -c ":helptags $(USER_DOC_DIRECTORY)" -c "q!"
 
 	@echo --------------------------------------------------
