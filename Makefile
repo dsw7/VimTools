@@ -30,22 +30,20 @@ define ECHO_WARNING
     @echo -e $(LIGHT_YELLOW)WARNING: $(1)$(NO_COLOR)
 endef
 
-.PHONY = fetch inflate position clean tags setup test full dockertest
+.PHONY = install test full dockertest
 .DEFAULT_GOAL = full
 
-fetch:
+install:
 	$(call ECHO_STEP,Downloading $(FILENAME_ZIP_ARCHIVE))
 	@echo Using branch: $(GIT_BRANCH)
 	@echo Querying URL: $(GIT_URL_VIMTOOLS)
 	@curl --location $(GIT_URL_VIMTOOLS) --output $(FILENAME_ZIP_ARCHIVE) --fail
 	@echo Repository will be dumped to: $(FILENAME_ZIP_ARCHIVE)
 
-inflate: fetch
 	$(call ECHO_STEP,Inflating $(FILENAME_ZIP_ARCHIVE))
 	@unzip -o $(FILENAME_ZIP_ARCHIVE)
 	@echo The inflated directory will be: $(FILENAME_INFLATED)
 
-position: inflate
 	$(call ECHO_STEP,Removing $(USER_RUNTIME_DIRECTORY) runtime directory if exists)
 ifneq ($(wildcard $(USER_RUNTIME_DIRECTORY)/.),)
 	$(call ECHO_WARNING,Found existing $(USER_RUNTIME_DIRECTORY) user runtime directory. Removing it!)
@@ -56,16 +54,13 @@ endif
 	$(call ECHO_STEP,Renamimg inflated directory)
 	@mv -v $(FILENAME_INFLATED) $(USER_RUNTIME_DIRECTORY)
 
-clean:
 	$(call ECHO_STEP,Cleaning up any remaining files)
 	@rm -vf $(FILENAME_ZIP_ARCHIVE)
 
-tags:
 	$(call ECHO_STEP,Generating help tags for project)
 	@echo Step ensures \":help VimTools\" information is up to date
 	@vim -es -c ":helptags $(USER_RUNTIME_DIRECTORY)/doc" -c "q!"
 
-setup: position clean tags
 	@echo --------------------------------------------------
 	@echo Setup is complete!
 
@@ -74,7 +69,7 @@ test:
 	@chmod +x $(PATH_PYTHON_UNITTEST_RUNNER)
 	@$(PATH_PYTHON_UNITTEST_RUNNER)
 
-full: setup test
+full: install test
 
 dockertest:
 	$(call ECHO_STEP,Building docker image $(DOCKER_TAG))
