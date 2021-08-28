@@ -58,10 +58,10 @@ else
 endif
 
 	$(call ECHO_STEP,Extracting plugin components from inflated directory)
-	@mv -v $(FILENAME_INFLATED)/plugin/vimtools $(USER_RUNTIME_DIRECTORY)
+	@mv -v $(FILENAME_INFLATED)/plugin/vimtools/* $(USER_RUNTIME_DIRECTORY)
 
 	$(call ECHO_STEP,Extracting doc components from inflated directory)
-	@mv -v $(FILENAME_INFLATED)/doc $(USER_DOC_DIRECTORY)
+	@mv -v $(FILENAME_INFLATED)/doc/* $(USER_DOC_DIRECTORY)
 
 	$(call ECHO_STEP,Generating help tags for project)
 	@echo Step ensures \":help VimTools\" information is up to date
