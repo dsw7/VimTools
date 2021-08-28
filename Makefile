@@ -56,7 +56,8 @@ else
 endif
 
 	$(call ECHO_STEP,Extracting plugin components from inflated directory)
-	@mv -v $(FILENAME_INFLATED) $(USER_RUNTIME_DIRECTORY)
+	@echo $(FILENAME_INFLATED)/plugin/vimtools -> $(USER_RUNTIME_DIRECTORY)
+	@mv -v $(FILENAME_INFLATED)/plugin/vimtools $(USER_RUNTIME_DIRECTORY)
 
 	$(call ECHO_STEP,Cleaning up any remaining files)
 	@rm -vf $(FILENAME_ZIP_ARCHIVE)
