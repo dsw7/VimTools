@@ -50,7 +50,10 @@ ifneq ($(wildcard $(USER_RUNTIME_DIRECTORY)/.),)
 	@rm -rv $(USER_RUNTIME_DIRECTORY)
 else
 	@echo No existing $(USER_RUNTIME_DIRECTORY) found
+	@echo Creating a new $(USER_RUNTIME_DIRECTORY) directory
+	@mkdir -p $(USER_RUNTIME_DIRECTORY)
 endif
+
 	$(call ECHO_STEP,Renamimg inflated directory)
 	@mv -v $(FILENAME_INFLATED) $(USER_RUNTIME_DIRECTORY)
 
