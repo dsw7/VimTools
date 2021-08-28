@@ -48,19 +48,17 @@ install:
 	@echo The inflated directory will be: $(FILENAME_INFLATED)
 
 	$(call ECHO_STEP,Removing $(USER_RUNTIME_DIRECTORY) runtime directory if exists)
-ifneq ($(wildcard $(USER_RUNTIME_DIRECTORY)/.),)
-	$(call ECHO_WARNING,Found existing $(USER_RUNTIME_DIRECTORY) user runtime directory. Removing it!)
-	@rm -rv $(USER_RUNTIME_DIRECTORY)
-else
-	@echo No existing $(USER_RUNTIME_DIRECTORY) found
-	@echo Creating a new $(USER_RUNTIME_DIRECTORY) directory
-	@mkdir -p $(USER_RUNTIME_DIRECTORY)
-endif
+	@rm -rfv $(USER_RUNTIME_DIRECTORY)
+
+	$(call ECHO_STEP,Removing $(USER_DOC_DIRECTORY)/vimtools.txt file if exists)
+	@rm -vf $(USER_DOC_DIRECTORY)/vimtools.txt
 
 	$(call ECHO_STEP,Extracting plugin components from inflated directory)
+	@mkdir -p $(USER_RUNTIME_DIRECTORY)
 	@mv -v $(FILENAME_INFLATED)/plugin/vimtools/* $(USER_RUNTIME_DIRECTORY)
 
 	$(call ECHO_STEP,Extracting doc components from inflated directory)
+	@mkdir -p $(USER_RUNTIME_DIRECTORY)
 	@mv -v $(FILENAME_INFLATED)/doc/vimtools.txt $(USER_DOC_DIRECTORY)/
 
 	$(call ECHO_STEP,Generating help tags for project)
