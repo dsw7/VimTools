@@ -120,11 +120,6 @@ Almost all scripts in this project follow the general layout:
 
 Moving from top to bottom:
 
-- **A main function**: In this case ``s:MainFunction``. The main function retains its scope relative to the script and makes use of the helper functions
-- **A vertical separator**: This separator delineates the interface between private and public scope
-- **A short description**: This short description explains what action the consequent command performs
-- **The command**: This line is the adapter between the main function and the global namespace
-
 .. list-table::
    :widths: 50 50
    :header-rows: 1
@@ -134,10 +129,10 @@ Moving from top to bottom:
    * - **Helper functions**
      - In this case ``s:Helper{Foo,Bar,Baz}``. These functions serve auxiliary roles
    * - **Main function**
-     - Row 2, column 2
+     - In this case ``s:MainFunction``. The main function retains its scope relative to the script and makes use of the helper functions
    * - **Vertical separator**
-     - Row 2, column 2
+     - This separator delineates the interface between private and public scope
    * - **Short description**
-     - Row 2, column 2
+     - This short description explains what action the consequent command performs
    * - **Command**
-     - Row 2, column 2
+     - This line is the adapter between the main function and the global namespace
