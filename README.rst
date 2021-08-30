@@ -130,9 +130,15 @@ Moving from top to bottom:
    :widths: 50 50
    :header-rows: 1
 
-   * - Heading row 1, column 1
-     - Heading row 1, column 2
-   * - Row 1, column 1
+   * - Component
+     - Description
+   * - Helper functions
      -
-   * - Row 2, column 1
+   * - Main function
+     - Row 2, column 2
+   * - Vertical separator
+     - Row 2, column 2
+   * - Short description
+     - Row 2, column 2
+   * - Command
      - Row 2, column 2
