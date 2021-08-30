@@ -120,7 +120,6 @@ Almost all scripts in this project follow the general layout:
 
 Moving from top to bottom:
 
-- **Helper functions**: In this case ``s:Helper{Foo,Bar,Baz}``. These functions serve auxiliary roles
 - **A main function**: In this case ``s:MainFunction``. The main function retains its scope relative to the script and makes use of the helper functions
 - **A vertical separator**: This separator delineates the interface between private and public scope
 - **A short description**: This short description explains what action the consequent command performs
@@ -133,12 +132,12 @@ Moving from top to bottom:
    * - Component
      - Description
    * - **Helper functions**
-     -
-   * - Main function
+     - In this case ``s:Helper{Foo,Bar,Baz}``. These functions serve auxiliary roles
+   * - **Main function**
      - Row 2, column 2
-   * - Vertical separator
+   * - **Vertical separator**
      - Row 2, column 2
-   * - Short description
+   * - **Short description**
      - Row 2, column 2
-   * - Command
+   * - **Command**
      - Row 2, column 2
