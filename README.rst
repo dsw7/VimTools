@@ -132,7 +132,7 @@ Moving from top to bottom:
 
    * - Component
      - Description
-   * - Helper functions
+   * - **Helper functions**
      -
    * - Main function
      - Row 2, column 2
