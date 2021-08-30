@@ -18,8 +18,15 @@ To install the project:
 
     curl https://raw.githubusercontent.com/dsw7/VimTools/master/Makefile > Makefile && make
 
-The default ``make`` target simply downloads a ``.zip`` archive of this project, unpacks it into ``${PWD}/.vim`` and
-runs unit tests on the installation. **Warning: this will remove existing an existing .vim directory!**
+The default ``make`` target simply downloads a ``.zip`` archive of this project, unpacks the archive, then moves
+the following files/directories to the following destinations:
+
+.. code-block::
+
+    /path/to/VimTools-master/plugin/vimtools/* -> ${HOME}/.vim/plugin/vimtools/
+    /path/to/VimTools-master/doc/vimtools.txt  -> ${HOME}/.vim/doc/
+
+The target then runs unit tests on the installation.
 
 The ``setup`` build target
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -27,13 +34,13 @@ A more fine-grained installation approach can (and should) be used. To install t
 
 .. code-block:: bash
 
-    make setup
+    make install
 
 To install a specific branch using the ``Makefile``:
 
 .. code-block:: bash
 
-    make GIT_BRANCH=<branch-name> setup
+    make GIT_BRANCH=<branch-name> install
 
 The ``test`` build target
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -43,7 +50,7 @@ To run just the unit tests:
 
     make test
 
-This feature is useful for local testing. This target runs unit tests under the ``${PWD}/.vim/tests`` directory.
+This feature is useful for local testing. This target runs unit tests under the ``${HOME}/.vim/plugin/vimtools/tests`` directory.
 
 Accessing the commands
 --------------------------------------------------
