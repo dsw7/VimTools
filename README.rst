@@ -125,3 +125,17 @@ Moving from top to bottom:
 - **A vertical separator**: This separator delineates the interface between private and public scope
 - **A short description**: This short description explains what action the consequent command performs
 - **The command**: This line is the adapter between the main function and the global namespace
+
+.. list-table:: 
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - Heading row 1, column 1
+     - Heading row 1, column 2
+     - Heading row 1, column 3
+   * - Row 1, column 1
+     -
+     - Row 1, column 3
+   * - Row 2, column 1
+     - Row 2, column 2
+     - Row 2, column 3
