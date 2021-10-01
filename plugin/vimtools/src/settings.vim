@@ -61,3 +61,7 @@ set splitbelow
 
 " Set spellcheck (English by default)
 " set spell
+
+" Set a column for ensuring lines do not exceed some number of characters
+set colorcolumn=110
+highlight ColorColumn ctermbg=232
