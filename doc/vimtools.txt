@@ -96,7 +96,7 @@ USAGE INSTRUCTIONS                                              *vimtools-usage*
 
 11. *Col*
     {Description}: Toggle cursor column. Useful for checking vertical alignment.
-          {Usage}: `Col` <no-arguments>
+          {Usage}: `Col` <no-arguments> (or type `cx` in normal mode)
 
 12. *Block*
     {Description}: Copy the contents of some external file between a set of lines
@@ -140,7 +140,7 @@ USAGE INSTRUCTIONS                                              *vimtools-usage*
 
 15. *Num*
     {Description}: Toggle between relative and absolute line numbering.
-          {Usage}: `Num` <no-arguments>
+          {Usage}: `Num` <no-arguments> (or type `nn` in normal mode)
 
 ==============================================================================
 ADDING VIMTOOLS COMMANDS                              *adding-vimtools-commands*
