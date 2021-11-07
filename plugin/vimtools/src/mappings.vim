@@ -29,3 +29,9 @@ nnoremap <PageUp> <C-u>
 
 " Jump between :vsplit (:vs) or :split (:sp) splits
 nnoremap tt <C-w>w
+
+" Toggle between absolute and relative line numbering
+nnoremap nn :call NumberToggle()<CR>
+
+" Toggle cursorcolumn
+nnoremap cx :call ColumnToggle()<CR>
