@@ -140,7 +140,7 @@ USAGE INSTRUCTIONS                                              *vimtools-usage*
 
 15. *Num*
     {Description}: Toggle between relative and absolute line numbering.
-          {Usage}: `Num` <no-arguments> (or type `nn` in normal mode)
+          {Usage}: `Num` <no-arguments> (or type `ss` in normal mode)
 
 ==============================================================================
 ADDING VIMTOOLS COMMANDS                              *adding-vimtools-commands*

@@ -31,7 +31,7 @@ nnoremap <PageUp> <C-u>
 nnoremap tt <C-w>w
 
 " Toggle between absolute and relative line numbering
-nnoremap nn :call NumberToggle()<CR>
+nnoremap ss :call NumberToggle()<CR>
 
 " Toggle cursorcolumn
 nnoremap cx :call ColumnToggle()<CR>
