@@ -65,3 +65,6 @@ set splitbelow
 " Set a column for ensuring lines do not exceed some number of characters
 set colorcolumn=110
 highlight ColorColumn ctermbg=232
+
+" Disable annoying mouse = a
+set mouse=
