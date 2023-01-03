@@ -10,6 +10,7 @@ colorscheme desert
 " Tabbing
 set tabstop=4
 set softtabstop=4
+set shiftwidth=2 " Otherwise vim will indent by one tab of 8 spaces
 set expandtab
 
 " Set line numbers and set the number color
