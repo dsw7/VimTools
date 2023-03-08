@@ -69,3 +69,7 @@ highlight ColorColumn ctermbg=232
 
 " Disable annoying mouse = a
 set mouse=
+
+" Uncomment this setting to prevent vim from starting in REPLACE mode
+" See https://superuser.com/questions/1284561/why-is-vim-starting-in-replace-mode
+" set t_u7=
