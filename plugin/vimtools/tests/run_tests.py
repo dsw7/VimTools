@@ -1,42 +1,18 @@
 #!/usr/bin/env python3
 import sys
-from os import path
-from tempfile import gettempdir
-from unittest import (
-    TestLoader,
-    TextTestRunner
-)
-
-EXIT_SUCCESS = 0
-EXIT_FAILURE = 1
-PATH_REPORT = path.join(gettempdir(), 'vimtools_test_report.txt')
-TEST_FILENAMES_PATTERN = 'test_*'
-
-def write_report(failures):
-    with open(PATH_REPORT, 'w') as f:
-        for item in failures:
-            f.write(item[0].__str__())
-            f.write(item[1])
-            f.write('\n')
-    print('Wrote test report to {}'.format(PATH_REPORT))
+from pathlib import Path
+from unittest import TestLoader, TextTestRunner
 
 def main():
-    test_directory = path.dirname(__file__)
-    realpath = path.realpath(test_directory)
 
-    print('Running tests in directory: {}'.format(realpath))
+    test_directory = Path(__file__).resolve().parent
+    print(f'Running tests in directory: {test_directory}')
 
-    suite = TestLoader().discover(
-        test_directory, pattern=TEST_FILENAMES_PATTERN
-    )
-    runner = TextTestRunner(verbosity=2)
-    test_result = runner.run(suite)
+    suite = TestLoader().discover(test_directory, pattern='test_*')
+    result = TextTestRunner(verbosity=2).run(suite)
 
-    if test_result.wasSuccessful():
-        sys.exit(EXIT_SUCCESS)
-    else:
-        write_report(test_result.failures)
-        sys.exit(EXIT_FAILURE)
+    if not result.wasSuccessful():
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()
