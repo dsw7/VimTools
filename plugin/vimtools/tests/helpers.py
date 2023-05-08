@@ -1,45 +1,37 @@
 # pylint: disable=W0201 # Disable "Attribute defined outside __init__"
 
-from filecmp import cmp
-from textwrap import dedent
-from subprocess import call
-from unittest import TestCase
-from stat import S_IEXEC
-from tempfile import gettempdir
 from contextlib import contextmanager
-from os import (
-    remove,
-    stat,
-    chmod,
-    path
-)
-
-FILENAME_ACTUAL = path.join(gettempdir(), 'vimtools_test_actual')
-FILENAME_EXPECTED = path.join(gettempdir(), 'vimtools_test_expected')
-TEMPORARY_COMMAND_FILE = path.join(gettempdir(), 'vimtools_command_file')
+from filecmp import cmp
+from pathlib import Path
+from stat import S_IEXEC
+from subprocess import call
+from tempfile import gettempdir
+from textwrap import dedent
+from typing import List
+from unittest import TestCase
 
 
 class VimToolsTestCase(TestCase):
 
+    filename_actual = Path(gettempdir(), 'vimtools_test_actual')
+    filename_expected = Path(gettempdir(), 'vimtools_test_expected')
+    command_file = Path(gettempdir(), 'vimtools_command_file')
+
     def write_executable_command_file(self) -> None:
         vim_command = '#!/bin/sh\nvim -es '
         for command in self.commands:
-            vim_command += '-c "{}" '.format(command)
+            vim_command += f'-c "{command}" '
 
-        vim_command += '-c "wq" {}'.format(FILENAME_ACTUAL)
-        with open(TEMPORARY_COMMAND_FILE, 'w') as f:
-            f.write(vim_command)
+        vim_command += f'-c "wq" {self.filename_actual}'
 
-        status_fd = stat(TEMPORARY_COMMAND_FILE)
-        chmod(TEMPORARY_COMMAND_FILE, status_fd.st_mode | S_IEXEC)
+        self.command_file.write_text(vim_command)
+        self.command_file.chmod(self.command_file.stat().st_mode | S_IEXEC)
 
     def write_actual_contents_to_file(self) -> None:
-        with open(FILENAME_ACTUAL, 'w') as f:
-            f.write(dedent(self.input_contents))
+        self.filename_actual.write_text(dedent(self.input_contents))
 
     def write_expected_contents_to_file(self) -> None:
-        with open(FILENAME_EXPECTED, 'w') as f:
-            f.write(dedent(self.expected_contents))
+        self.filename_expected.write_text(dedent(self.expected_contents))
 
     @contextmanager
     def context_file(self, *args, **kwargs) -> None:
@@ -48,26 +40,26 @@ class VimToolsTestCase(TestCase):
         self.write_expected_contents_to_file()
 
         try:
-            call(TEMPORARY_COMMAND_FILE)
+            call(self.command_file)
             yield None
 
         finally:
-            remove(FILENAME_ACTUAL)
-            remove(FILENAME_EXPECTED)
-            remove(TEMPORARY_COMMAND_FILE)
+            self.filename_actual.unlink()
+            self.filename_expected.unlink()
+            self.command_file.unlink()
 
-    def assert_files_equal(self, commands: list, input_contents: str, expected_contents: str) -> None:
+    def assert_files_equal(self, commands: List[str], input_contents: str, expected_contents: str) -> None:
         self.commands = commands
         self.input_contents = input_contents
         self.expected_contents = expected_contents
 
         with self.context_file():
-            self.assertTrue(cmp(FILENAME_ACTUAL, FILENAME_EXPECTED))
+            self.assertTrue(cmp(self.filename_actual, self.filename_expected))
 
-    def assert_files_not_equal(self, commands: list, input_contents: str, expected_contents: str) -> None:
+    def assert_files_not_equal(self, commands: List[str], input_contents: str, expected_contents: str) -> None:
         self.commands = commands
         self.input_contents = input_contents
         self.expected_contents = expected_contents
 
         with self.context_file():
-            self.assertFalse(cmp(FILENAME_ACTUAL, FILENAME_EXPECTED))
+            self.assertFalse(cmp(self.filename_actual, self.filename_expected))
