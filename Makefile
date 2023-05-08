@@ -75,8 +75,7 @@ install:
 
 test:
 	$(call ECHO_STEP,Running all unit tests)
-	@chmod +x $(PATH_PYTHON_UNITTEST_RUNNER)
-	@$(PATH_PYTHON_UNITTEST_RUNNER)
+	@python3 $(PATH_PYTHON_UNITTEST_RUNNER)
 
 full: install test
 
