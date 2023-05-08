@@ -98,47 +98,16 @@ USAGE INSTRUCTIONS                                              *vimtools-usage*
     {Description}: Toggle cursor column. Useful for checking vertical alignment.
           {Usage}: `Col` <no-arguments> (or type `cx` in normal mode)
 
-12. *Block*
-    {Description}: Copy the contents of some external file between a set of lines
-                   to current cursor position. Note that `Block` will start in
-                   two different modes:
-
-                     [1] Normal mode
-                     [2] Vimdiff mode
-
-                   In mode [1], `Block` will require that a hard path be
-                   specified to the file from which lines are being copied. In
-                   mode [2], `Block` will fetch lines from the next vimdiff window.
-
-                   Note that I have added a mapping, `tt`, that may accelerate
-                   the process of running `Block` between two different files.
-                   Basically, one can run either `:vsplit` or `:split` to open
-                   a file in another buffer, then one can jump between the
-                   buffers using `tt` and yank code from one buffer to
-                   another.
-
-       {Scenario}: Mode [1] - Normal mode:
-          {Usage}: `Block` <relative-or-absolute-path> <start-line> <end-line>
-        {Example}: Copy a function from /tmp/foo.cpp on lines 5-10 to the
-                   current cursor position:
-                 : -> `:Block` `/tmp/foo.cpp` `5` `10`
-
-       {Scenario}: Mode [2] - Vimdiff mode:
-          {Usage}: `Block` <start-line> <end-line>
-        {Example}: Copy a function from /tmp/foo.cpp on lines 5-10 from the
-                   other vimdiff buffer at the current cursor position:
-                 : -> `:Block` `5` `10`
-
-13. *Menu*
+12. *Menu*
     {Description}: The "main menu" for managing housekeeping tasks.
           {Usage}: `Menu` <no-arguments>
 
-14. *Vs*
+13. *Vs*
     {Description}: Toggle between vertical and horizontal vimdiff splits.
                    The `Vs` command will only work in vimdiff mode!
           {Usage}: `Vs` <no-arguments>
 
-15. *Num*
+14. *Num*
     {Description}: Toggle between relative and absolute line numbering.
           {Usage}: `Num` <no-arguments> (or type `ss` in normal mode)
 
