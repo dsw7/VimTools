@@ -4,7 +4,7 @@ from helpers import VimToolsTestCase
 class TestWl(VimToolsTestCase):
 
     def setUp(self):
-        self.input_string = """\
+        self.input_str = """\
         Lorem
           ipsum
             dolor
@@ -18,7 +18,7 @@ class TestWl(VimToolsTestCase):
         """
 
     def test_remove_whitelines(self):
-        expected_string = """\
+        self.expected_str = """\
         Lorem
         ipsum
         dolor
@@ -30,14 +30,14 @@ class TestWl(VimToolsTestCase):
               sit
                 amet...
         """
-        command = [":Wl 1 5"]
-        self.assert_files_equal(command, self.input_string, expected_string)
+        self.commands = [":Wl 1 5"]
+        self.assert_files_equal()
 
     def test_remove_whitelines_two_digit_range(self):
         # This test ensures that a range 6 - 10 is not coerced to a range
         # 6 - 1 by Vimscript
 
-        expected_string = """\
+        self.expected_str = """\
         Lorem
           ipsum
             dolor
@@ -49,11 +49,11 @@ class TestWl(VimToolsTestCase):
         sit
         amet...
         """
-        command = [":Wl 6 10"]
-        self.assert_files_equal(command, self.input_string, expected_string)
+        self.commands = [":Wl 6 10"]
+        self.assert_files_equal()
 
     def test_remove_whitelines_two_digit_range_backwards_range(self):
-        expected_string = """\
+        self.expected_str = """\
         Lorem
           ipsum
             dolor
@@ -65,5 +65,5 @@ class TestWl(VimToolsTestCase):
               sit
                 amet...
         """
-        command = [":Wl 10 6"]
-        self.assert_files_equal(command, self.input_string, expected_string)
+        self.commands = [":Wl 10 6"]
+        self.assert_files_equal()

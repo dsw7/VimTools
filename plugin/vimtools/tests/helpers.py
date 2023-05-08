@@ -28,10 +28,10 @@ class VimToolsTestCase(TestCase):
         self.command_file.chmod(self.command_file.stat().st_mode | S_IEXEC)
 
     def write_actual_contents_to_file(self) -> None:
-        self.filename_actual.write_text(dedent(self.input_contents))
+        self.filename_actual.write_text(dedent(self.input_str))
 
     def write_expected_contents_to_file(self) -> None:
-        self.filename_expected.write_text(dedent(self.expected_contents))
+        self.filename_expected.write_text(dedent(self.expected_str))
 
     @contextmanager
     def context_file(self, *args, **kwargs) -> None:
@@ -48,18 +48,10 @@ class VimToolsTestCase(TestCase):
             self.filename_expected.unlink()
             self.command_file.unlink()
 
-    def assert_files_equal(self, commands: List[str], input_contents: str, expected_contents: str) -> None:
-        self.commands = commands
-        self.input_contents = input_contents
-        self.expected_contents = expected_contents
-
+    def assert_files_equal(self) -> None:
         with self.context_file():
             self.assertTrue(cmp(self.filename_actual, self.filename_expected))
 
-    def assert_files_not_equal(self, commands: List[str], input_contents: str, expected_contents: str) -> None:
-        self.commands = commands
-        self.input_contents = input_contents
-        self.expected_contents = expected_contents
-
+    def assert_files_not_equal(self) -> None:
         with self.context_file():
             self.assertFalse(cmp(self.filename_actual, self.filename_expected))

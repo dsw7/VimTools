@@ -4,7 +4,7 @@ from helpers import VimToolsTestCase
 class TestCp(VimToolsTestCase):
 
     def setUp(self):
-        self.input_string = """\
+        self.input_str = """\
         namespace foo {
             void bar() {
                 std::cout << "A foo that bars!" << std::endl;
@@ -17,7 +17,7 @@ class TestCp(VimToolsTestCase):
         # :Cp command can write to line 7
 
     def test_copy(self):
-        expected_string = """\
+        self.expected_str = """\
         namespace foo {
             void bar() {
                 std::cout << "A foo that bars!" << std::endl;
@@ -33,5 +33,5 @@ class TestCp(VimToolsTestCase):
         }
         """
 
-        command = [":Cp 1 6 7"]
-        self.assert_files_equal(command, self.input_string, expected_string)
+        self.commands = [":Cp 1 6 7"]
+        self.assert_files_equal()

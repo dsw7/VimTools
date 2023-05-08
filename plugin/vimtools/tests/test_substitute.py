@@ -4,53 +4,53 @@ from helpers import VimToolsTestCase
 class TestSub(VimToolsTestCase):
 
     def setUp(self):
-        self.input_string = """\
+        self.input_str = """\
         foo bar baz
         foo bar baz
         foo bar baz
         """
 
     def test_sub_no_limits(self):
-        expected_string = """\
+        self.expected_str = """\
         cat bar baz
         cat bar baz
         cat bar baz
         """
-        command = ["/foo", ":S cat"]
-        self.assert_files_equal(command, self.input_string, expected_string)
+        self.commands = ["/foo", ":S cat"]
+        self.assert_files_equal()
 
     def test_sub_one_line(self):
-        expected_string = """\
+        self.expected_str = """\
         foo bar baz
         cat bar baz
         foo bar baz
         """
-        command = ["/foo", ":S cat 2"]
-        self.assert_files_equal(command, self.input_string, expected_string)
+        self.commands = ["/foo", ":S cat 2"]
+        self.assert_files_equal()
 
     def test_sub_between_lines(self):
-        expected_string = """\
+        self.expected_str = """\
         cat bar baz
         cat bar baz
         foo bar baz
         """
-        command = ["/foo", ":S cat 1 2"]
-        self.assert_files_equal(command, self.input_string, expected_string)
+        self.commands = ["/foo", ":S cat 1 2"]
+        self.assert_files_equal()
 
     def test_sub_or_condition(self):
-        expected_string = """\
+        self.expected_str = """\
         cat bar cat
         cat bar cat
         cat bar cat
         """
-        command = [r"/foo\|baz", ":S cat"]
-        self.assert_files_equal(command, self.input_string, expected_string)
+        self.commands = [r"/foo\|baz", ":S cat"]
+        self.assert_files_equal()
 
     def test_sub_and_condition(self):
-        expected_string = """\
+        self.expected_str = """\
         cat
         cat
         cat
         """
-        command = [r"/foo.*baz", ":S cat"]
-        self.assert_files_equal(command, self.input_string, expected_string)
+        self.commands = [r"/foo.*baz", ":S cat"]
+        self.assert_files_equal()
