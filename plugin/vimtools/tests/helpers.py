@@ -7,7 +7,7 @@ from stat import S_IEXEC
 from subprocess import call
 from tempfile import gettempdir
 from textwrap import dedent
-from typing import List
+from typing import Generator
 from unittest import TestCase
 
 
@@ -34,7 +34,7 @@ class VimToolsTestCase(TestCase):
         self.filename_expected.write_text(dedent(self.expected_str))
 
     @contextmanager
-    def context_file(self, *args, **kwargs) -> None:
+    def context_file(self, *args, **kwargs) -> Generator:
         self.write_executable_command_file()
         self.write_actual_contents_to_file()
         self.write_expected_contents_to_file()
