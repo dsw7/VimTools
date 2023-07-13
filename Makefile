@@ -33,7 +33,7 @@ define ECHO_WARNING
 endef
 
 .PHONY = install test full dockertest
-.DEFAULT_GOAL = full
+.DEFAULT_GOAL = test
 
 install:
 
