@@ -26,39 +26,6 @@ USAGE INSTRUCTIONS                                              *vimtools-usage*
         {Example}: Comment out a Python function between lines 2 and 5:
                  : -> `:Ins` `#` `2` `5`
 
-8. *S*
-    {Description}: Replace a pattern between a set of lines or globally.
-
-       {Scenario}: Replace a pattern globally:
-          {Usage}: `/`<pattern> -> `S` <new-string>
-        {Example}: Replace "foo" with "bar" throughout file:
-                 : -> `:/foo`
-                 : -> `:S` `bar`
-
-       {Scenario}: Replace a pattern on one line only:
-          {Usage}: `/`<pattern> -> `S` <new-string> <line-number>
-        {Example}: Replace "foo" with "bar" only on line 5:
-                 : -> `:/foo`
-                 : -> `:S` `bar 5`
-
-       {Scenario}: Replace a pattern between a set of lines:
-          {Usage}: `/`<pattern> -> `S` <new-string> <start-line> <end-line>
-        {Example}: Replace "foo" with "bar" between lines 2 and 5:
-                 : -> `:/foo`
-                 : -> `:S` `bar` `2` `5`
-
-       {Scenario}: Replace from start of file to specific line:
-          {Usage}: `/`<pattern> -> `S` <new-string> :<line>
-        {Example}: Replace "foo" with "bar" up to line 5:
-                 : -> `:/foo`
-                 : -> `:S` `bar` `:5`
-
-       {Scenario}: Replace from specific line to end of file:
-          {Usage}: `/`<pattern> -> `S` <new-string> <line>:
-        {Example}: Replace "foo" with "bar" from line 5 to end of file:
-                 : -> `:/foo`
-                 : -> `:S` `bar` `5:`
-
 9. *Mv*
     {Description}: Drag a set of lines to some new line.
           {Usage}: `Mv` <start-line> <end-line> <destination-line>
