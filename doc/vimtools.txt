@@ -20,12 +20,6 @@ USAGE INSTRUCTIONS                                              *vimtools-usage*
         {Example}: Deindent a function between lines 2 and 5:
                  : -> `:Wl` `2` `5`
 
-4. *Cp*
-    {Description}: Copy a set of lines to some new location.
-          {Usage}: `Cp` <start-line> <end-line> <destination-line>
-        {Example}: Copy lines 2 through 5 to line 7:
-                 : -> `:Cp` `2` `5` `7`
-
 5. *Ind*
     {Description}: Indent by a set number of tabs between a set of line numbers.
 
