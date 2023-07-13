@@ -20,38 +20,34 @@ USAGE INSTRUCTIONS                                              *vimtools-usage*
         {Example}: Deindent a function between lines 2 and 5:
                  : -> `:Wl` `2` `5`
 
-7. *Ins*
+4. *Ins*
     {Description}: Insert a delimiter before a set of lines.
           {Usage}: `Ins` <character> <start-line> <end-line>
         {Example}: Comment out a Python function between lines 2 and 5:
                  : -> `:Ins` `#` `2` `5`
 
-9. *Mv*
+5. *Mv*
     {Description}: Drag a set of lines to some new line.
           {Usage}: `Mv` <start-line> <end-line> <destination-line>
         {Example}: Drag lines 2 through 5 to line 7:
                  : -> `:Mv` `2` `5` `7`
 
-10. *Paste*
+6. *Paste*
     {Description}: Paste system clipboard contents to current cursor position.
           {Usage}: `Paste` <no-arguments>
 
-11. *Col*
+7. *Col*
     {Description}: Toggle cursor column. Useful for checking vertical alignment.
           {Usage}: `Col` <no-arguments> (or type `cx` in normal mode)
 
-12. *Menu*
+8. *Menu*
     {Description}: The "main menu" for managing housekeeping tasks.
           {Usage}: `Menu` <no-arguments>
 
-13. *Vs*
+9. *Vs*
     {Description}: Toggle between vertical and horizontal vimdiff splits.
                    The `Vs` command will only work in vimdiff mode!
           {Usage}: `Vs` <no-arguments>
-
-14. *Num*
-    {Description}: Toggle between relative and absolute line numbering.
-          {Usage}: `Num` <no-arguments> (or type `ss` in normal mode)
 
 ==============================================================================
 ADDING VIMTOOLS COMMANDS                              *adding-vimtools-commands*
