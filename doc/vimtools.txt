@@ -20,19 +20,6 @@ USAGE INSTRUCTIONS                                              *vimtools-usage*
         {Example}: Deindent a function between lines 2 and 5:
                  : -> `:Wl` `2` `5`
 
-5. *Ind*
-    {Description}: Indent by a set number of tabs between a set of line numbers.
-
-       {Scenario}: Indent by 4 spaces:
-          {Usage}: `Ind` <start-line> <end-line>
-        {Example}: Indent a function between lines 2 and 5:
-                 : -> `:Ind` `2` `5`
-
-       {Scenario}: Indent by more than 4 spaces:
-          {Usage}: `Ind` <start-line> <end-line> <number-tabs>
-        {Example}: Indent between lines 2 and 5 by 12 spaces (3 tabs):
-                 : -> `:Ind` `2` `5` `3`
-
 7. *Ins*
     {Description}: Insert a delimiter before a set of lines.
           {Usage}: `Ins` <character> <start-line> <end-line>
