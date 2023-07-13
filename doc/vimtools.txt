@@ -33,12 +33,6 @@ USAGE INSTRUCTIONS                                              *vimtools-usage*
         {Example}: Indent between lines 2 and 5 by 12 spaces (3 tabs):
                  : -> `:Ind` `2` `5` `3`
 
-6. *Del*
-    {Description}: Delete lines between a set of line numbers.
-          {Usage}: `Del` <start-line> <end-line>
-        {Example}: Delete a function between lines 2 and 5:
-                 : -> `:Del` `2` `5`
-
 7. *Ins*
     {Description}: Insert a delimiter before a set of lines.
           {Usage}: `Ins` <character> <start-line> <end-line>
