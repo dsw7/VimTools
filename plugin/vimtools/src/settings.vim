@@ -7,10 +7,13 @@ set cmdheight=1
 " Set colorscheme
 colorscheme desert
 
+" Allow vim to identify specific file types
+filetype plugin indent on
+
 " Tabbing
+set shiftwidth=2 " Otherwise vim will indent by one tab of 8 spaces
 set tabstop=4
 set softtabstop=4
-set shiftwidth=2 " Otherwise vim will indent by one tab of 8 spaces
 set expandtab
 
 " Set line numbers and set the number color
@@ -27,9 +30,6 @@ set cursorline
 
 " Set default cursorcolumn highlighting in case user calls :Col
 highlight CursorColumn ctermbg=234
-
-" Allow vim to identify specific file types
-filetype indent on
 
 " Enable autocompletion of vim commands
 set wildmenu
