@@ -2,7 +2,6 @@ from helpers import VimToolsTestCase
 
 
 class TestMv(VimToolsTestCase):
-
     def setUp(self):
         self.input_str = """\
         namespace foo {
@@ -27,5 +26,5 @@ class TestMv(VimToolsTestCase):
             }
         }
         """
-        self.commands = [':Mv 1 6 7']
+        self.commands = [":Mv 1 6 7"]
         self.assert_files_equal()

@@ -2,7 +2,6 @@ from helpers import VimToolsTestCase
 
 
 class TestWl(VimToolsTestCase):
-
     def setUp(self):
         self.input_str = """\
         Lorem

@@ -2,15 +2,10 @@ from helpers import VimToolsTestCase
 
 
 class TestWs(VimToolsTestCase):
-
     def setUp(self):
-        self.input_str = '\n'.join([
-            'Lorem  ',
-            'ipsum  ',
-            'dolor  ',
-            'sit    ',
-            'amet...'
-        ])
+        self.input_str = "\n".join(
+            ["Lorem  ", "ipsum  ", "dolor  ", "sit    ", "amet..."]
+        )
 
     def test_remove_whitespace(self):
         self.expected_str = """\

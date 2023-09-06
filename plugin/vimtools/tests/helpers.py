@@ -12,13 +12,12 @@ from unittest import TestCase
 
 
 class VimToolsTestCase(TestCase):
-
-    filename_actual = Path(gettempdir(), 'vimtools_test_actual')
-    filename_expected = Path(gettempdir(), 'vimtools_test_expected')
-    command_file = Path(gettempdir(), 'vimtools_command_file')
+    filename_actual = Path(gettempdir(), "vimtools_test_actual")
+    filename_expected = Path(gettempdir(), "vimtools_test_expected")
+    command_file = Path(gettempdir(), "vimtools_command_file")
 
     def write_executable_command_file(self) -> None:
-        vim_command = '#!/bin/sh\nvim -es '
+        vim_command = "#!/bin/sh\nvim -es "
         for command in self.commands:
             vim_command += f'-c "{command}" '
 

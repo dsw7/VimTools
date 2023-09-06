@@ -2,7 +2,6 @@ from helpers import VimToolsTestCase
 
 
 class TestIns(VimToolsTestCase):
-
     def setUp(self):
         self.input_str = """\
         foo bar baz
