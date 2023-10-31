@@ -1,79 +1,8 @@
-############################################
-#                                          #
-#  DAVID WEBER VIMTOOLS OFFICIAL MAKEFILE  #
-#                                          #
-############################################
+.PHONY = setup
+.DEFAULT_GOAL = setup
 
-GIT_BRANCH = master
-GIT_REPOSITORY_NAME = VimTools
-GIT_URL_VIMTOOLS = https://github.com/dsw7/$(GIT_REPOSITORY_NAME)/archive/$(GIT_BRANCH).zip
-TMPDIR = /tmp
-FILENAME_ZIP_ARCHIVE = $(TMPDIR)/$(GIT_REPOSITORY_NAME)-$(GIT_BRANCH).zip
-INFLATED_PKG = $(TMPDIR)/$(GIT_REPOSITORY_NAME)-$(GIT_BRANCH)
-USER_RUNTIME_DIRECTORY = $(HOME)/.vim/plugin/vimtools
-USER_DOC_DIRECTORY = $(HOME)/.vim/doc
-PATH_PYTHON_UNITTEST_RUNNER = $(USER_RUNTIME_DIRECTORY)/tests/run_tests.py
-
-LIGHT_PURPLE = "\033[4;1;35m"
-LIGHT_RED = "\033[1;31m"
-LIGHT_YELLOW = "\033[1;33m"
-NO_COLOR = "\033[0m"
-
-define ECHO_STEP
-	@echo -e $(LIGHT_PURPLE)$(1)$(NO_COLOR)
-endef
-
-define ECHO_ERROR
-    @echo -e $(LIGHT_RED)ERROR: $(1)$(NO_COLOR)
-endef
-
-define ECHO_WARNING
-    @echo -e $(LIGHT_YELLOW)WARNING: $(1)$(NO_COLOR)
-endef
-
-.PHONY = install test full
-.DEFAULT_GOAL = test
-
-install:
-
-	$(call ECHO_STEP,Downloading $(FILENAME_ZIP_ARCHIVE))
-	@echo Using branch: $(GIT_BRANCH)
-	@echo Querying URL: $(GIT_URL_VIMTOOLS)
-	@curl --location $(GIT_URL_VIMTOOLS) --output $(FILENAME_ZIP_ARCHIVE) --fail
-	@echo Repository will be dumped to: $(FILENAME_ZIP_ARCHIVE)
-
-	$(call ECHO_STEP,Inflating $(FILENAME_ZIP_ARCHIVE))
-	@unzip -o $(FILENAME_ZIP_ARCHIVE) -d $(TMPDIR)
-	@echo The inflated directory will be: $(INFLATED_PKG)
-
-	$(call ECHO_STEP,Removing $(USER_RUNTIME_DIRECTORY) runtime directory if exists)
-	@rm -rfv $(USER_RUNTIME_DIRECTORY)
-
-	$(call ECHO_STEP,Removing $(USER_DOC_DIRECTORY)/vimtools.txt file if exists)
-	@rm -vf $(USER_DOC_DIRECTORY)/vimtools.txt
-
-	$(call ECHO_STEP,Extracting plugin components from inflated directory)
-	@mkdir -p $(USER_RUNTIME_DIRECTORY)
-	@mv -v $(INFLATED_PKG)/plugin/vimtools/* $(USER_RUNTIME_DIRECTORY)
-
-	$(call ECHO_STEP,Extracting doc components from inflated directory)
-	@mkdir -p $(USER_DOC_DIRECTORY)
-	@mv -v $(INFLATED_PKG)/doc/vimtools.txt $(USER_DOC_DIRECTORY)/
-
-	$(call ECHO_STEP,Generating help tags for project)
-	@echo Step ensures \":help VimTools\" information is up to date
-	@echo Scanning $(USER_DOC_DIRECTORY)
-	@vim -es -c ":helptags $(USER_DOC_DIRECTORY)" -c "q!"
-
-	$(call ECHO_STEP,Cleaning up any remaining files)
-	@rm -vf $(FILENAME_ZIP_ARCHIVE)
-	@rm -vfr $(INFLATED_PKG)
-
-	@echo --------------------------------------------------
-	@echo Setup is complete!
-
-test:
-	$(call ECHO_STEP,Running all unit tests)
-	@python3 $(PATH_PYTHON_UNITTEST_RUNNER)
-
-full: install test
+setup:
+	@cp --verbose .vimrc $(HOME)/.vimrc
+	@echo "Generating help tags..."
+	@vim -es -c ":helptags doc" -c "q!"
+	@echo "Setup done!"
