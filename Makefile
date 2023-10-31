@@ -13,7 +13,6 @@ INFLATED_PKG = $(TMPDIR)/$(GIT_REPOSITORY_NAME)-$(GIT_BRANCH)
 USER_RUNTIME_DIRECTORY = $(HOME)/.vim/plugin/vimtools
 USER_DOC_DIRECTORY = $(HOME)/.vim/doc
 PATH_PYTHON_UNITTEST_RUNNER = $(USER_RUNTIME_DIRECTORY)/tests/run_tests.py
-DOCKER_TAG = vimtools
 
 LIGHT_PURPLE = "\033[4;1;35m"
 LIGHT_RED = "\033[1;31m"
@@ -32,7 +31,7 @@ define ECHO_WARNING
     @echo -e $(LIGHT_YELLOW)WARNING: $(1)$(NO_COLOR)
 endef
 
-.PHONY = install test full dockertest
+.PHONY = install test full
 .DEFAULT_GOAL = test
 
 install:
@@ -78,9 +77,3 @@ test:
 	@python3 $(PATH_PYTHON_UNITTEST_RUNNER)
 
 full: install test
-
-dockertest:
-	$(call ECHO_STEP,Building docker image $(DOCKER_TAG))
-	@docker build --tag $(DOCKER_TAG) $(PWD)/
-	$(call ECHO_STEP,Running tests in docker container)
-	@docker run --interactive --tty --env GIT_BRANCH=$(GIT_BRANCH) --rm $(DOCKER_TAG)
