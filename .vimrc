@@ -173,6 +173,16 @@ function RemoveWhiteSpaceBeforeLines(start_line, end_line)
   endtry
 endfunction
 
+function OpenGPTifierResults()
+  let l:results_file = expand('~') . '/results.gpt'
+
+  if filereadable(l:results_file)
+    execute 'vs' . l:results_file
+  else
+    echoerr l:results_file . ' does not exist'
+  endif
+endfunction
+
 " ===========================================================================================================
 " Commands
 " ===========================================================================================================
@@ -191,3 +201,6 @@ command -nargs=+ Ins :call Insert(<f-args>)
 
 " Remove all whitespace before lines
 command -nargs=+ Wl :call RemoveWhiteSpaceBeforeLines(<f-args>)
+
+" Open GPTifier results file
+command G :call OpenGPTifierResults()
