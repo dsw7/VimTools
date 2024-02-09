@@ -174,7 +174,7 @@ function RemoveWhiteSpaceBeforeLines(start_line, end_line)
 endfunction
 
 function OpenGPTifierResults()
-  let l:results_file = expand('~') . '/results.gpt'
+  let l:results_file = expand('~') . '/.gptifier/completions.gpt'
 
   if filereadable(l:results_file)
     execute 'vs' . l:results_file
