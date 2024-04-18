@@ -13,9 +13,6 @@ syntax on
 " Set command bar height
 set cmdheight=1
 
-" Set colorscheme
-colorscheme desert
-
 " Allow vim to identify specific file types
 filetype plugin indent on
 
