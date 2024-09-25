@@ -180,6 +180,21 @@ function OpenGPTifierResults()
   endif
 endfunction
 
+function! RunGPTifier(prompt)
+  let command = 'gpt run --no-interactive-export --prompt="' . a:prompt . '"'
+  let output = system(command)
+  vnew
+
+  " Set the buffer to be read-only
+  setlocal buftype=nofile
+  setlocal bufhidden=wipe
+  setlocal noswapfile
+
+  call setline(1, split(output, '\n'))
+
+  normal! gg
+endfunction
+
 " ===========================================================================================================
 " Commands
 " ===========================================================================================================
@@ -201,3 +216,6 @@ command -nargs=+ Wl :call RemoveWhiteSpaceBeforeLines(<f-args>)
 
 " Open GPTifier results file
 command G :call OpenGPTifierResults()
+
+" Run GPTifier
+command! -nargs=1 Gpt call RunGPTifier(<q-args>)
