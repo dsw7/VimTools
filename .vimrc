@@ -181,16 +181,20 @@ function OpenGPTifierResults()
 endfunction
 
 function! RunGPTifier(prompt)
-  let command = 'gpt run --no-interactive-export --prompt="' . a:prompt . '"'
-  let output = system(command)
+  let l:command = 'gpt run --no-interactive-export --prompt="' . a:prompt . '"'
+  let l:output = system(l:command)
   vnew
 
-  " Set the buffer to be read-only
   setlocal buftype=nofile
   setlocal bufhidden=wipe
   setlocal noswapfile
 
-  call setline(1, split(output, '\n'))
+  if (v:shell_error == 0)
+    call setline(1, split(l:output, '\n'))
+  else
+    call setline(1, 'An error occurred when running GPTifier!')
+    call setline(2, split(l:output, '\n'))
+  endif
 
   normal! gg
 endfunction
