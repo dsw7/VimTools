@@ -181,7 +181,7 @@ function OpenGPTifierResults()
 endfunction
 
 function! RunGPTifier(prompt)
-  let l:command = 'gpt run --no-interactive-export --prompt="' . a:prompt . '"'
+  let l:command = 'gpt short --prompt="' . a:prompt . '"'
   let l:output = system(l:command)
   vnew
 
