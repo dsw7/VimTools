@@ -222,4 +222,4 @@ command -nargs=+ Wl call RemoveWhiteSpaceBeforeLines(<f-args>)
 command G call OpenGPTifierResults()
 
 " Run GPTifier
-command! -nargs=1 Gpt call RunGPTifier(<q-args>)
+command -nargs=1 Gpt call RunGPTifier(<q-args>)
