@@ -180,7 +180,7 @@ function OpenGPTifierResults()
   endif
 endfunction
 
-function! RunGPTifier(prompt)
+function RunGPTifier(prompt)
   let l:command = 'gpt short --prompt="' . a:prompt . '"'
   let l:output = system(l:command)
   vnew
@@ -204,22 +204,22 @@ endfunction
 " ===========================================================================================================
 
 " Clear highlighting
-command Cls :noh
+command Cls noh
 
 " Toggle a cursor column
-command Col :call ColumnToggle()
+command Col call ColumnToggle()
 
 " Remove all whitespace
-command Ws :call RemoveWhiteSpace()
+command Ws call RemoveWhiteSpace()
 
 " Insert a character at the beginning of line
-command -nargs=+ Ins :call Insert(<f-args>)
+command -nargs=+ Ins call Insert(<f-args>)
 
 " Remove all whitespace before lines
-command -nargs=+ Wl :call RemoveWhiteSpaceBeforeLines(<f-args>)
+command -nargs=+ Wl call RemoveWhiteSpaceBeforeLines(<f-args>)
 
 " Open GPTifier results file
-command G :call OpenGPTifierResults()
+command G call OpenGPTifierResults()
 
 " Run GPTifier
 command! -nargs=1 Gpt call RunGPTifier(<q-args>)
