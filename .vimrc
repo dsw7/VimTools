@@ -218,16 +218,12 @@ function! ProcessGPTPrompt()
 
   let l:output = system(l:command)
 
-  vnew
-  setlocal buftype=nofile
-  setlocal bufhidden=wipe
-  setlocal noswapfile
-
   if (v:shell_error == 0)
-    call setline(1, split(l:output, '\n'))
+    call append('$', '>>> Results')
+    call append('$', split(l:output, '\n'))
   else
-    call setline(1, 'An error occurred when running GPTifier!')
-    call setline(2, split(l:output, '\n'))
+    call append('$', 'An error occurred when running GPTifier!')
+    call append('$', split(l:output, '\n'))
   endif
 
   normal! gg
@@ -258,5 +254,5 @@ command G call OpenGPTifierResults()
 " Open a window (let's call it S) for inputting a GPTifier prompt
 command S call OpenGPTPrompt()
 
-" Open a window (let's call it P) for processing the prompt from window S
+" Append the GPT completion to window S
 command P call ProcessGPTPrompt()
