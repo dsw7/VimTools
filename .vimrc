@@ -199,6 +199,19 @@ function RunGPTifier(prompt)
   normal! gg
 endfunction
 
+function! OpenGPTPrompt()
+  vnew
+  setlocal buftype=nofile
+  setlocal bufhidden=wipe
+  setlocal noswapfile
+
+  call setline(1, '>>> GPTifier')
+  call setline(2, '>>> Input a prompt on line 3 onwards:')
+  call setline(3, 'What is 2 + 2?')
+
+  normal! G
+endfunction
+
 " ===========================================================================================================
 " Commands
 " ===========================================================================================================
@@ -223,3 +236,6 @@ command G call OpenGPTifierResults()
 
 " Run GPTifier
 command -nargs=1 Gpt call RunGPTifier(<q-args>)
+
+" Open a window for inputting a GPTifier prompt
+command S call OpenGPTPrompt()
