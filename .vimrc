@@ -225,6 +225,11 @@ function! ProcessGPTPrompt()
 
   let l:prompt = join(l:full_text[2:], '\n')
 
+  if strlen(l:prompt) < 1
+    echoerr 'No prompt provided. Cannot proceed!'
+    return
+  endif
+
   let l:command = 'gpt short --prompt="' . l:prompt . '"'
   let l:output = system(l:command)
 
