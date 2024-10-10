@@ -180,25 +180,6 @@ function OpenGPTifierResults()
   endif
 endfunction
 
-function RunGPTifier(prompt)
-  let l:command = 'gpt short --prompt="' . a:prompt . '"'
-  let l:output = system(l:command)
-  vnew
-
-  setlocal buftype=nofile
-  setlocal bufhidden=wipe
-  setlocal noswapfile
-
-  if (v:shell_error == 0)
-    call setline(1, split(l:output, '\n'))
-  else
-    call setline(1, 'An error occurred when running GPTifier!')
-    call setline(2, split(l:output, '\n'))
-  endif
-
-  normal! gg
-endfunction
-
 function! OpenGPTPrompt()
   vnew
   setlocal buftype=nofile
@@ -269,9 +250,6 @@ command -nargs=+ Wl call RemoveWhiteSpaceBeforeLines(<f-args>)
 
 " Open GPTifier results file
 command G call OpenGPTifierResults()
-
-" Run GPTifier
-command -nargs=1 Gpt call RunGPTifier(<q-args>)
 
 " Open a window (let's call it S) for inputting a GPTifier prompt
 command S call OpenGPTPrompt()
