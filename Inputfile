@@ -1,1 +1,0 @@
-I create a new vim window using :vnew and copy the text from this window using gg"ayG into register a. Write a vimscript function that does the same for me
