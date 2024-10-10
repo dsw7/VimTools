@@ -212,6 +212,31 @@ function! OpenGPTPrompt()
   normal! G
 endfunction
 
+function! ProcessGPTPrompt()
+  normal! gg"ayG
+
+  let l:full_text = split(@a, '\n')
+  let l:header = l:full_text[:1]
+  let l:prompt = join(l:full_text[2:], '\n')
+
+  let l:command = 'gpt short --prompt="' . l:prompt . '"'
+  let l:output = system(l:command)
+
+  vnew
+  setlocal buftype=nofile
+  setlocal bufhidden=wipe
+  setlocal noswapfile
+
+  if (v:shell_error == 0)
+    call setline(1, split(l:output, '\n'))
+  else
+    call setline(1, 'An error occurred when running GPTifier!')
+    call setline(2, split(l:output, '\n'))
+  endif
+
+  normal! gg
+endfunction
+
 " ===========================================================================================================
 " Commands
 " ===========================================================================================================
@@ -237,5 +262,8 @@ command G call OpenGPTifierResults()
 " Run GPTifier
 command -nargs=1 Gpt call RunGPTifier(<q-args>)
 
-" Open a window for inputting a GPTifier prompt
+" Open a window (let's call it S) for inputting a GPTifier prompt
 command S call OpenGPTPrompt()
+
+" Open a window (let's call it P) for processing the prompt from window S
+command P call ProcessGPTPrompt()
