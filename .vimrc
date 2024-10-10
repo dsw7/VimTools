@@ -212,6 +212,10 @@ function! ProcessGPTPrompt()
   endif
 
   let l:command = 'gpt short --prompt="' . l:prompt . '"'
+
+  call append('$', '>>> Running command:')
+  call append('$', ['```console', l:command, '```'])
+
   let l:output = system(l:command)
 
   vnew
