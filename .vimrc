@@ -216,7 +216,13 @@ function! ProcessGPTPrompt()
   normal! gg"ayG
 
   let l:full_text = split(@a, '\n')
-  let l:header = l:full_text[:1]
+  let l:header = l:full_text[0]
+
+  if l:header !=# '>>> GPTifier'
+    echoerr 'Not a GPT prompt. Cannot proceed!'
+    return
+  endif
+
   let l:prompt = join(l:full_text[2:], '\n')
 
   let l:command = 'gpt short --prompt="' . l:prompt . '"'
