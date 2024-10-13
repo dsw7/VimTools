@@ -201,9 +201,10 @@ function! ProcessGPTPrompt()
     return
   endif
 
-  let @a = ''
-  normal! 3G"ayG
+  let l:curr_line = line('.') + 1
 
+  let @a = ''
+  execute 'normal!' l:curr_line . 'G"ayG'
   let l:prompt = shellescape(@a)
 
   if strlen(l:prompt) < 1
@@ -220,11 +221,12 @@ function! ProcessGPTPrompt()
 
   if v:shell_error == 0
     call append('$', '>>> Results')
-    call append('$', split(l:output, '\n'))
   else
     call append('$', 'An error occurred when running GPTifier!')
-    call append('$', split(l:output, '\n'))
   endif
+
+  call append('$', split(l:output, '\n'))
+  call append('$', '')
 
   normal! G
 endfunction
