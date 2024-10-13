@@ -186,7 +186,7 @@ function! OpenGPTPrompt()
   setlocal bufhidden=wipe
   setlocal noswapfile
 
-  let b:window_type = 'win_gptifier'
+  let b:is_gpt_window = v:true
 
   call setline(1, '>>> GPTifier')
   call setline(2, '>>> Input a prompt on line 3 onwards:')
@@ -196,7 +196,7 @@ function! OpenGPTPrompt()
 endfunction
 
 function! ProcessGPTPrompt()
-  if ! exists('b:window_type') || b:window_type !=# 'win_gptifier'
+  if ! exists('b:is_gpt_window') || ! b:is_gpt_window
     echoerr 'Not a GPT prompt. Cannot proceed!'
     return
   endif
