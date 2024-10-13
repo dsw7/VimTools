@@ -204,14 +204,14 @@ function! ProcessGPTPrompt()
   let @a = ''
   normal! 3G"ayG
 
-  let l:prompt = @a
+  let l:prompt = shellescape(@a)
 
   if strlen(l:prompt) < 1
     echoerr 'No prompt provided. Cannot proceed!'
     return
   endif
 
-  let l:command = 'gpt short --prompt="' . l:prompt . '"'
+  let l:command = 'gpt short --prompt=' . l:prompt
 
   call append('$', '>>> Running command:')
   call append('$', ['```console', l:command, '```'])
