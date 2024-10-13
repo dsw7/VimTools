@@ -180,6 +180,10 @@ function OpenGPTifierResults()
   endif
 endfunction
 
+function! PrintSeparator()
+  call append('$', repeat('-', 110))
+endfunction
+
 function! OpenGPTPrompt()
   vnew
   setlocal buftype=nofile
@@ -212,19 +216,22 @@ function! ProcessGPTPrompt()
   endif
 
   let l:command = 'gpt short --prompt=' . l:prompt
+  call PrintSeparator()
 
   call append('$', '>>> Running command:')
   call append('$', ['```console', l:command, '```'])
 
   let l:output = system(l:command)
+  call PrintSeparator()
 
   if v:shell_error == 0
     call append('$', '>>> Results')
-    call append('$', split(l:output, '\n'))
   else
     call append('$', 'An error occurred when running GPTifier!')
-    call append('$', split(l:output, '\n'))
   endif
+
+  call append('$', split(l:output, '\n'))
+  call PrintSeparator()
 
   normal! G
 endfunction
