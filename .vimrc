@@ -201,10 +201,10 @@ function! ProcessGPTPrompt()
     return
   endif
 
-  normal! gg"ayG
+  let @a = ''
+  normal! 3G"ayG
 
-  let l:full_text = split(@a, '\n')
-  let l:prompt = join(l:full_text[2:], '\n')
+  let l:prompt = @a
 
   if strlen(l:prompt) < 1
     echoerr 'No prompt provided. Cannot proceed!'
