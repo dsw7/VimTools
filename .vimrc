@@ -195,7 +195,7 @@ function! OpenGPTPrompt()
 
   let b:is_gpt_window = v:true
 
-  call setline(1, '>>> Input a prompt below then run :W')
+  call setline(1, '> Input a prompt below then run :W')
   call setline(2, GetSeparator())
   call setline(3, 'What is 2 + 2?')
 
@@ -255,15 +255,15 @@ function! ProcessGPTPrompt()
   let l:command = 'gpt short --prompt=' . l:prompt
   call PrintSeparator()
 
-  call append('$', '>>> Running command:')
+  call append('$', '> Running command:')
   call append('$', ['```console', l:command, '```'])
   call PrintSeparator()
 
   let l:output = system(l:command)
   if v:shell_error == 0
-    call append('$', '>>> Results')
+    call append('$', '> Results:')
   else
-    call append('$', 'An error occurred when running GPTifier!')
+    call append('$', '> An error occurred when running GPTifier!')
   endif
 
   call append('$', split(l:output, '\n'))
