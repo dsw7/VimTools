@@ -183,18 +183,6 @@ endfunction
 " ===========================================================================================================
 " AI specific functions
 " ===========================================================================================================
-let g:was_prompt_consumed = v:false
-
-function! PrintSeparator()
-  call append('$', repeat('-', 109))
-endfunction
-
-function! PromptWasConsumed()
-  call append('$', 'Prompt was already consumed.')
-  call PrintSeparator()
-  normal! G
-endfunction
-
 function! OpenGPTPrompt()
   vnew
   setlocal buftype=nofile
@@ -207,6 +195,18 @@ function! OpenGPTPrompt()
   call setline(2, '>>> Input a prompt on the next line:')
   call setline(3, 'What is 2 + 2?')
 
+  normal! G
+endfunction
+
+let g:was_prompt_consumed = v:false
+
+function! PrintSeparator()
+  call append('$', repeat('-', 109))
+endfunction
+
+function! PromptWasConsumed()
+  call append('$', 'Prompt was already consumed.')
+  call PrintSeparator()
   normal! G
 endfunction
 
