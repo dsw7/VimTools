@@ -123,7 +123,7 @@ nnoremap ss :call NumberToggle()<CR>
 " Functions
 " ===========================================================================================================
 function ColumnToggle()
-  if (&cursorcolumn == 1)
+  if &cursorcolumn == 1
     set nocursorcolumn
   else
     set cursorcolumn
@@ -139,7 +139,7 @@ function Insert(char, ...)
 endfunction
 
 function NumberToggle()
-  if (&relativenumber == 1)
+  if &relativenumber == 1
     set norelativenumber
   else
     set relativenumber
@@ -181,23 +181,124 @@ function OpenGPTifierResults()
 endfunction
 
 " ===========================================================================================================
+" AI specific functions
+" ===========================================================================================================
+function! GetSeparator()
+  return repeat('-', 109)
+endfunction
+
+function! OpenGPTPrompt()
+  vnew
+  setlocal buftype=nofile
+  setlocal bufhidden=wipe
+  setlocal noswapfile
+
+  let b:is_gpt_window = v:true
+
+  call setline(1, '> Input a prompt below then run :W')
+  call setline(2, GetSeparator())
+  call setline(3, 'What is 2 + 2?')
+
+  normal! G
+endfunction
+
+function! PrintSeparator()
+  call append('$', GetSeparator())
+endfunction
+
+function! PromptWasConsumed()
+  call append('$', 'Prompt was already consumed.')
+  call append('$', 'Clear the prompt by running :C')
+
+  call PrintSeparator()
+  normal! G
+endfunction
+
+let g:was_prompt_consumed = v:false
+
+function! ClearPrompt()
+  normal! 3GdG
+  call setline(3, 'What is 2 + 2?')
+
+  let g:was_prompt_consumed = v:false
+  normal! G
+endfunction
+
+function! ProcessGPTPrompt()
+  if ! exists('b:is_gpt_window') || ! b:is_gpt_window
+    echoerr 'Not a GPT prompt. Cannot proceed!'
+    return
+  endif
+
+  if line('$') < 3
+    echoerr 'File is too short. Prompt is read from 3rd line onwards!'
+    return
+  endif
+
+  if g:was_prompt_consumed
+    call PromptWasConsumed()
+    return
+  endif
+
+  let g:was_prompt_consumed = v:true
+
+  let @a = ''
+  normal! 3G"ayG
+
+  let l:prompt = shellescape(@a)
+
+  if strlen(l:prompt) < 1
+    echoerr 'No prompt provided. Cannot proceed!'
+    return
+  endif
+
+  let l:command = 'gpt short --prompt=' . l:prompt
+  call PrintSeparator()
+
+  call append('$', '> Running command:')
+  call append('$', ['```console', l:command, '```'])
+  call PrintSeparator()
+
+  let l:output = system(l:command)
+  if v:shell_error == 0
+    call append('$', '> Results:')
+  else
+    call append('$', '> An error occurred when running GPTifier!')
+  endif
+
+  call append('$', split(l:output, '\n'))
+  call PrintSeparator()
+
+  normal! G
+endfunction
+
+" ===========================================================================================================
 " Commands
 " ===========================================================================================================
 
 " Clear highlighting
-command Cls :noh
+command Cls noh
 
 " Toggle a cursor column
-command Col :call ColumnToggle()
+command Col call ColumnToggle()
 
 " Remove all whitespace
-command Ws :call RemoveWhiteSpace()
+command Ws call RemoveWhiteSpace()
 
 " Insert a character at the beginning of line
-command -nargs=+ Ins :call Insert(<f-args>)
+command -nargs=+ Ins call Insert(<f-args>)
 
 " Remove all whitespace before lines
-command -nargs=+ Wl :call RemoveWhiteSpaceBeforeLines(<f-args>)
+command -nargs=+ Wl call RemoveWhiteSpaceBeforeLines(<f-args>)
 
 " Open GPTifier results file
-command G :call OpenGPTifierResults()
+command G call OpenGPTifierResults()
+
+" Open a window (let's call it S) for inputting a GPTifier prompt
+command S call OpenGPTPrompt()
+
+" Append the GPT completion to window S
+command W call ProcessGPTPrompt()
+
+" Clear window S
+command C call ClearPrompt()
