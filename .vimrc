@@ -230,6 +230,11 @@ function! ProcessGPTPrompt()
     return
   endif
 
+  if line('$') < 3
+    echoerr 'File is too short. Prompt is read from 3rd line onwards!'
+    return
+  endif
+
   if g:was_prompt_consumed
     call PromptWasConsumed()
     return
