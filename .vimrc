@@ -255,4 +255,4 @@ command G call OpenGPTifierResults()
 command S call OpenGPTPrompt()
 
 " Append the GPT completion to window S
-command P call ProcessGPTPrompt()
+command W call ProcessGPTPrompt()
