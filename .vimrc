@@ -189,7 +189,7 @@ function! OpenGPTPrompt()
   let b:is_gpt_window = v:true
 
   call setline(1, '>>> GPTifier')
-  call setline(2, '>>> Input a prompt on line 3 onwards:')
+  call setline(2, '>>> Input a prompt on the next line:')
   call setline(3, 'What is 2 + 2?')
 
   normal! G
@@ -204,13 +204,6 @@ function! ProcessGPTPrompt()
   normal! gg"ayG
 
   let l:full_text = split(@a, '\n')
-  let l:header = l:full_text[0]
-
-  if l:header !=# '>>> GPTifier'
-    echoerr 'Not a GPT prompt. Cannot proceed!'
-    return
-  endif
-
   let l:prompt = join(l:full_text[2:], '\n')
 
   if strlen(l:prompt) < 1
