@@ -202,15 +202,25 @@ function! OpenGPTPrompt()
   normal! G
 endfunction
 
-let g:was_prompt_consumed = v:false
-
 function! PrintSeparator()
   call append('$', GetSeparator())
 endfunction
 
 function! PromptWasConsumed()
   call append('$', 'Prompt was already consumed.')
+  call append('$', 'Clear the prompt by running :C')
+
   call PrintSeparator()
+  normal! G
+endfunction
+
+let g:was_prompt_consumed = v:false
+
+function! ClearPrompt()
+  normal! 3GdG
+  call setline(3, 'What is 2 + 2?')
+
+  let g:was_prompt_consumed = v:false
   normal! G
 endfunction
 
@@ -284,3 +294,6 @@ command S call OpenGPTPrompt()
 
 " Append the GPT completion to window S
 command W call ProcessGPTPrompt()
+
+" Clear window S
+command C call ClearPrompt()
