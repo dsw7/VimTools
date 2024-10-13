@@ -180,8 +180,19 @@ function OpenGPTifierResults()
   endif
 endfunction
 
+" ===========================================================================================================
+" AI specific functions
+" ===========================================================================================================
+let g:was_prompt_consumed = v:false
+
 function! PrintSeparator()
-  call append('$', repeat('-', 110))
+  call append('$', repeat('-', 109))
+endfunction
+
+function! PromptWasConsumed()
+  call append('$', 'Prompt was already consumed.')
+  call PrintSeparator()
+  normal! G
 endfunction
 
 function! OpenGPTPrompt()
@@ -205,6 +216,13 @@ function! ProcessGPTPrompt()
     return
   endif
 
+  if g:was_prompt_consumed
+    call PromptWasConsumed()
+    return
+  endif
+
+  let g:was_prompt_consumed = v:true
+
   let @a = ''
   normal! 3G"ayG
 
@@ -220,10 +238,9 @@ function! ProcessGPTPrompt()
 
   call append('$', '>>> Running command:')
   call append('$', ['```console', l:command, '```'])
-
-  let l:output = system(l:command)
   call PrintSeparator()
 
+  let l:output = system(l:command)
   if v:shell_error == 0
     call append('$', '>>> Results')
   else
