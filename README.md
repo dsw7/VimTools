@@ -4,7 +4,7 @@ and leisurely.
 
 ## Install - quick and dirty
 To install the `.vimrc` file without cloning this repository:
-```bash
+```console
 curl https://raw.githubusercontent.com/dsw7/VimTools/master/.vimrc > ~/.vimrc
 ```
 
