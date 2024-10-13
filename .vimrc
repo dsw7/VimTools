@@ -186,6 +186,8 @@ function! OpenGPTPrompt()
   setlocal bufhidden=wipe
   setlocal noswapfile
 
+  let b:window_type = 'win_gptifier'
+
   call setline(1, '>>> GPTifier')
   call setline(2, '>>> Input a prompt on line 3 onwards:')
   call setline(3, 'What is 2 + 2?')
@@ -194,6 +196,11 @@ function! OpenGPTPrompt()
 endfunction
 
 function! ProcessGPTPrompt()
+  if ! exists('b:window_type') || b:window_type !=# 'win_gptifier'
+    echoerr 'Not a GPT prompt. Cannot proceed!'
+    return
+  endif
+
   normal! gg"ayG
 
   let l:full_text = split(@a, '\n')
@@ -226,7 +233,7 @@ function! ProcessGPTPrompt()
     call append('$', split(l:output, '\n'))
   endif
 
-  normal! gg
+  normal! G
 endfunction
 
 " ===========================================================================================================
