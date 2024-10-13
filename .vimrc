@@ -123,7 +123,7 @@ nnoremap ss :call NumberToggle()<CR>
 " Functions
 " ===========================================================================================================
 function ColumnToggle()
-  if (&cursorcolumn == 1)
+  if &cursorcolumn == 1
     set nocursorcolumn
   else
     set cursorcolumn
@@ -139,7 +139,7 @@ function Insert(char, ...)
 endfunction
 
 function NumberToggle()
-  if (&relativenumber == 1)
+  if &relativenumber == 1
     set norelativenumber
   else
     set relativenumber
@@ -218,7 +218,7 @@ function! ProcessGPTPrompt()
 
   let l:output = system(l:command)
 
-  if (v:shell_error == 0)
+  if v:shell_error == 0
     call append('$', '>>> Results')
     call append('$', split(l:output, '\n'))
   else
