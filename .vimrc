@@ -183,6 +183,10 @@ endfunction
 " ===========================================================================================================
 " AI specific functions
 " ===========================================================================================================
+function! GetSeparator()
+  return repeat('-', 109)
+endfunction
+
 function! OpenGPTPrompt()
   vnew
   setlocal buftype=nofile
@@ -191,8 +195,8 @@ function! OpenGPTPrompt()
 
   let b:is_gpt_window = v:true
 
-  call setline(1, '>>> GPTifier')
-  call setline(2, '>>> Input a prompt on the next line:')
+  call setline(1, '>>> Input a prompt below then run :W')
+  call setline(2, GetSeparator())
   call setline(3, 'What is 2 + 2?')
 
   normal! G
@@ -201,7 +205,7 @@ endfunction
 let g:was_prompt_consumed = v:false
 
 function! PrintSeparator()
-  call append('$', repeat('-', 109))
+  call append('$', GetSeparator())
 endfunction
 
 function! PromptWasConsumed()
