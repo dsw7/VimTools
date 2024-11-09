@@ -33,6 +33,7 @@ set showcmd
 " Set a cursor line
 " Note that this can make vim slow
 set cursorline
+highlight CursorLine cterm=NONE ctermbg=233
 
 " Set default cursorcolumn highlighting in case user calls :Col
 highlight CursorColumn ctermbg=234
