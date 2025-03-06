@@ -253,7 +253,7 @@ function! ProcessGPTPrompt()
     return
   endif
 
-  let l:command = 'gpt short --prompt=' . l:prompt
+  let l:command = 'gpt short ' . l:prompt
   call PrintSeparator()
 
   call append('$', '> Running command:')
