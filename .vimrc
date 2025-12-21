@@ -120,6 +120,9 @@ nnoremap tt <C-w>w
 " Toggle between absolute and relative line numbering
 nnoremap ss :call NumberToggle()<CR>
 
+" Wrap a block of text with FuncGraft @@@ markers
+xnoremap ed :<C-u>call WrapCodeWithFuncGraftDelimiters()<CR>
+
 " ===========================================================================================================
 " Functions
 " ===========================================================================================================
@@ -271,6 +274,21 @@ function! ProcessGPTPrompt()
   call PrintSeparator()
 
   normal! G
+endfunction
+
+function! WrapCodeWithFuncGraftDelimiters()
+  let start_line = getpos("'<")[1]
+  let end_line = getpos("'>")[1]
+
+  execute end_line . 'put =\"\n\"'
+  execute start_line . ',' . end_line . 'move ' . (end_line + 1)
+
+  execute start_line . 'put =\"@@@\"'
+  execute (end_line + 2) . 'put =\"@@@\"'
+
+  " sequence of put operations will move block down by 1
+  " move the block back up
+  execute start_line . 'd'
 endfunction
 
 " ===========================================================================================================
