@@ -121,7 +121,7 @@ nnoremap tt <C-w>w
 nnoremap ss :call NumberToggle()<CR>
 
 " Wrap a block of text with FuncGraft @@@ markers
-xnoremap ed :<C-u>call WrapCodeWithFuncGraftMarkers()<CR>
+xnoremap ed :<C-u>call WrapCodeWithFuncGraftDelimiters()<CR>
 
 " ===========================================================================================================
 " Functions
@@ -276,7 +276,7 @@ function! ProcessGPTPrompt()
   normal! G
 endfunction
 
-function! WrapCodeWithFuncGraftMarkers()
+function! WrapCodeWithFuncGraftDelimiters()
   let start_line = getpos("'<")[1]
   let end_line = getpos("'>")[1]
 
