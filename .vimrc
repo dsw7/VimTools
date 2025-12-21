@@ -120,6 +120,9 @@ nnoremap tt <C-w>w
 " Toggle between absolute and relative line numbering
 nnoremap ss :call NumberToggle()<CR>
 
+" Wrap a block of text with FuncGraft @@@ markers
+xnoremap ed :<C-u>call ShiftAndInsertMarkers()<CR>
+
 " ===========================================================================================================
 " Functions
 " ===========================================================================================================
