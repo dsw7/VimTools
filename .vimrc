@@ -38,6 +38,9 @@ highlight CursorLine cterm=NONE ctermbg=233
 " Set default cursorcolumn highlighting in case user calls :Col
 highlight CursorColumn ctermbg=234
 
+" Enable tab completion of paths / filenames
+set wildmode=longest,list,full
+
 " Enable autocompletion of vim commands
 set wildmenu
 
