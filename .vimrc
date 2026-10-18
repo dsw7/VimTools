@@ -171,56 +171,28 @@ function s:OpenGPTifierResults()
   endif
 endfunction
 
-let s:comment_delimiters = {
-  \ 'py': '#',
-  \ 'rs': '//',
-  \ 'js': '//',
-  \ 'ts': '//',
-  \ 'jsx': '//',
-  \ 'tsx': '//',
-  \ 'c': '//',
-  \ 'cpp': '//',
-  \ 'cc': '//',
-  \ 'h': '//',
-  \ 'hpp': '//',
-  \ 'java': '//',
-  \ 'go': '//',
-  \ 'rb': '#',
-  \ 'sh': '#',
-  \ 'bash': '#',
-  \ 'zsh': '#',
-  \ 'vim': '"',
-  \ 'lua': '--',
-  \ 'sql': '--',
-  \ 'php': '//',
-  \ 'swift': '//',
-  \ 'kt': '//',
-  \ 'scala': '//',
-  \ 'r': '#',
-  \ }
+augroup CommentSettings
+  autocmd!
+  autocmd FileType python,ruby,sh,bash,zsh,r let b:comment_delimiter = '#'
+  autocmd FileType rust,javascript,typescript,c,cpp,java,go let b:comment_delimiter = '//'
+  autocmd FileType vim let b:comment_delimiter = '"'
+  autocmd FileType lua,sql let b:comment_delimiter = '--'
+augroup END
 
-function g:CommentOutLines() range
-  let l:extension = expand('%:e')
-  let l:delimiter = get(s:comment_delimiters, l:extension, '//')
+function! g:CommentOutLines() range
+  let l:delimiter = get(b:, 'comment_delimiter', '//')
 
-  let l:start_line = a:firstline
-  let l:end_line = a:lastline
-
-  for l:line_num in range(l:start_line, l:end_line)
+  for l:line_num in range(a:firstline, a:lastline)
     let l:line_content = getline(l:line_num)
     call setline(l:line_num, l:delimiter . ' ' . l:line_content)
   endfor
 endfunction
 
 function! g:UncommentLines() range
-  let l:extension = expand('%:e')
-  let l:delimiter = get(s:comment_delimiters, l:extension, '//')
-
-  let l:start_line = a:firstline
-  let l:end_line = a:lastline
+  let l:delimiter = get(b:, 'comment_delimiter', '//')
   let l:escaped_delimiter = escape(l:delimiter, '*/\^$.~[]')
 
-  for l:line_num in range(l:start_line, l:end_line)
+  for l:line_num in range(a:firstline, a:lastline)
     let l:line_content = getline(l:line_num)
     let l:uncommented = substitute(l:line_content, '\v^\s*' . l:escaped_delimiter . ' ?', '', '')
     call setline(l:line_num, l:uncommented)
