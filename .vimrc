@@ -212,6 +212,21 @@ function g:CommentOutLines() range
   endfor
 endfunction
 
+function! g:UncommentLines() range
+  let l:extension = expand('%:e')
+  let l:delimiter = get(s:comment_delimiters, l:extension, '//')
+
+  let l:start_line = a:firstline
+  let l:end_line = a:lastline
+  let l:escaped_delimiter = escape(l:delimiter, '*/\^$.~[]')
+
+  for l:line_num in range(l:start_line, l:end_line)
+    let l:line_content = getline(l:line_num)
+    let l:uncommented = substitute(l:line_content, '\v^\s*' . l:escaped_delimiter . ' ?', '', '')
+    call setline(l:line_num, l:uncommented)
+  endfor
+endfunction
+
 " ===========================================================================================================
 " Commands
 " ===========================================================================================================
@@ -228,5 +243,6 @@ command Ws call s:RemoveWhiteSpace()
 " Open GPTifier results file
 command G call s:OpenGPTifierResults()
 
-" Comment out lines
+" Comment lines in and out
 command -range C <line1>,<line2>call g:CommentOutLines()
+command -range U <line1>,<line2>call g:UncommentLines()
