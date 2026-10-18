@@ -124,15 +124,15 @@ nnoremap <PageUp> <C-u>
 nnoremap tt <C-w>w
 
 " Toggle between absolute and relative line numbering
-nnoremap ss :call NumberToggle()<CR>
+nnoremap ss :call g:NumberToggle()<CR>
 
-" Wrap a block of text with FuncGraft @@@ markers
-xnoremap ed :<C-u>call WrapCodeWithFuncGraftDelimiters()<CR>
+" Comment lines in and out
+xnoremap gc :call g:ToggleCommentLines()<CR>
 
 " ===========================================================================================================
 " Functions
 " ===========================================================================================================
-function ColumnToggle()
+function s:ColumnToggle()
   if &cursorcolumn == 1
     set nocursorcolumn
   else
@@ -140,15 +140,7 @@ function ColumnToggle()
   endif
 endfunction
 
-function Insert(char, ...)
-  if a:0 == 2
-    execute a:1 . ',' . a:2 . 's/^/' . a:char . '/g'
-  else
-    echoerr 'Function takes either 0 or 2 arguments'
-  endif
-endfunction
-
-function NumberToggle()
+function g:NumberToggle()
   if &relativenumber == 1
     set norelativenumber
   else
@@ -156,7 +148,7 @@ function NumberToggle()
   endif
 endfunction
 
-function HandleNoWhiteSpaceError(exception)
+function s:HandleNoWhiteSpaceError(exception)
   if stridx(a:exception, 'E486: Pattern not found') == -1
     echoerr a:exception
   else
@@ -164,23 +156,15 @@ function HandleNoWhiteSpaceError(exception)
   endif
 endfunction
 
-function RemoveWhiteSpace()
+function s:RemoveWhiteSpace()
   try
     execute '%s/\s\+$//g'
   catch
-    call HandleNoWhiteSpaceError(v:exception)
+    call s:HandleNoWhiteSpaceError(v:exception)
   endtry
 endfunction
 
-function RemoveWhiteSpaceBeforeLines(start_line, end_line)
-  try
-    execute a:start_line . ',' . a:end_line . 's/^\s\+//g'
-  catch
-    call HandleNoWhiteSpaceError(v:exception)
-  endtry
-endfunction
-
-function OpenGPTifierResults()
+function s:OpenGPTifierResults()
   let l:results_file = expand('~') . '/.gptifier/completions.gpt'
 
   if filereadable(l:results_file)
@@ -190,111 +174,39 @@ function OpenGPTifierResults()
   endif
 endfunction
 
-" ===========================================================================================================
-" AI specific functions
-" ===========================================================================================================
-function! GetSeparator()
-  return repeat('-', 109)
+augroup CommentSettings
+  autocmd!
+  autocmd FileType python,ruby,sh,bash,zsh,r let b:comment_delimiter = '#'
+  autocmd FileType rust,javascript,typescript,c,cpp,java,go let b:comment_delimiter = '//'
+  autocmd FileType vim let b:comment_delimiter = '"'
+  autocmd FileType lua,sql let b:comment_delimiter = '--'
+augroup END
+
+function! s:CommentLinesOut(start, end, delimiter)
+  for l:line_num in range(a:start, a:end)
+    let l:line_content = getline(l:line_num)
+    call setline(l:line_num, a:delimiter . ' ' . l:line_content)
+  endfor
 endfunction
 
-function! OpenGPTPrompt()
-  vnew
-  setlocal buftype=nofile
-  setlocal bufhidden=wipe
-  setlocal noswapfile
-
-  let b:is_gpt_window = v:true
-
-  call setline(1, '> Input a prompt below then run :W')
-  call setline(2, GetSeparator())
-  call setline(3, 'What is 2 + 2?')
-
-  normal! G
+function! s:UncommentLines(start, end, escaped_delimiter)
+  for l:line_num in range(a:start, a:end)
+    let l:line_content = getline(l:line_num)
+    let l:uncommented = substitute(l:line_content, '\v^\s*' . a:escaped_delimiter . ' ?', '', '')
+    call setline(l:line_num, l:uncommented)
+  endfor
 endfunction
 
-function! PrintSeparator()
-  call append('$', GetSeparator())
-endfunction
+function! g:ToggleCommentLines() range
+  let l:delimiter = get(b:, 'comment_delimiter', '//')
+  let l:escaped_delimiter = escape(l:delimiter, '*/\^$.~[]')
+  let l:first_line_content = getline(a:firstline)
 
-function! PromptWasConsumed()
-  call append('$', 'Prompt was already consumed.')
-  call append('$', 'Clear the prompt by running :C')
-
-  call PrintSeparator()
-  normal! G
-endfunction
-
-let g:was_prompt_consumed = v:false
-
-function! ClearPrompt()
-  normal! 3GdG
-  call setline(3, 'What is 2 + 2?')
-
-  let g:was_prompt_consumed = v:false
-  normal! G
-endfunction
-
-function! ProcessGPTPrompt()
-  if ! exists('b:is_gpt_window') || ! b:is_gpt_window
-    echoerr 'Not a GPT prompt. Cannot proceed!'
-    return
-  endif
-
-  if line('$') < 3
-    echoerr 'File is too short. Prompt is read from 3rd line onwards!'
-    return
-  endif
-
-  if g:was_prompt_consumed
-    call PromptWasConsumed()
-    return
-  endif
-
-  let g:was_prompt_consumed = v:true
-
-  let @a = ''
-  normal! 3G"ayG
-
-  let l:prompt = shellescape(@a)
-
-  if strlen(l:prompt) < 1
-    echoerr 'No prompt provided. Cannot proceed!'
-    return
-  endif
-
-  let l:command = 'gpt short ' . l:prompt
-  call PrintSeparator()
-
-  call append('$', '> Running command:')
-  call append('$', ['```console', l:command, '```'])
-  call PrintSeparator()
-
-  let l:output = system(l:command)
-  if v:shell_error == 0
-    call append('$', '> Results:')
+  if l:first_line_content =~# '\v^\s*' . l:escaped_delimiter
+    call s:UncommentLines(a:firstline, a:lastline, l:escaped_delimiter)
   else
-    call append('$', '> An error occurred when running GPTifier!')
+    call s:CommentLinesOut(a:firstline, a:lastline, l:delimiter)
   endif
-
-  call append('$', split(l:output, '\n'))
-  call PrintSeparator()
-
-  normal! G
-endfunction
-
-function! WrapCodeWithFuncGraftDelimiters()
-  let l:start_line = getpos("'<")[1]
-  let l:end_line = getpos("'>")[1]
-
-  execute l:end_line . 'put =\"\n\"'
-  execute l:start_line . ',' . l:end_line . 'move ' . (l:end_line + 1)
-
-  execute l:start_line . 'put =\"@@@\"'
-  execute (l:end_line + 2) . 'put =\"@@@\"'
-
-  " sequence of put operations will move block down by 1
-  " move the block back up
-  execute l:start_line . 'd'
 endfunction
 
 " ===========================================================================================================
@@ -305,25 +217,13 @@ endfunction
 command Cls noh
 
 " Toggle a cursor column
-command Col call ColumnToggle()
+command Col call s:ColumnToggle()
 
 " Remove all whitespace
-command Ws call RemoveWhiteSpace()
-
-" Insert a character at the beginning of line
-command -nargs=+ Ins call Insert(<f-args>)
-
-" Remove all whitespace before lines
-command -nargs=+ Wl call RemoveWhiteSpaceBeforeLines(<f-args>)
+command Ws call s:RemoveWhiteSpace()
 
 " Open GPTifier results file
-command G call OpenGPTifierResults()
+command G call s:OpenGPTifierResults()
 
-" Open a window (let's call it S) for inputting a GPTifier prompt
-command S call OpenGPTPrompt()
-
-" Append the GPT completion to window S
-command W call ProcessGPTPrompt()
-
-" Clear window S
-command C call ClearPrompt()
+" Comment lines in and out
+command -range TC <line1>,<line2>call g:ToggleCommentLines()
