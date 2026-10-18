@@ -126,6 +126,9 @@ nnoremap tt <C-w>w
 " Toggle between absolute and relative line numbering
 nnoremap ss :call g:NumberToggle()<CR>
 
+" Comment lines in and out
+xnoremap cc :call g:ToggleCommentLines()<CR>
+
 " ===========================================================================================================
 " Functions
 " ===========================================================================================================
@@ -179,14 +182,14 @@ augroup CommentSettings
   autocmd FileType lua,sql let b:comment_delimiter = '--'
 augroup END
 
-function! g:AddComments(start, end, delimiter)
+function! s:CommentLinesOut(start, end, delimiter)
   for l:line_num in range(a:start, a:end)
     let l:line_content = getline(l:line_num)
     call setline(l:line_num, a:delimiter . ' ' . l:line_content)
   endfor
 endfunction
 
-function! g:RemoveComments(start, end, escaped_delimiter)
+function! s:UncommentLines(start, end, escaped_delimiter)
   for l:line_num in range(a:start, a:end)
     let l:line_content = getline(l:line_num)
     let l:uncommented = substitute(l:line_content, '\v^\s*' . a:escaped_delimiter . ' ?', '', '')
@@ -200,9 +203,9 @@ function! g:ToggleCommentLines() range
   let l:first_line_content = getline(a:firstline)
 
   if l:first_line_content =~# '\v^\s*' . l:escaped_delimiter
-    call g:RemoveComments(a:firstline, a:lastline, l:escaped_delimiter)
+    call s:UncommentLines(a:firstline, a:lastline, l:escaped_delimiter)
   else
-    call g:AddComments(a:firstline, a:lastline, l:delimiter)
+    call s:CommentLinesOut(a:firstline, a:lastline, l:delimiter)
   endif
 endfunction
 
