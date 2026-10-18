@@ -126,9 +126,6 @@ nnoremap tt <C-w>w
 " Toggle between absolute and relative line numbering
 nnoremap ss :call NumberToggle()<CR>
 
-" Wrap a block of text with FuncGraft @@@ markers
-xnoremap ed :<C-u>call WrapCodeWithFuncGraftDelimiters()<CR>
-
 " ===========================================================================================================
 " Functions
 " ===========================================================================================================
@@ -191,113 +188,6 @@ function OpenGPTifierResults()
 endfunction
 
 " ===========================================================================================================
-" AI specific functions
-" ===========================================================================================================
-function! GetSeparator()
-  return repeat('-', 109)
-endfunction
-
-function! OpenGPTPrompt()
-  vnew
-  setlocal buftype=nofile
-  setlocal bufhidden=wipe
-  setlocal noswapfile
-
-  let b:is_gpt_window = v:true
-
-  call setline(1, '> Input a prompt below then run :W')
-  call setline(2, GetSeparator())
-  call setline(3, 'What is 2 + 2?')
-
-  normal! G
-endfunction
-
-function! PrintSeparator()
-  call append('$', GetSeparator())
-endfunction
-
-function! PromptWasConsumed()
-  call append('$', 'Prompt was already consumed.')
-  call append('$', 'Clear the prompt by running :C')
-
-  call PrintSeparator()
-  normal! G
-endfunction
-
-let g:was_prompt_consumed = v:false
-
-function! ClearPrompt()
-  normal! 3GdG
-  call setline(3, 'What is 2 + 2?')
-
-  let g:was_prompt_consumed = v:false
-  normal! G
-endfunction
-
-function! ProcessGPTPrompt()
-  if ! exists('b:is_gpt_window') || ! b:is_gpt_window
-    echoerr 'Not a GPT prompt. Cannot proceed!'
-    return
-  endif
-
-  if line('$') < 3
-    echoerr 'File is too short. Prompt is read from 3rd line onwards!'
-    return
-  endif
-
-  if g:was_prompt_consumed
-    call PromptWasConsumed()
-    return
-  endif
-
-  let g:was_prompt_consumed = v:true
-
-  let @a = ''
-  normal! 3G"ayG
-
-  let l:prompt = shellescape(@a)
-
-  if strlen(l:prompt) < 1
-    echoerr 'No prompt provided. Cannot proceed!'
-    return
-  endif
-
-  let l:command = 'gpt short ' . l:prompt
-  call PrintSeparator()
-
-  call append('$', '> Running command:')
-  call append('$', ['```console', l:command, '```'])
-  call PrintSeparator()
-
-  let l:output = system(l:command)
-  if v:shell_error == 0
-    call append('$', '> Results:')
-  else
-    call append('$', '> An error occurred when running GPTifier!')
-  endif
-
-  call append('$', split(l:output, '\n'))
-  call PrintSeparator()
-
-  normal! G
-endfunction
-
-function! WrapCodeWithFuncGraftDelimiters()
-  let l:start_line = getpos("'<")[1]
-  let l:end_line = getpos("'>")[1]
-
-  execute l:end_line . 'put =\"\n\"'
-  execute l:start_line . ',' . l:end_line . 'move ' . (l:end_line + 1)
-
-  execute l:start_line . 'put =\"@@@\"'
-  execute (l:end_line + 2) . 'put =\"@@@\"'
-
-  " sequence of put operations will move block down by 1
-  " move the block back up
-  execute l:start_line . 'd'
-endfunction
-
-" ===========================================================================================================
 " Commands
 " ===========================================================================================================
 
@@ -318,12 +208,3 @@ command -nargs=+ Wl call RemoveWhiteSpaceBeforeLines(<f-args>)
 
 " Open GPTifier results file
 command G call OpenGPTifierResults()
-
-" Open a window (let's call it S) for inputting a GPTifier prompt
-command S call OpenGPTPrompt()
-
-" Append the GPT completion to window S
-command W call ProcessGPTPrompt()
-
-" Clear window S
-command C call ClearPrompt()
