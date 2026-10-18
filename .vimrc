@@ -124,12 +124,12 @@ nnoremap <PageUp> <C-u>
 nnoremap tt <C-w>w
 
 " Toggle between absolute and relative line numbering
-nnoremap ss :call NumberToggle()<CR>
+nnoremap ss :call s:NumberToggle()<CR>
 
 " ===========================================================================================================
 " Functions
 " ===========================================================================================================
-function ColumnToggle()
+function s:ColumnToggle()
   if &cursorcolumn == 1
     set nocursorcolumn
   else
@@ -137,7 +137,7 @@ function ColumnToggle()
   endif
 endfunction
 
-function NumberToggle()
+function s:NumberToggle()
   if &relativenumber == 1
     set norelativenumber
   else
@@ -145,7 +145,7 @@ function NumberToggle()
   endif
 endfunction
 
-function HandleNoWhiteSpaceError(exception)
+function s:HandleNoWhiteSpaceError(exception)
   if stridx(a:exception, 'E486: Pattern not found') == -1
     echoerr a:exception
   else
@@ -153,15 +153,15 @@ function HandleNoWhiteSpaceError(exception)
   endif
 endfunction
 
-function RemoveWhiteSpace()
+function s:RemoveWhiteSpace()
   try
     execute '%s/\s\+$//g'
   catch
-    call HandleNoWhiteSpaceError(v:exception)
+    call s:HandleNoWhiteSpaceError(v:exception)
   endtry
 endfunction
 
-function OpenGPTifierResults()
+function s:OpenGPTifierResults()
   let l:results_file = expand('~') . '/.gptifier/completions.gpt'
 
   if filereadable(l:results_file)
@@ -179,10 +179,10 @@ endfunction
 command Cls noh
 
 " Toggle a cursor column
-command Col call ColumnToggle()
+command Col call s:ColumnToggle()
 
 " Remove all whitespace
-command Ws call RemoveWhiteSpace()
+command Ws call s:RemoveWhiteSpace()
 
 " Open GPTifier results file
-command G call OpenGPTifierResults()
+command G call s:OpenGPTifierResults()
