@@ -137,14 +137,6 @@ function ColumnToggle()
   endif
 endfunction
 
-function Insert(char, ...)
-  if a:0 == 2
-    execute a:1 . ',' . a:2 . 's/^/' . a:char . '/g'
-  else
-    echoerr 'Function takes either 0 or 2 arguments'
-  endif
-endfunction
-
 function NumberToggle()
   if &relativenumber == 1
     set norelativenumber
@@ -164,14 +156,6 @@ endfunction
 function RemoveWhiteSpace()
   try
     execute '%s/\s\+$//g'
-  catch
-    call HandleNoWhiteSpaceError(v:exception)
-  endtry
-endfunction
-
-function RemoveWhiteSpaceBeforeLines(start_line, end_line)
-  try
-    execute a:start_line . ',' . a:end_line . 's/^\s\+//g'
   catch
     call HandleNoWhiteSpaceError(v:exception)
   endtry
@@ -199,12 +183,6 @@ command Col call ColumnToggle()
 
 " Remove all whitespace
 command Ws call RemoveWhiteSpace()
-
-" Insert a character at the beginning of line
-command -nargs=+ Ins call Insert(<f-args>)
-
-" Remove all whitespace before lines
-command -nargs=+ Wl call RemoveWhiteSpaceBeforeLines(<f-args>)
 
 " Open GPTifier results file
 command G call OpenGPTifierResults()
