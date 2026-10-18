@@ -127,7 +127,7 @@ nnoremap tt <C-w>w
 nnoremap ss :call g:NumberToggle()<CR>
 
 " Comment lines in and out
-xnoremap cc :call g:ToggleCommentLines()<CR>
+xnoremap gc :call g:ToggleCommentLines()<CR>
 
 " ===========================================================================================================
 " Functions
