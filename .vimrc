@@ -124,7 +124,7 @@ nnoremap <PageUp> <C-u>
 nnoremap tt <C-w>w
 
 " Toggle between absolute and relative line numbering
-nnoremap ss :call s:NumberToggle()<CR>
+nnoremap ss :call g:NumberToggle()<CR>
 
 " ===========================================================================================================
 " Functions
@@ -137,7 +137,7 @@ function s:ColumnToggle()
   endif
 endfunction
 
-function s:NumberToggle()
+function g:NumberToggle()
   if &relativenumber == 1
     set norelativenumber
   else
@@ -171,6 +171,47 @@ function s:OpenGPTifierResults()
   endif
 endfunction
 
+function g:CommentOutLines() range
+  let l:comment_delimiters = {
+    \ 'py': '#',
+    \ 'rs': '//',
+    \ 'js': '//',
+    \ 'ts': '//',
+    \ 'jsx': '//',
+    \ 'tsx': '//',
+    \ 'c': '//',
+    \ 'cpp': '//',
+    \ 'cc': '//',
+    \ 'h': '//',
+    \ 'hpp': '//',
+    \ 'java': '//',
+    \ 'go': '//',
+    \ 'rb': '#',
+    \ 'sh': '#',
+    \ 'bash': '#',
+    \ 'zsh': '#',
+    \ 'vim': '"',
+    \ 'lua': '--',
+    \ 'sql': '--',
+    \ 'php': '//',
+    \ 'swift': '//',
+    \ 'kt': '//',
+    \ 'scala': '//',
+    \ 'r': '#',
+    \ }
+
+  let l:extension = expand('%:e')
+  let l:delimiter = get(l:comment_delimiters, l:extension, '//')
+
+  let l:start_line = a:firstline
+  let l:end_line = a:lastline
+
+  for l:line_num in range(l:start_line, l:end_line)
+    let l:line_content = getline(l:line_num)
+    call setline(l:line_num, l:delimiter . ' ' . l:line_content)
+  endfor
+endfunction
+
 " ===========================================================================================================
 " Commands
 " ===========================================================================================================
@@ -186,3 +227,6 @@ command Ws call s:RemoveWhiteSpace()
 
 " Open GPTifier results file
 command G call s:OpenGPTifierResults()
+
+" Comment out lines
+command -range C <line1>,<line2>call g:CommentOutLines()
