@@ -179,24 +179,24 @@ augroup CommentSettings
   autocmd FileType lua,sql let b:comment_delimiter = '--'
 augroup END
 
-function! g:CommentOutLines() range
-  let l:delimiter = get(b:, 'comment_delimiter', '//')
-
-  for l:line_num in range(a:firstline, a:lastline)
-    let l:line_content = getline(l:line_num)
-    call setline(l:line_num, l:delimiter . ' ' . l:line_content)
-  endfor
-endfunction
-
-function! g:UncommentLines() range
+function! g:ToggleCommentLines() range
   let l:delimiter = get(b:, 'comment_delimiter', '//')
   let l:escaped_delimiter = escape(l:delimiter, '*/\^$.~[]')
 
-  for l:line_num in range(a:firstline, a:lastline)
-    let l:line_content = getline(l:line_num)
-    let l:uncommented = substitute(l:line_content, '\v^\s*' . l:escaped_delimiter . ' ?', '', '')
-    call setline(l:line_num, l:uncommented)
-  endfor
+  let l:first_line_content = getline(a:firstline)
+
+  if l:first_line_content =~# '\v^\s*' . l:escaped_delimiter
+    for l:line_num in range(a:firstline, a:lastline)
+      let l:line_content = getline(l:line_num)
+      let l:uncommented = substitute(l:line_content, '\v^\s*' . l:escaped_delimiter . ' ?', '', '')
+      call setline(l:line_num, l:uncommented)
+    endfor
+  else
+    for l:line_num in range(a:firstline, a:lastline)
+      let l:line_content = getline(l:line_num)
+      call setline(l:line_num, l:delimiter . ' ' . l:line_content)
+    endfor
+  endif
 endfunction
 
 " ===========================================================================================================
@@ -216,5 +216,4 @@ command Ws call s:RemoveWhiteSpace()
 command G call s:OpenGPTifierResults()
 
 " Comment lines in and out
-command -range C <line1>,<line2>call g:CommentOutLines()
-command -range U <line1>,<line2>call g:UncommentLines()
+command -range TC <line1>,<line2>call g:ToggleCommentLines()
