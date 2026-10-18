@@ -132,7 +132,7 @@ xnoremap gc :call g:ToggleCommentLines()<CR>
 " ===========================================================================================================
 " Functions
 " ===========================================================================================================
-function s:ColumnToggle()
+function! s:ColumnToggle()
   if &cursorcolumn == 1
     set nocursorcolumn
   else
@@ -140,7 +140,7 @@ function s:ColumnToggle()
   endif
 endfunction
 
-function g:NumberToggle()
+function! g:NumberToggle()
   if &relativenumber == 1
     set norelativenumber
   else
@@ -148,7 +148,7 @@ function g:NumberToggle()
   endif
 endfunction
 
-function s:HandleNoWhiteSpaceError(exception)
+function! s:HandleNoWhiteSpaceError(exception)
   if stridx(a:exception, 'E486: Pattern not found') == -1
     echoerr a:exception
   else
@@ -156,7 +156,7 @@ function s:HandleNoWhiteSpaceError(exception)
   endif
 endfunction
 
-function s:RemoveWhiteSpace()
+function! s:RemoveWhiteSpace()
   try
     execute '%s/\s\+$//g'
   catch
@@ -164,7 +164,7 @@ function s:RemoveWhiteSpace()
   endtry
 endfunction
 
-function s:OpenGPTifierResults()
+function! s:OpenGPTifierResults()
   let l:results_file = expand('~') . '/.gptifier/completions.gpt'
 
   if filereadable(l:results_file)
