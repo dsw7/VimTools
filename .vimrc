@@ -171,37 +171,37 @@ function s:OpenGPTifierResults()
   endif
 endfunction
 
-function g:CommentOutLines() range
-  let l:comment_delimiters = {
-    \ 'py': '#',
-    \ 'rs': '//',
-    \ 'js': '//',
-    \ 'ts': '//',
-    \ 'jsx': '//',
-    \ 'tsx': '//',
-    \ 'c': '//',
-    \ 'cpp': '//',
-    \ 'cc': '//',
-    \ 'h': '//',
-    \ 'hpp': '//',
-    \ 'java': '//',
-    \ 'go': '//',
-    \ 'rb': '#',
-    \ 'sh': '#',
-    \ 'bash': '#',
-    \ 'zsh': '#',
-    \ 'vim': '"',
-    \ 'lua': '--',
-    \ 'sql': '--',
-    \ 'php': '//',
-    \ 'swift': '//',
-    \ 'kt': '//',
-    \ 'scala': '//',
-    \ 'r': '#',
-    \ }
+let s:comment_delimiters = {
+  \ 'py': '#',
+  \ 'rs': '//',
+  \ 'js': '//',
+  \ 'ts': '//',
+  \ 'jsx': '//',
+  \ 'tsx': '//',
+  \ 'c': '//',
+  \ 'cpp': '//',
+  \ 'cc': '//',
+  \ 'h': '//',
+  \ 'hpp': '//',
+  \ 'java': '//',
+  \ 'go': '//',
+  \ 'rb': '#',
+  \ 'sh': '#',
+  \ 'bash': '#',
+  \ 'zsh': '#',
+  \ 'vim': '"',
+  \ 'lua': '--',
+  \ 'sql': '--',
+  \ 'php': '//',
+  \ 'swift': '//',
+  \ 'kt': '//',
+  \ 'scala': '//',
+  \ 'r': '#',
+  \ }
 
+function g:CommentOutLines() range
   let l:extension = expand('%:e')
-  let l:delimiter = get(l:comment_delimiters, l:extension, '//')
+  let l:delimiter = get(s:comment_delimiters, l:extension, '//')
 
   let l:start_line = a:firstline
   let l:end_line = a:lastline
