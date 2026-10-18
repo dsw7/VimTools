@@ -179,23 +179,30 @@ augroup CommentSettings
   autocmd FileType lua,sql let b:comment_delimiter = '--'
 augroup END
 
+function! g:AddComments(start, end, delimiter)
+  for l:line_num in range(a:start, a:end)
+    let l:line_content = getline(l:line_num)
+    call setline(l:line_num, a:delimiter . ' ' . l:line_content)
+  endfor
+endfunction
+
+function! g:RemoveComments(start, end, escaped_delimiter)
+  for l:line_num in range(a:start, a:end)
+    let l:line_content = getline(l:line_num)
+    let l:uncommented = substitute(l:line_content, '\v^\s*' . a:escaped_delimiter . ' ?', '', '')
+    call setline(l:line_num, l:uncommented)
+  endfor
+endfunction
+
 function! g:ToggleCommentLines() range
   let l:delimiter = get(b:, 'comment_delimiter', '//')
   let l:escaped_delimiter = escape(l:delimiter, '*/\^$.~[]')
-
   let l:first_line_content = getline(a:firstline)
 
   if l:first_line_content =~# '\v^\s*' . l:escaped_delimiter
-    for l:line_num in range(a:firstline, a:lastline)
-      let l:line_content = getline(l:line_num)
-      let l:uncommented = substitute(l:line_content, '\v^\s*' . l:escaped_delimiter . ' ?', '', '')
-      call setline(l:line_num, l:uncommented)
-    endfor
+    call g:RemoveComments(a:firstline, a:lastline, l:escaped_delimiter)
   else
-    for l:line_num in range(a:firstline, a:lastline)
-      let l:line_content = getline(l:line_num)
-      call setline(l:line_num, l:delimiter . ' ' . l:line_content)
-    endfor
+    call g:AddComments(a:firstline, a:lastline, l:delimiter)
   endif
 endfunction
 
